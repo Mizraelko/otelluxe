@@ -7,6 +7,8 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import RoomServiceIcon from '@mui/icons-material/RoomService';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import StructuredData from '@/components/StructuredData';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -58,10 +60,22 @@ const services = [
 ];
 
 export default function ServicesPage() {
+  const breadcrumbs = [
+    { name: 'Главная', url: 'https://otel-luxe.ru' },
+    { name: 'Услуги', url: 'https://otel-luxe.ru/services' }
+  ];
+
+  const breadcrumbItems = [
+    { label: 'Услуги', current: true }
+  ];
+
   return (
-    <Box sx={{ py: 6 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h2" align="center" gutterBottom>
+    <>
+      <StructuredData type="breadcrumb" data={breadcrumbs} />
+      <Box sx={{ py: 6, bgcolor: 'background.default' }}>
+        <Container maxWidth="lg">
+          <Breadcrumbs items={breadcrumbItems} />
+        <Typography variant="h2" align="center" gutterBottom color="text.primary">
           Наши услуги
         </Typography>
         <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto' }}>
@@ -88,37 +102,37 @@ export default function ServicesPage() {
           ))}
         </Grid>
 
-        <Box sx={{ mt: 8, p: 4, bgcolor: 'primary.main', color: 'white', borderRadius: 2 }}>
-          <Typography variant="h4" align="center" gutterBottom>
+        <Box sx={{ mt: 8, p: 4, bgcolor: 'background.paper', borderRadius: 2, border: '1px solid', borderColor: 'divider' }}>
+          <Typography variant="h4" align="center" gutterBottom color="text.primary">
             Особые предложения
           </Typography>
           <Grid container spacing={4} sx={{ mt: 2 }}>
             <Grid item xs={12} md={4}>
               <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="h5" gutterBottom color="secondary.main">
+                <Typography variant="h5" gutterBottom color="primary.main">
                   Корпоративные тарифы
                 </Typography>
-                <Typography variant="body1">
+                <Typography variant="body1" color="text.secondary">
                   Специальные условия для организаций. Скидки от 10% при бронировании от 5 номеров.
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="h5" gutterBottom color="secondary.main">
+                <Typography variant="h5" gutterBottom color="primary.main">
                   Длительное проживание
                 </Typography>
-                <Typography variant="body1">
+                <Typography variant="body1" color="text.secondary">
                   Выгодные условия при проживании от 7 дней. Скидка до 15% на все номера.
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="h5" gutterBottom color="secondary.main">
+                <Typography variant="h5" gutterBottom color="primary.main">
                   Раннее бронирование
                 </Typography>
-                <Typography variant="body1">
+                <Typography variant="body1" color="text.secondary">
                   Бронируйте заранее и получайте скидку 10% при бронировании за 30 дней.
                 </Typography>
               </Box>
@@ -127,6 +141,7 @@ export default function ServicesPage() {
         </Box>
       </Container>
     </Box>
+    </>
   );
 }
 
