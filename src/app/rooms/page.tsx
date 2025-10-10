@@ -24,6 +24,7 @@ const rooms = [
     description: 'Уютный одноместный номер с односпальной кроватью, рабочим столом, телевизором',
     price: '2800',
     image: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800',
+    amenities: ['Wi-Fi', 'Кондиционер', 'Телевизор', 'Сейф'],
   },
   {
     id: 2,
@@ -31,6 +32,7 @@ const rooms = [
     description: 'Комфортный номер с двуспальной кроватью, современным дизайном',
     price: '3500',
     image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800',
+    amenities: ['Wi-Fi', 'Кондиционер', 'Телевизор', 'Сейф', 'Мини-холодильник'],
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ const rooms = [
     description: 'Просторный номер с улучшенными удобствами, мини-баром, зоной отдыха',
     price: '5500',
     image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800',
+    amenities: ['Wi-Fi', 'Кондиционер', 'Телевизор', 'Сейф', 'Мини-бар', 'Джакузи'],
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ const rooms = [
     description: 'Номер премиум-класса с панорамным видом на город, джакузи',
     price: '8500',
     image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800',
+    amenities: ['Wi-Fi', 'Кондиционер', 'Телевизор', 'Сейф', 'Мини-бар', 'Джакузи', 'Курить можно'],
   },
   {
     id: 5,
@@ -52,6 +56,7 @@ const rooms = [
     description: 'Просторный номер для семьи с двумя спальнями и гостиной',
     price: '7000',
     image: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800',
+    amenities: ['Wi-Fi', 'Кондиционер', 'Телевизор', 'Сейф', 'Мини-холодильник', 'Детская кроватка'],
   },
   {
     id: 6,
@@ -59,6 +64,7 @@ const rooms = [
     description: 'Двухкомнатные апартаменты с кухней, идеально для длительного проживания',
     price: '9500',
     image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800',
+    amenities: ['Wi-Fi', 'Кондиционер', 'Телевизор', 'Сейф', 'Кухня', 'Стиральная машина'],
   },
 ];
 
@@ -88,7 +94,7 @@ export default function RoomsPage() {
 
         <Grid container spacing={4}>
           {rooms.map((room) => (
-            <Grid item xs={12} sm={6} md={4} key={room.id}>
+            <Grid item xs={12} md={6} key={room.id}>
               <StructuredData type="room" data={room} />
               <RoomCard room={room} />
             </Grid>
