@@ -1,10 +1,20 @@
 import { Container, Box, Typography, Grid } from '@mui/material';
 import RoomCard from '@/components/RoomCard';
+import StructuredData from '@/components/StructuredData';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Номера - Отель "Люкс" Богородск',
   description: 'Выбор номеров в отеле "Люкс" Богородск: Стандарт, Полулюкс, Люкс. Современные номера с комфортом и удобствами. Бронирование онлайн.',
+  openGraph: {
+    title: 'Номера отеля "Люкс" в Богородске',
+    description: 'Комфортабельные номера различных категорий с современными удобствами',
+    url: 'https://otel-luxe.ru/rooms',
+  },
+  alternates: {
+    canonical: '/rooms',
+  },
 };
 
 const rooms = [
@@ -53,9 +63,21 @@ const rooms = [
 ];
 
 export default function RoomsPage() {
+  const breadcrumbs = [
+    { name: 'Главная', url: 'https://otel-luxe.ru' },
+    { name: 'Номера', url: 'https://otel-luxe.ru/rooms' }
+  ];
+
+  const breadcrumbItems = [
+    { label: 'Номера', current: true }
+  ];
+
   return (
-    <Box sx={{ py: 6, bgcolor: 'background.default' }}>
-      <Container maxWidth="lg">
+    <>
+      <StructuredData type="breadcrumb" data={breadcrumbs} />
+      <Box sx={{ py: 6, bgcolor: 'background.default' }}>
+        <Container maxWidth="lg">
+          <Breadcrumbs items={breadcrumbItems} />
         <Typography variant="h2" align="center" gutterBottom>
           Наши номера
         </Typography>
@@ -67,6 +89,7 @@ export default function RoomsPage() {
         <Grid container spacing={4}>
           {rooms.map((room) => (
             <Grid item xs={12} sm={6} md={4} key={room.id}>
+              <StructuredData type="room" data={room} />
               <RoomCard room={room} />
             </Grid>
           ))}
@@ -93,6 +116,7 @@ export default function RoomsPage() {
         </Box>
       </Container>
     </Box>
+    </>
   );
 }
 
