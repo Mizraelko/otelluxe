@@ -1,10 +1,6 @@
 import Script from 'next/script';
 import { SEO_CONFIG } from '@/config/seo';
-
-interface StructuredDataProps {
-  type: 'hotel' | 'room' | 'breadcrumb' | 'faq' | 'localBusiness';
-  data: any;
-}
+import { StructuredDataProps, Room, BreadcrumbItem, FAQItem } from '@/types';
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
   const getStructuredData = () => {
@@ -60,21 +56,22 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         };
 
       case 'room':
+        const roomData = data as Room;
         return {
           "@context": "https://schema.org",
           "@type": "LodgingBusiness",
-          "name": data.title,
-          "description": data.description,
-          "url": `https://otel-luxe.ru/rooms#${data.id}`,
-          "image": data.image,
+          "name": roomData.title,
+          "description": roomData.description,
+          "url": `https://otel-luxe.ru/rooms#${roomData.id}`,
+          "image": roomData.image,
           "offers": {
             "@type": "Offer",
-            "price": data.price,
+            "price": roomData.price,
             "priceCurrency": "RUB",
             "availability": "https://schema.org/InStock",
             "validFrom": new Date().toISOString().split('T')[0]
           },
-          "amenityFeature": data.amenities ? data.amenities.map((amenity: string) => ({
+          "amenityFeature": roomData.amenities ? roomData.amenities.map((amenity: string) => ({
             "@type": "LocationFeatureSpecification",
             "name": amenity,
             "value": true
@@ -101,7 +98,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
-          "itemListElement": data.map((item: any, index: number) => ({
+          "itemListElement": (data as BreadcrumbItem[]).map((item: BreadcrumbItem, index: number) => ({
             "@type": "ListItem",
             "position": index + 1,
             "name": item.name,
@@ -113,7 +110,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": data.map((faq: any) => ({
+          "mainEntity": (data as FAQItem[]).map((faq: FAQItem) => ({
             "@type": "Question",
             "name": faq.question,
             "acceptedAnswer": {

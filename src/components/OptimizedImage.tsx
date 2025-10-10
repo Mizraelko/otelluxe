@@ -1,18 +1,13 @@
 import Image from 'next/image';
-import { Box } from '@mui/material';
+import { Box, SxProps, Theme } from '@mui/material';
+import { OptimizedImageProps } from '@/types';
 
-interface OptimizedImageProps {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  priority?: boolean;
+interface ExtendedOptimizedImageProps extends OptimizedImageProps {
   quality?: number;
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
   sizes?: string;
-  className?: string;
-  sx?: any;
+  sx?: SxProps<Theme>;
 }
 
 export default function OptimizedImage({
@@ -28,7 +23,7 @@ export default function OptimizedImage({
   className,
   sx,
   ...props
-}: OptimizedImageProps) {
+}: ExtendedOptimizedImageProps) {
   return (
     <Box sx={{ position: 'relative', ...sx }} className={className}>
       <Image
