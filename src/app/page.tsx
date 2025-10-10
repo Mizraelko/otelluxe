@@ -121,10 +121,10 @@ export default function Home() {
       <Box sx={{ py: 8, bgcolor: 'background.default' }}>
         <Container maxWidth="md">
           <Typography variant="h2" align="center" gutterBottom>
-            Отель "Люкс" в Богородске
+            Отель &quot;Люкс&quot; в Богородске
           </Typography>
           <Typography variant="body1" paragraph sx={{ mt: 3, fontSize: '1.1rem' }}>
-            Добро пожаловать в отель "Люкс" – современную гостиницу в самом центре города Богородск. 
+            Добро пожаловать в отель &quot;Люкс&quot; – современную гостиницу в самом центре города Богородск. 
             Мы предлагаем комфортабельные номера, высокий уровень сервиса и индивидуальный подход 
             к каждому гостю.
           </Typography>

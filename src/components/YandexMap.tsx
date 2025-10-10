@@ -1,11 +1,11 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, useMemo } from 'react';
 
 function MapComponent() {
   const [mounted, setMounted] = useState(false);
-  const coordinates: [number, number] = [56.1039, 43.5122];
+  const coordinates: [number, number] = useMemo(() => [56.1039, 43.5122], []);
 
   useEffect(() => {
     setMounted(true);
