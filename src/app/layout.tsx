@@ -114,7 +114,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <AppThemeProvider>
             <Header />
-            <main style={{ minHeight: '70vh' }}>
+            <main style={{ minHeight: '70vh', paddingTop: '64px' }}>
               {children}
             </main>
             <Footer />
