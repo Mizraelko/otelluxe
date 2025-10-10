@@ -17,6 +17,7 @@ import {
 import Link from 'next/link';
 import HotelIcon from '@mui/icons-material/Hotel';
 import MenuIcon from '@mui/icons-material/Menu';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -103,6 +104,23 @@ export default function Header() {
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {/* VK Link */}
+            <IconButton
+              component={Link}
+              href="https://vk.com/otel_luxe_bogorodsk"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                color: 'inherit',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                }
+              }}
+              aria-label="Мы в ВКонтакте"
+            >
+              <FacebookIcon />
+            </IconButton>
+            
             <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
             
             {/* Mobile Menu Button */}

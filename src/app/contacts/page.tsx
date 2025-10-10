@@ -1,8 +1,9 @@
-import { Container, Box, Typography, Grid, Card, CardContent } from '@mui/material';
+import { Container, Box, Typography, Grid, Card, CardContent, Link, IconButton } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import YandexMap from '@/components/YandexMap';
 import type { Metadata } from 'next';
 
@@ -30,9 +31,17 @@ export default function ContactsPage() {
                 <Typography variant="h6" gutterBottom>
                   Телефон
                 </Typography>
-                <Typography variant="body1" color="primary.main" fontWeight="bold">
-                  +7 (831) 123-45-67
-                </Typography>
+                <Link 
+                  href="tel:+78311234567" 
+                  sx={{ 
+                    textDecoration: 'none',
+                    '&:hover': { textDecoration: 'underline' }
+                  }}
+                >
+                  <Typography variant="body1" color="primary.main" fontWeight="bold">
+                    +7 (831) 123-45-67
+                  </Typography>
+                </Link>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                   Звонки принимаются круглосуточно
                 </Typography>
@@ -47,9 +56,17 @@ export default function ContactsPage() {
                 <Typography variant="h6" gutterBottom>
                   Email
                 </Typography>
-                <Typography variant="body1" color="primary.main" fontWeight="bold">
-                  info@otel-luxe.ru
-                </Typography>
+                <Link 
+                  href="mailto:info@otel-luxe.ru" 
+                  sx={{ 
+                    textDecoration: 'none',
+                    '&:hover': { textDecoration: 'underline' }
+                  }}
+                >
+                  <Typography variant="body1" color="primary.main" fontWeight="bold">
+                    info@otel-luxe.ru
+                  </Typography>
+                </Link>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                   Ответим в течение 24 часов
                 </Typography>
@@ -91,6 +108,32 @@ export default function ContactsPage() {
             </Card>
           </Grid>
         </Grid>
+
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
+            Мы в социальных сетях
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 4 }}>
+            <IconButton
+              component={Link}
+              href="https://vk.com/otel_luxe_bogorodsk"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                bgcolor: 'primary.main',
+                color: 'primary.contrastText',
+                '&:hover': {
+                  bgcolor: 'primary.dark',
+                },
+                width: 64,
+                height: 64,
+              }}
+              aria-label="Мы в ВКонтакте"
+            >
+              <FacebookIcon sx={{ fontSize: 32 }} />
+            </IconButton>
+          </Box>
+        </Box>
 
         <Box sx={{ mb: 6 }}>
           <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
