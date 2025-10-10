@@ -45,7 +45,7 @@ function MapComponent() {
         script.parentNode.removeChild(script);
       }
     };
-  }, []);
+  }, [coordinates]);
 
   if (!mounted) {
     return (

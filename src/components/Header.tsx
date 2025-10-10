@@ -81,7 +81,7 @@ export default function Header() {
               flexGrow: { xs: 1, md: 0 },
             }}
           >
-            Отель "Люкс"
+            Отель &quot;Люкс&quot;
           </Typography>
           
           {/* Desktop Navigation */}

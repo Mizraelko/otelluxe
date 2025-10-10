@@ -88,7 +88,7 @@ export default function RoomsPage() {
           Наши номера
         </Typography>
         <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto' }}>
-          В отеле "Люкс" представлены номера различных категорий. Все номера оборудованы современной 
+          В отеле &quot;Люкс&quot; представлены номера различных категорий. Все номера оборудованы современной 
           мебелью, кондиционером, телевизором и бесплатным Wi-Fi.
         </Typography>
 

@@ -22,7 +22,7 @@ export default function Footer() {
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6" gutterBottom>
-              Отель "Люкс"
+              Отель &quot;Люкс&quot;
             </Typography>
             <Typography variant="body2" sx={{ mb: 2 }}>
               Современная гостиница в центре Богородска. Комфорт и качественный сервис для наших гостей.
@@ -107,7 +107,7 @@ export default function Footer() {
 
         <Box sx={{ mt: 4, pt: 4, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
           <Typography variant="body2" align="center">
-            © {new Date().getFullYear()} Отель "Люкс" Богородск. Все права защищены.
+            © {new Date().getFullYear()} Отель &quot;Люкс&quot; Богородск. Все права защищены.
           </Typography>
         </Box>
       </Container>

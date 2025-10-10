@@ -37,7 +37,7 @@ export default function Hero() {
               textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
             }}
           >
-            Добро пожаловать в Отель "Люкс"
+            Добро пожаловать в Отель &quot;Люкс&quot;
           </Typography>
           <Typography 
             variant="h5" 
