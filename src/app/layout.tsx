@@ -71,8 +71,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
   },
 };
 
@@ -110,7 +110,10 @@ export default function RootLayout({
         }} />
       </head>
       <body suppressHydrationWarning={true}>
-        <Analytics />
+        <Analytics 
+          googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}
+          yandexMetrikaId={process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID}
+        />
         <AppRouterCacheProvider>
           <AppThemeProvider>
             <Header />

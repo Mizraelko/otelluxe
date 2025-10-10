@@ -74,7 +74,11 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "availability": "https://schema.org/InStock",
             "validFrom": new Date().toISOString().split('T')[0]
           },
-          "amenityFeature": [
+          "amenityFeature": data.amenities ? data.amenities.map((amenity: string) => ({
+            "@type": "LocationFeatureSpecification",
+            "name": amenity,
+            "value": true
+          })) : [
             {
               "@type": "LocationFeatureSpecification",
               "name": "Wi-Fi",
