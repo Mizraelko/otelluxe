@@ -1,6 +1,6 @@
 export const SEO_CONFIG = {
   site: {
-    name: 'Отель "Люкс"',
+    name: 'Отель &quot;Люкс&quot;',
     url: 'https://otel-luxe.ru',
     description: 'Современный отель в центре Богородска с комфортабельными номерами и высоким уровнем сервиса',
     keywords: [
@@ -22,7 +22,7 @@ export const SEO_CONFIG = {
   },
   
   hotel: {
-    name: 'Отель "Люкс"',
+    name: 'Отель &quot;Люкс&quot;',
     address: {
       street: 'ул. Центральная, д. 1',
       city: 'Богородск',
