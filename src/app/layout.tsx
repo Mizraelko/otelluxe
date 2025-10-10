@@ -7,10 +7,10 @@ import Analytics from '@/components/Analytics';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Отель &quot;Люкс&quot; - Богородск | Комфортабельная гостиница в центре города',
-    template: '%s | Отель &quot;Люкс&quot; - Богородск'
+    default: 'Отель Люкс Богородск',
+    template: '%s | Отель Люкс Богородск'
   },
-  description: 'Современный отель &quot;Люкс&quot; в Богородске предлагает комфортабельные номера, высокий сервис и удобное расположение в центре города. Бронирование онлайн по выгодным ценам. Wi-Fi, ресторан, парковка.',
+  description: 'Современный отель "Люкс" в Богородске предлагает комфортабельные номера, высокий сервис и удобное расположение в центре города. Бронирование онлайн по выгодным ценам. Wi-Fi, ресторан, парковка.',
   keywords: [
     'отель Богородск',
     'гостиница Люкс',
@@ -100,6 +100,8 @@ export default function RootLayout({
         <link rel="canonical" href="https://otel-luxe.ru" />
         <link rel="alternate" hrefLang="ru" href="https://otel-luxe.ru" />
         <link rel="alternate" hrefLang="x-default" href="https://otel-luxe.ru" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <style dangerouslySetInnerHTML={{
           __html: `
             /* Скрываем предупреждения от расширений браузера */

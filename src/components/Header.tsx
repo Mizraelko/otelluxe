@@ -17,6 +17,7 @@ import {
 import Link from 'next/link';
 import HotelIcon from '@mui/icons-material/Hotel';
 import MenuIcon from '@mui/icons-material/Menu';
+import PhoneIcon from '@mui/icons-material/Phone';
 import VKIcon from './VKIcon';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -200,8 +201,62 @@ export default function Header() {
               </Button>
             )}
           </Box>
+          
         </Toolbar>
       </Container>
+      
+      {/* 24/7 Reception Phone - Desktop Only - Right Corner */}
+      {!isMobile && (
+        <Box 
+          sx={{ 
+            position: 'absolute',
+            top: 4,
+            right: 16,
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            zIndex: 10,
+            px: 1,
+            py: 0.5,
+          }}
+        >
+          <Typography 
+            variant="caption" 
+            sx={{ 
+              fontSize: '0.65rem',
+              lineHeight: 1.1,
+              color: 'primary.contrastText',
+              textAlign: 'center',
+            }}
+          >
+            <Box component="span" sx={{ color: '#ff4444', fontWeight: 600 }}>
+              Круглосуточно
+            </Box>
+            {' '}стойка администрации
+          </Typography>
+          <Box
+            component="a"
+            href="tel:+79991234567"
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.3,
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              color: 'primary.contrastText',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease',
+              mt: 1,
+              '&:hover': {
+                color: 'secondary.light',
+              }
+            }}
+          >
+            <PhoneIcon sx={{ fontSize: '0.7rem' }} />
+            +7 (999) 123-45-67
+          </Box>
+        </Box>
+      )}
     </AppBar>
   );
 }

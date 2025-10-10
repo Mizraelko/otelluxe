@@ -1,4 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" fill="#000000"/>
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Л</text>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hotel building -->
+  <rect x="4" y="12" width="24" height="16" fill="#1976d2" stroke="#1565c0" stroke-width="1"/>
+  
+  <!-- Windows -->
+  <rect x="6" y="14" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="10" y="14" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="14" y="14" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="18" y="14" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="22" y="14" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  
+  <rect x="6" y="18" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="10" y="18" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="14" y="18" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="18" y="18" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="22" y="18" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  
+  <rect x="6" y="22" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="10" y="22" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="14" y="22" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="18" y="22" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  <rect x="22" y="22" width="3" height="3" fill="#ffffff" opacity="0.8"/>
+  
+  <!-- Door -->
+  <rect x="14" y="24" width="4" height="4" fill="#8d6e63"/>
+  
+  <!-- Roof -->
+  <polygon points="2,12 16,4 30,12" fill="#d32f2f"/>
+  
+  <!-- Flag -->
+  <rect x="16" y="2" width="2" height="6" fill="#8d6e63"/>
+  <polygon points="18,2 18,4 22,3" fill="#ffd700"/>
 </svg>

@@ -10,7 +10,19 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: '#ffffff',
     theme_color: '#000000',
     orientation: 'portrait',
-    icons: [],
+    icons: [
+      {
+        src: '/favicon.svg',
+        sizes: 'any',
+        type: 'image/svg+xml',
+        purpose: 'any maskable'
+      },
+      {
+        src: '/favicon.ico',
+        sizes: '16x16 32x32 48x48',
+        type: 'image/x-icon'
+      }
+    ],
     categories: ['travel', 'business', 'lifestyle'],
     lang: 'ru',
     dir: 'ltr',
