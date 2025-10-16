@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Номера отеля "Люкс" в Богородске',
     description: 'Комфортабельные номера различных категорий с современными удобствами',
-    url: 'https://otel-luxe.ru/rooms',
+    url: 'https://hotelluxbg.ru/rooms',
   },
   alternates: {
     canonical: '/rooms',
@@ -70,8 +70,8 @@ const rooms = [
 
 export default function RoomsPage() {
   const breadcrumbs = [
-    { name: 'Главная', url: 'https://otel-luxe.ru' },
-    { name: 'Номера', url: 'https://otel-luxe.ru/rooms' }
+    { name: 'Главная', url: 'https://hotelluxbg.ru' },
+    { name: 'Номера', url: 'https://hotelluxbg.ru/rooms' }
   ];
 
   const breadcrumbItems = [

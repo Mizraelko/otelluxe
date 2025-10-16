@@ -1,7 +1,7 @@
 export const SEO_CONFIG = {
   site: {
     name: 'Отель &quot;Люкс&quot;',
-    url: 'https://otel-luxe.ru',
+    url: 'https://hotelluxbg.ru',
     description: 'Современный отель в центре Богородска с комфортабельными номерами и высоким уровнем сервиса',
     keywords: [
       'отель Богородск',
@@ -24,19 +24,19 @@ export const SEO_CONFIG = {
   hotel: {
     name: 'Отель &quot;Люкс&quot;',
     address: {
-      street: 'ул. Центральная, д. 1',
+      street: 'ул. Ленина, д. 50',
       city: 'Богородск',
-      region: 'Московская область',
-      postalCode: '142400',
+      region: 'Нижегородская область',
+      postalCode: '607600',
       country: 'RU'
     },
     coordinates: {
-      latitude: '55.7558',
-      longitude: '37.6176'
+      latitude: '56.1039',
+      longitude: '43.5122'
     },
     contact: {
-      phone: '+7 (495) 123-45-67',
-      email: 'info@otel-luxe.ru'
+      phone: '+7 (987) 757-83-23',
+      email: 'luxgostevoidom@yandex.ru'
     },
     rating: {
       value: 4,
@@ -62,10 +62,11 @@ export const SEO_CONFIG = {
   },
 
   social: {
-    facebook: 'https://facebook.com/otelluxe',
-    instagram: 'https://instagram.com/otelluxe',
-    vk: 'https://vk.com/otelluxe',
-    twitter: 'https://twitter.com/otelluxe'
+    vk: 'https://vk.com/id412614778',
+    telegram: 'https://t.me/otelluxbg',
+    facebook: '',
+    instagram: '',
+    twitter: ''
   },
 
   images: {

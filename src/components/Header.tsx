@@ -108,7 +108,7 @@ export default function Header() {
             {/* VK Link */}
             <IconButton
               component={Link}
-              href="https://vk.com/otel_luxe_bogorodsk"
+              href="https://vk.com/id412614778"
               target="_blank"
               rel="noopener noreferrer"
               sx={{
@@ -236,7 +236,7 @@ export default function Header() {
           </Typography>
           <Box
             component="a"
-            href="tel:+79991234567"
+            href="tel:+79877578323"
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -253,7 +253,7 @@ export default function Header() {
             }}
           >
             <PhoneIcon sx={{ fontSize: '0.7rem' }} />
-            +7 (999) 123-45-67
+            +7 (987) 757-83-23
           </Box>
         </Box>
       )}

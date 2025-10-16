@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://hotelluxbg.ru
+
+# Sitemaps
+Sitemap: https://hotelluxbg.ru/sitemap.xml

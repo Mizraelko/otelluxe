@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://otel-luxe.ru',
+  siteUrl: process.env.SITE_URL || 'https://hotelluxbg.ru',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,

@@ -60,34 +60,34 @@ export default function Footer() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <PhoneIcon fontSize="small" />
                 <MuiLink 
-                  href="tel:+78311234567" 
+                  href="tel:+79877578323" 
                   color="inherit" 
                   underline="hover"
                   sx={{ textDecoration: 'none' }}
                 >
-                  <Typography variant="body2">+7 (831) 123-45-67</Typography>
+                  <Typography variant="body2">+7 (987) 757-83-23</Typography>
                 </MuiLink>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <EmailIcon fontSize="small" />
                 <MuiLink 
-                  href="mailto:info@otel-luxe.ru" 
+                  href="mailto:luxgostevoidom@yandex.ru" 
                   color="inherit" 
                   underline="hover"
                   sx={{ textDecoration: 'none' }}
                 >
-                  <Typography variant="body2">info@otel-luxe.ru</Typography>
+                  <Typography variant="body2">luxgostevoidom@yandex.ru</Typography>
                 </MuiLink>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <LocationOnIcon fontSize="small" />
-                <Typography variant="body2">г. Богородск, ул. Центральная, 1</Typography>
+                <Typography variant="body2">г. Богородск, ул. Ленина, 50</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
                 <Typography variant="body2">Мы в соцсетях:</Typography>
                 <IconButton
                   component={Link}
-                  href="https://vk.com/otel_luxe_bogorodsk"
+                  href="https://vk.com/id412614778"
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{

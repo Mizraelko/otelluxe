@@ -62,7 +62,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "@type": "LodgingBusiness",
           "name": roomData.title,
           "description": roomData.description,
-          "url": `https://otel-luxe.ru/rooms#${roomData.id}`,
+          "url": `https://hotelluxbg.ru/rooms#${roomData.id}`,
           "image": roomData.image,
           "offers": {
             "@type": "Offer",
@@ -125,22 +125,22 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "@context": "https://schema.org",
           "@type": "LodgingBusiness",
           "name": "Отель \"Люкс\"",
-          "image": "https://otel-luxe.ru/images/hotel-exterior.jpg",
-          "telephone": "+7 (495) 123-45-67",
-          "email": "info@otel-luxe.ru",
-          "url": "https://otel-luxe.ru",
+          "image": "https://hotelluxbg.ru/images/hotel-exterior.jpg",
+          "telephone": "+7 (987) 757-83-23",
+          "email": "luxgostevoidom@yandex.ru",
+          "url": "https://hotelluxbg.ru",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "ул. Центральная, д. 1",
+            "streetAddress": "ул. Ленина, д. 50",
             "addressLocality": "Богородск",
-            "addressRegion": "Московская область",
-            "postalCode": "142400",
+            "addressRegion": "Нижегородская область",
+            "postalCode": "607600",
             "addressCountry": "RU"
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "55.7558",
-            "longitude": "37.6176"
+            "latitude": "56.1039",
+            "longitude": "43.5122"
           },
           "openingHours": "Mo-Su 00:00-23:59",
           "priceRange": "$$"

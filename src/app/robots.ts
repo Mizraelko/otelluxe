@@ -24,8 +24,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/', '/private/'],
       },
     ],
-    sitemap: 'https://otel-luxe.ru/sitemap.xml',
-    host: 'https://otel-luxe.ru',
+    sitemap: 'https://hotelluxbg.ru/sitemap.xml',
+    host: 'https://hotelluxbg.ru',
   };
 }
 

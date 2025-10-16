@@ -33,14 +33,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://otel-luxe.ru'),
+  metadataBase: new URL('https://hotelluxbg.ru'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Отель "Люкс" - Богородск | Комфортабельная гостиница',
     description: 'Современный отель в центре Богородска. Уютные номера, высокий сервис, удобное расположение. Бронирование онлайн.',
-    url: 'https://otel-luxe.ru',
+    url: 'https://hotelluxbg.ru',
     siteName: 'Отель "Люкс"',
     images: [
       {
@@ -93,13 +93,13 @@ export default function RootLayout({
         <meta name="application-name" content="Отель Люкс" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="geo.region" content="RU-MOW" />
+        <meta name="geo.region" content="RU-NIZ" />
         <meta name="geo.placename" content="Богородск" />
-        <meta name="geo.position" content="55.7558;37.6176" />
-        <meta name="ICBM" content="55.7558, 37.6176" />
-        <link rel="canonical" href="https://otel-luxe.ru" />
-        <link rel="alternate" hrefLang="ru" href="https://otel-luxe.ru" />
-        <link rel="alternate" hrefLang="x-default" href="https://otel-luxe.ru" />
+        <meta name="geo.position" content="56.1039;43.5122" />
+        <meta name="ICBM" content="56.1039, 43.5122" />
+        <link rel="canonical" href="https://hotelluxbg.ru" />
+        <link rel="alternate" hrefLang="ru" href="https://hotelluxbg.ru" />
+        <link rel="alternate" hrefLang="x-default" href="https://hotelluxbg.ru" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <style dangerouslySetInnerHTML={{

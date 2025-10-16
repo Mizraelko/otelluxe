@@ -12,7 +12,7 @@ function MapComponent() {
     
     // Динамически загружаем Яндекс.Карты для избежания SSR проблем
     const script = document.createElement('script');
-    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY || 'ВАШ_API_KEY_ЯНДЕКС_КАРТ'}&lang=ru_RU&load=package.full`;
+    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY || 'b2ff1b7a-7797-4395-96e5-3d415dfa9e76'}&lang=ru_RU&load=package.full`;
     script.async = true;
     script.onload = () => {
       // @ts-ignore

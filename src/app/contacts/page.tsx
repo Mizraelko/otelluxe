@@ -32,14 +32,14 @@ export default function ContactsPage() {
                   Телефон
                 </Typography>
                 <Link 
-                  href="tel:+78311234567" 
+                  href="tel:+79877578323" 
                   sx={{ 
                     textDecoration: 'none',
                     '&:hover': { textDecoration: 'underline' }
                   }}
                 >
                   <Typography variant="body1" color="primary.main" fontWeight="bold">
-                    +7 (831) 123-45-67
+                    +7 (987) 757-83-23
                   </Typography>
                 </Link>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -57,14 +57,14 @@ export default function ContactsPage() {
                   Email
                 </Typography>
                 <Link 
-                  href="mailto:info@otel-luxe.ru" 
+                  href="mailto:luxgostevoidom@yandex.ru" 
                   sx={{ 
                     textDecoration: 'none',
                     '&:hover': { textDecoration: 'underline' }
                   }}
                 >
                   <Typography variant="body1" color="primary.main" fontWeight="bold">
-                    info@otel-luxe.ru
+                    luxgostevoidom@yandex.ru
                   </Typography>
                 </Link>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -116,7 +116,7 @@ export default function ContactsPage() {
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 4 }}>
             <IconButton
               component={Link}
-              href="https://vk.com/otel_luxe_bogorodsk"
+              href="https://vk.com/id412614778"
               target="_blank"
               rel="noopener noreferrer"
               sx={{

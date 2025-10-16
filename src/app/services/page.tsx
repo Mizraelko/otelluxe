@@ -61,8 +61,8 @@ const services = [
 
 export default function ServicesPage() {
   const breadcrumbs = [
-    { name: 'Главная', url: 'https://otel-luxe.ru' },
-    { name: 'Услуги', url: 'https://otel-luxe.ru/services' }
+    { name: 'Главная', url: 'https://hotelluxbg.ru' },
+    { name: 'Услуги', url: 'https://hotelluxbg.ru/services' }
   ];
 
   const breadcrumbItems = [

@@ -96,7 +96,7 @@ export default function BookingPage() {
 
             <Box 
               component="a" 
-              href="tel:+79991234567"
+              href="tel:+79877578323"
               sx={{ 
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -119,7 +119,7 @@ export default function BookingPage() {
               }}
             >
               <PhoneIcon sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }} />
-              +7 (999) 123-45-67
+              +7 (987) 757-83-23
             </Box>
 
             <Typography 
