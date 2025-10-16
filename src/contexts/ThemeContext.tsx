@@ -26,8 +26,10 @@ interface ThemeProviderProps {
 
 export function AppThemeProvider({ children }: ThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Загружаем сохраненную тему из localStorage
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -36,9 +38,11 @@ export function AppThemeProvider({ children }: ThemeProviderProps) {
   }, []);
 
   useEffect(() => {
-    // Сохраняем тему в localStorage
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+    if (mounted) {
+      // Сохраняем тему в localStorage только после монтирования
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }
+  }, [isDarkMode, mounted]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);

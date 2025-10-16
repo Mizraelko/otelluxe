@@ -1,7 +1,6 @@
 import { Container, Box, Typography, Grid, Card, CardContent, Button } from '@mui/material';
 import Hero from '@/components/Hero';
 import RoomCard from '@/components/RoomCard';
-import FAQ from '@/components/FAQ';
 import StructuredData from '@/components/StructuredData';
 import Link from 'next/link';
 import StarIcon from '@mui/icons-material/Star';
@@ -75,7 +74,7 @@ export default function Home() {
       
       {/* Преимущества */}
       <Box sx={{ py: 8, bgcolor: 'background.default' }}>
-        <Container maxWidth="lg">
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
           <Typography variant="h2" align="center" gutterBottom>
             Почему выбирают нас
           </Typography>
@@ -103,7 +102,7 @@ export default function Home() {
 
       {/* Популярные номера */}
       <Box sx={{ py: 8, bgcolor: 'background.default' }}>
-        <Container maxWidth="lg">
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
           <Typography variant="h2" align="center" gutterBottom>
             Наши номера
           </Typography>
@@ -119,7 +118,7 @@ export default function Home() {
 
       {/* О нас */}
       <Box sx={{ py: 8, bgcolor: 'background.default' }}>
-        <Container maxWidth="md">
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
           <Typography variant="h2" align="center" gutterBottom>
             Отель &quot;Люкс&quot; в Богородске
           </Typography>
@@ -135,9 +134,6 @@ export default function Home() {
           </Typography>
         </Container>
       </Box>
-
-      {/* FAQ */}
-      <FAQ />
     </>
   );
 }

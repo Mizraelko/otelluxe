@@ -59,31 +59,49 @@ export default function Header() {
     <AppBar 
       position="fixed" 
       sx={{ 
-        bgcolor: scrolled ? 'rgba(0, 0, 0, 0.9)' : 'primary.main',
-        color: 'primary.contrastText',
+        bgcolor: scrolled 
+          ? (isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.9)')
+          : 'primary.main',
+        color: scrolled 
+          ? (isDarkMode ? 'white' : 'primary.main')
+          : 'primary.contrastText',
         backdropFilter: scrolled ? 'blur(10px)' : 'none',
         transition: 'all 0.3s ease-in-out',
-        boxShadow: scrolled ? '0 2px 20px rgba(0, 0, 0, 0.3)' : 'none',
+        boxShadow: scrolled ? (isDarkMode ? '0 2px 20px rgba(0, 0, 0, 0.5)' : '0 2px 20px rgba(0, 0, 0, 0.1)') : 'none',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
         <Toolbar disableGutters>
-          <HotelIcon sx={{ mr: 1, fontSize: 32, color: 'inherit' }} />
-          <Typography
-            variant="h6"
-            component={Link}
-            href="/"
-            sx={{
-              mr: 4,
-              fontWeight: 700,
-              fontSize: '1.5rem',
-              textDecoration: 'none',
-              color: 'inherit',
-              flexGrow: { xs: 1, md: 0 },
-            }}
-          >
-            Отель &quot;Люкс&quot;
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', mr: 4 }}>
+            <HotelIcon sx={{ 
+              mr: 1, 
+              fontSize: 36, 
+              color: scrolled 
+                ? (isDarkMode ? 'white' : 'primary.main')
+                : 'inherit'
+            }} />
+            <Typography
+              variant="h6"
+              component={Link}
+              href="/"
+              sx={{
+                fontWeight: 700,
+                fontSize: '1.6rem',
+                textDecoration: 'none',
+                color: scrolled 
+                  ? (isDarkMode ? 'white' : 'primary.main')
+                  : 'inherit',
+                flexGrow: { xs: 1, md: 0 },
+                '&:hover': {
+                  color: scrolled 
+                    ? (isDarkMode ? '#ffeb3b' : 'primary.dark')
+                    : 'inherit',
+                }
+              }}
+            >
+              Отель &quot;Люкс&quot;
+            </Typography>
+          </Box>
           
           {/* Desktop Navigation */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
@@ -93,10 +111,22 @@ export default function Header() {
                 component={Link} 
                 href={item.href} 
                 sx={{ 
-                  color: 'inherit',
+                  color: scrolled 
+                    ? (isDarkMode ? 'white' : 'primary.main')
+                    : 'inherit',
+                  border: 'none',
+                  outline: 'none',
+                  boxShadow: 'none',
                   '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  }
+                    backgroundColor: scrolled 
+                      ? (isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(25, 118, 210, 0.1)')
+                      : 'rgba(255, 255, 255, 0.1)',
+                    boxShadow: 'none',
+                  },
+                  '&:focus': {
+                    boxShadow: 'none',
+                    outline: 'none',
+                  },
                 }}
               >
                 {item.label}
@@ -104,7 +134,12 @@ export default function Header() {
             ))}
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: { xs: 0.5, sm: 1, md: 0.5, lg: 1 },
+            flexWrap: 'nowrap'
+          }}>
             {/* VK Link */}
             <IconButton
               component={Link}
@@ -112,10 +147,28 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                color: 'inherit',
+                color: '#0077FF', // Синий цвет VK
+                size: { xs: 'small', sm: 'medium', md: 'small', lg: 'medium' },
+                border: 'none',
+                outline: 'none',
+                boxShadow: 'none',
                 '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                }
+                  backgroundColor: 'rgba(0, 119, 255, 0.1)', // Светло-синий фон при hover
+                  color: '#0056CC', // Темнее синий при hover
+                  boxShadow: 'none',
+                },
+                '&:focus': {
+                  boxShadow: 'none',
+                  outline: 'none',
+                },
+                '& svg': {
+                  fill: '#0077FF', // Синий цвет для VK иконки
+                  color: '#0077FF',
+                },
+                '&:hover svg': {
+                  fill: '#0056CC', // Темнее синий при hover
+                  color: '#0056CC',
+                },
               }}
               aria-label="Мы в ВКонтакте"
             >
@@ -196,6 +249,22 @@ export default function Header() {
                 color="secondary"
                 component={Link}
                 href="/booking"
+                sx={{
+                  fontSize: { xs: '0.8rem', sm: '0.9rem', md: '0.8rem', lg: '0.9rem' },
+                  px: { xs: 2, sm: 3, md: 2, lg: 3 },
+                  py: 1,
+                  minWidth: { xs: 'auto', sm: 'auto', md: 'auto', lg: 'auto' },
+                  border: 'none',
+                  outline: 'none',
+                  boxShadow: 'none',
+                  '&:hover': {
+                    boxShadow: 'none',
+                  },
+                  '&:focus': {
+                    boxShadow: 'none',
+                    outline: 'none',
+                  },
+                }}
               >
                 Забронировать
               </Button>
@@ -205,58 +274,63 @@ export default function Header() {
         </Toolbar>
       </Container>
       
-      {/* 24/7 Reception Phone - Desktop Only - Right Corner */}
-      {!isMobile && (
-        <Box 
+      {/* 24/7 Reception Phone - Responsive */}
+      <Box 
+        sx={{ 
+          position: 'absolute',
+          top: 4,
+          right: { xs: 8, sm: 16 },
+          display: { xs: 'none', md: 'none', xl: 'flex' }, // Показываем только на очень больших экранах
+          flexDirection: 'column',
+          alignItems: 'center',
+          zIndex: 10,
+          px: 1,
+          py: 0.5,
+          maxWidth: { xs: '120px', lg: '150px' },
+        }}
+      >
+        <Typography 
+          variant="caption" 
           sx={{ 
-            position: 'absolute',
-            top: 4,
-            right: 16,
-            display: 'flex', 
-            flexDirection: 'column',
-            alignItems: 'center',
-            zIndex: 10,
-            px: 1,
-            py: 0.5,
+            fontSize: { xs: '0.6rem', lg: '0.65rem' },
+            lineHeight: 1.1,
+            color: scrolled 
+              ? (isDarkMode ? 'white' : 'primary.main')
+              : 'primary.contrastText',
+            textAlign: 'center',
+            wordBreak: 'break-word',
+            transition: 'color 0.3s ease-in-out',
           }}
         >
-          <Typography 
-            variant="caption" 
-            sx={{ 
-              fontSize: '0.65rem',
-              lineHeight: 1.1,
-              color: 'primary.contrastText',
-              textAlign: 'center',
-            }}
-          >
-            <Box component="span" sx={{ color: '#ff4444', fontWeight: 600 }}>
-              Круглосуточно
-            </Box>
-            {' '}стойка администрации
-          </Typography>
-          <Box
-            component="a"
-            href="tel:+79877578323"
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.3,
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              color: 'primary.contrastText',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-              mt: 1,
-              '&:hover': {
-                color: 'secondary.light',
-              }
-            }}
-          >
-            <PhoneIcon sx={{ fontSize: '0.7rem' }} />
-            +7 (987) 757-83-23
+          <Box component="span" sx={{ color: '#ff4444', fontWeight: 600 }}>
+            Круглосуточно
           </Box>
+          {' '}стойка администрации
+        </Typography>
+        <Box
+          component="a"
+          href="tel:+79877578323"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.3,
+            fontSize: { xs: '0.7rem', lg: '0.8rem' },
+            fontWeight: 700,
+            color: scrolled 
+              ? (isDarkMode ? 'white' : 'primary.main')
+              : 'primary.contrastText',
+            textDecoration: 'none',
+            transition: 'color 0.3s ease-in-out',
+            mt: 1,
+            '&:hover': {
+              color: 'secondary.light',
+            }
+          }}
+        >
+          <PhoneIcon sx={{ fontSize: { xs: '0.6rem', lg: '0.7rem' } }} />
+          +7 (987) 757-83-23
         </Box>
-      )}
+      </Box>
     </AppBar>
   );
 }

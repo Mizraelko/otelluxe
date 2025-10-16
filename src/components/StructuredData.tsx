@@ -131,7 +131,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "url": "https://hotelluxbg.ru",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "ул. Ленина, д. 50",
+            "streetAddress": "ул. Ленина, 223Б",
             "addressLocality": "Богородск",
             "addressRegion": "Нижегородская область",
             "postalCode": "607600",
@@ -139,8 +139,8 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "56.1039",
-            "longitude": "43.5122"
+            "latitude": "56.106022",
+            "longitude": "43.520823"
           },
           "openingHours": "Mo-Su 00:00-23:59",
           "priceRange": "$$"

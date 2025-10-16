@@ -25,7 +25,7 @@ export default function Hero() {
         },
       }}
     >
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, px: { xs: 2, sm: 3 } }}>
         <Box sx={{ maxWidth: '700px', color: 'white' }}>
           <Typography
             variant="h1"
@@ -50,7 +50,13 @@ export default function Hero() {
           >
             Комфорт и уют в сердце Богородска
           </Typography>
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            gap: 2, 
+            flexWrap: 'wrap',
+            flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: { xs: 'stretch', sm: 'flex-start' }
+          }}>
             <Button
               variant="contained"
               color="secondary"
@@ -58,10 +64,12 @@ export default function Hero() {
               component={Link}
               href="/booking"
               sx={{ 
-                px: 4, 
+                px: { xs: 3, sm: 4 }, 
                 py: 1.5,
                 bgcolor: 'primary.main',
                 color: 'primary.contrastText',
+                minWidth: { xs: 'auto', sm: '200px' },
+                fontSize: { xs: '0.9rem', sm: '1rem' },
                 '&:hover': {
                   bgcolor: 'primary.dark',
                 },
@@ -75,13 +83,15 @@ export default function Hero() {
               component={Link}
               href="/rooms"
               sx={{
-                px: 4,
+                px: { xs: 3, sm: 4 },
                 py: 1.5,
                 borderColor: 'rgba(255, 255, 255, 0.8)',
                 color: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(10px)',
                 fontWeight: 600,
+                minWidth: { xs: 'auto', sm: '200px' },
+                fontSize: { xs: '0.9rem', sm: '1rem' },
                 '&:hover': {
                   borderColor: 'white',
                   bgcolor: 'rgba(255, 255, 255, 0.2)',

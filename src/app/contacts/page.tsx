@@ -85,7 +85,7 @@ export default function ContactsPage() {
                   г. Богородск
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  ул. Центральная, 1
+                  ул. Ленина, 223Б
                 </Typography>
               </CardContent>
             </Card>
@@ -120,17 +120,27 @@ export default function ContactsPage() {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                bgcolor: 'primary.main',
-                color: 'primary.contrastText',
+                bgcolor: '#0077FF', // Синий цвет VK
+                color: 'white',
                 '&:hover': {
-                  bgcolor: 'primary.dark',
+                  bgcolor: '#0056CC', // Темнее синий при hover
                 },
                 width: 64,
                 height: 64,
+                '& svg': {
+                  fill: 'white !important', // Белый цвет для VK иконки
+                  color: 'white !important',
+                  width: '32px',
+                  height: '32px',
+                },
               }}
               aria-label="Мы в ВКонтакте"
             >
-              <VKIcon />
+              <VKIcon 
+                width={32} 
+                height={32} 
+                style={{ color: 'white', fill: 'white' }}
+              />
             </IconButton>
           </Box>
         </Box>

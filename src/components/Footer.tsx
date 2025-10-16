@@ -81,7 +81,7 @@ export default function Footer() {
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <LocationOnIcon fontSize="small" />
-                <Typography variant="body2">г. Богородск, ул. Ленина, 50</Typography>
+                <Typography variant="body2">г. Богородск, ул. Ленина, 223Б</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
                 <Typography variant="body2">Мы в соцсетях:</Typography>
@@ -91,10 +91,19 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
-                    color: 'white',
+                    color: '#0077FF', // Синий цвет VK
                     '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    }
+                      backgroundColor: 'rgba(0, 119, 255, 0.1)', // Светло-синий фон при hover
+                      color: '#0056CC', // Темнее синий при hover
+                    },
+                    '& svg': {
+                      fill: '#0077FF', // Синий цвет для VK иконки
+                      color: '#0077FF',
+                    },
+                    '&:hover svg': {
+                      fill: '#0056CC', // Темнее синий при hover
+                      color: '#0056CC',
+                    },
                   }}
                   aria-label="Мы в ВКонтакте"
                 >

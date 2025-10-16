@@ -24,15 +24,15 @@ export const SEO_CONFIG = {
   hotel: {
     name: 'Отель &quot;Люкс&quot;',
     address: {
-      street: 'ул. Ленина, д. 50',
+      street: 'ул. Ленина, 223Б',
       city: 'Богородск',
       region: 'Нижегородская область',
       postalCode: '607600',
       country: 'RU'
     },
     coordinates: {
-      latitude: '56.1039',
-      longitude: '43.5122'
+      latitude: '56.106022',
+      longitude: '43.520823'
     },
     contact: {
       phone: '+7 (987) 757-83-23',

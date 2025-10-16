@@ -19,8 +19,16 @@ export default function ThemeToggle({ isDarkMode, onToggle }: ThemeToggleProps) 
         onClick={onToggle}
         sx={{
           color: 'inherit',
+          border: 'none',
+          outline: 'none',
+          boxShadow: 'none',
           '&:hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+            outline: 'none',
           },
         }}
       >
