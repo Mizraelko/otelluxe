@@ -12,15 +12,7 @@ import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import LocalLaundryServiceIcon from '@mui/icons-material/LocalLaundryService';
-
-interface Room {
-  id: number;
-  title: string;
-  description: string;
-  price: string;
-  image: string;
-  amenities?: string[];
-}
+import { Room } from '@/types';
 
 interface RoomCardProps {
   room: Room;

@@ -5,6 +5,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VKIcon from '@/components/VKIcon';
 import YandexMap from '@/components/YandexMap';
+import { CONTACTS } from '@/config/contacts';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -32,14 +33,14 @@ export default function ContactsPage() {
                   Телефон
                 </Typography>
                 <Link 
-                  href="tel:+79877578323" 
+                  href={CONTACTS.phone.link} 
                   sx={{ 
                     textDecoration: 'none',
                     '&:hover': { textDecoration: 'underline' }
                   }}
                 >
                   <Typography variant="body1" color="primary.main" fontWeight="bold">
-                    +7 (987) 757-83-23
+                    {CONTACTS.phone.display}
                   </Typography>
                 </Link>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -57,14 +58,14 @@ export default function ContactsPage() {
                   Email
                 </Typography>
                 <Link 
-                  href="mailto:luxgostevoidom@yandex.ru" 
+                  href={CONTACTS.email.link} 
                   sx={{ 
                     textDecoration: 'none',
                     '&:hover': { textDecoration: 'underline' }
                   }}
                 >
                   <Typography variant="body1" color="primary.main" fontWeight="bold">
-                    luxgostevoidom@yandex.ru
+                    {CONTACTS.email.display}
                   </Typography>
                 </Link>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -82,10 +83,10 @@ export default function ContactsPage() {
                   Адрес
                 </Typography>
                 <Typography variant="body1" color="primary.main" fontWeight="bold">
-                  г. Богородск
+                  {CONTACTS.address.city}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  ул. Ленина, 223Б
+                  {CONTACTS.address.street}, {CONTACTS.address.building}
                 </Typography>
               </CardContent>
             </Card>
@@ -116,7 +117,7 @@ export default function ContactsPage() {
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 4 }}>
             <IconButton
               component={Link}
-              href="https://vk.com/id412614778"
+              href={CONTACTS.social.vk.url}
               target="_blank"
               rel="noopener noreferrer"
               sx={{

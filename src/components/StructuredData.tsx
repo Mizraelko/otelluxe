@@ -51,7 +51,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           ],
           "sameAs": [
             SEO_CONFIG.social.vk,
-            SEO_CONFIG.social.instagram
+            SEO_CONFIG.social.telegram
           ]
         };
 
@@ -62,7 +62,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "@type": "LodgingBusiness",
           "name": roomData.title,
           "description": roomData.description,
-          "url": `https://hotelluxbg.ru/rooms#${roomData.id}`,
+          "url": `${SEO_CONFIG.site.url}/rooms#${roomData.id}`,
           "image": roomData.image,
           "offers": {
             "@type": "Offer",
@@ -71,7 +71,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "availability": "https://schema.org/InStock",
             "validFrom": new Date().toISOString().split('T')[0]
           },
-          "amenityFeature": roomData.amenities ? roomData.amenities.map((amenity: string) => ({
+          "amenityFeature": roomData.amenities ? roomData.amenities.map((amenity) => ({
             "@type": "LocationFeatureSpecification",
             "name": amenity,
             "value": true
@@ -124,23 +124,23 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "LodgingBusiness",
-          "name": "Отель \"Люкс\"",
-          "image": "https://hotelluxbg.ru/images/hotel-exterior.jpg",
-          "telephone": "+7 (987) 757-83-23",
-          "email": "luxgostevoidom@yandex.ru",
-          "url": "https://hotelluxbg.ru",
+          "name": SEO_CONFIG.hotel.name,
+          "image": `${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`,
+          "telephone": SEO_CONFIG.hotel.contact.phone,
+          "email": SEO_CONFIG.hotel.contact.email,
+          "url": SEO_CONFIG.site.url,
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "ул. Ленина, 223Б",
-            "addressLocality": "Богородск",
-            "addressRegion": "Нижегородская область",
-            "postalCode": "607600",
-            "addressCountry": "RU"
+            "streetAddress": SEO_CONFIG.hotel.address.street,
+            "addressLocality": SEO_CONFIG.hotel.address.city,
+            "addressRegion": SEO_CONFIG.hotel.address.region,
+            "postalCode": SEO_CONFIG.hotel.address.postalCode,
+            "addressCountry": SEO_CONFIG.hotel.address.country
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "56.106022",
-            "longitude": "43.520823"
+            "latitude": SEO_CONFIG.hotel.coordinates.latitude.toString(),
+            "longitude": SEO_CONFIG.hotel.coordinates.longitude.toString()
           },
           "openingHours": "Mo-Su 00:00-23:59",
           "priceRange": "$$"

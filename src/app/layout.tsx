@@ -4,6 +4,7 @@ import { AppThemeProvider } from '@/contexts/ThemeContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Analytics from '@/components/Analytics';
+import { CONTACTS } from '@/config/contacts';
 
 export const metadata: Metadata = {
   title: {
@@ -95,8 +96,8 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=no" />
         <meta name="geo.region" content="RU-NIZ" />
         <meta name="geo.placename" content="Богородск" />
-        <meta name="geo.position" content="56.106329;43.520411" />
-        <meta name="ICBM" content="56.106329, 43.520411" />
+        <meta name="geo.position" content={`${CONTACTS.coordinates.latitude};${CONTACTS.coordinates.longitude}`} />
+        <meta name="ICBM" content={`${CONTACTS.coordinates.latitude}, ${CONTACTS.coordinates.longitude}`} />
         <link rel="canonical" href="https://hotelluxbg.ru" />
         <link rel="alternate" hrefLang="ru" href="https://hotelluxbg.ru" />
         <link rel="alternate" hrefLang="x-default" href="https://hotelluxbg.ru" />

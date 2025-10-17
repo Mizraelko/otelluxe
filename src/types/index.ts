@@ -1,24 +1,12 @@
 // Основные типы для приложения
 
-export interface HotelData {
-  name: string;
-  description: string;
-  address: string;
-  phone: string;
-  email: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-}
-
 export interface Room {
   id: number;
   title: string;
   description: string;
   price: string;
   image: string;
-  amenities: string[];
+  amenities?: readonly string[];
 }
 
 export interface FAQItem {
@@ -68,29 +56,11 @@ export interface OptimizedImageProps {
 
 export interface StructuredDataProps {
   type: 'hotel' | 'room' | 'breadcrumb' | 'faq' | 'localBusiness';
-  data: HotelData | Room | BreadcrumbItem[] | FAQItem[] | Record<string, unknown>;
-}
-
-// Типы для форм
-export interface BookingFormData {
-  name: string;
-  phone: string;
-  email: string;
-  checkIn: string;
-  checkOut: string;
-  roomType: string;
-  guests: string;
-  comments: string;
+  data?: Room | BreadcrumbItem[] | FAQItem[] | Record<string, unknown>;
 }
 
 // Типы для навигации
 export interface NavigationItem {
   label: string;
   href: string;
-}
-
-// Типы для тем
-export interface ThemeContextType {
-  isDarkMode: boolean;
-  toggleTheme: () => void;
 }

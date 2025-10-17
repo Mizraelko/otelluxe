@@ -22,6 +22,33 @@ import VKIcon from './VKIcon';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
 
+// Style constants for better maintainability
+const HEADER_STYLES = {
+  logo: {
+    fontWeight: 700,
+    fontSize: '1.6rem',
+    flexGrow: { xs: 1, md: 0 },
+  },
+  navigationButton: {
+    border: 'none',
+    outline: 'none',
+    boxShadow: 'none',
+  },
+  vkButton: {
+    color: '#0077FF',
+    border: 'none',
+    outline: 'none',
+    boxShadow: 'none',
+  },
+  phoneInfo: {
+    fontSize: { xs: '0.6rem', lg: '0.65rem' },
+    lineHeight: 1.1,
+    textAlign: 'center' as const,
+    wordBreak: 'break-word' as const,
+    transition: 'color 0.3s ease-in-out',
+  },
+} as const;
+
 export default function Header() {
   const { isDarkMode, toggleTheme } = useTheme();
   const muiTheme = useMuiTheme();
@@ -85,13 +112,11 @@ export default function Header() {
               component={Link}
               href="/"
               sx={{
-                fontWeight: 700,
-                fontSize: '1.6rem',
+                ...HEADER_STYLES.logo,
                 textDecoration: 'none',
                 color: scrolled 
                   ? (isDarkMode ? 'white' : 'primary.main')
                   : 'inherit',
-                flexGrow: { xs: 1, md: 0 },
                 '&:hover': {
                   color: scrolled 
                     ? (isDarkMode ? '#ffeb3b' : 'primary.dark')
@@ -114,9 +139,7 @@ export default function Header() {
                   color: scrolled 
                     ? (isDarkMode ? 'white' : 'primary.main')
                     : 'inherit',
-                  border: 'none',
-                  outline: 'none',
-                  boxShadow: 'none',
+                  ...HEADER_STYLES.navigationButton,
                   '&:hover': {
                     backgroundColor: scrolled 
                       ? (isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(25, 118, 210, 0.1)')
@@ -147,14 +170,11 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                color: '#0077FF', // Синий цвет VK
+                ...HEADER_STYLES.vkButton,
                 size: { xs: 'small', sm: 'medium', md: 'small', lg: 'medium' },
-                border: 'none',
-                outline: 'none',
-                boxShadow: 'none',
                 '&:hover': {
-                  backgroundColor: 'rgba(0, 119, 255, 0.1)', // Светло-синий фон при hover
-                  color: '#0056CC', // Темнее синий при hover
+                  backgroundColor: 'rgba(0, 119, 255, 0.1)',
+                  color: '#0056CC',
                   boxShadow: 'none',
                 },
                 '&:focus': {
@@ -162,11 +182,11 @@ export default function Header() {
                   outline: 'none',
                 },
                 '& svg': {
-                  fill: '#0077FF', // Синий цвет для VK иконки
+                  fill: '#0077FF',
                   color: '#0077FF',
                 },
                 '&:hover svg': {
-                  fill: '#0056CC', // Темнее синий при hover
+                  fill: '#0056CC',
                   color: '#0056CC',
                 },
               }}
@@ -254,9 +274,7 @@ export default function Header() {
                   px: { xs: 2, sm: 3, md: 2, lg: 3 },
                   py: 1,
                   minWidth: { xs: 'auto', sm: 'auto', md: 'auto', lg: 'auto' },
-                  border: 'none',
-                  outline: 'none',
-                  boxShadow: 'none',
+                  ...HEADER_STYLES.navigationButton,
                   '&:hover': {
                     boxShadow: 'none',
                   },
@@ -292,14 +310,10 @@ export default function Header() {
         <Typography 
           variant="caption" 
           sx={{ 
-            fontSize: { xs: '0.6rem', lg: '0.65rem' },
-            lineHeight: 1.1,
+            ...HEADER_STYLES.phoneInfo,
             color: scrolled 
               ? (isDarkMode ? 'white' : 'primary.main')
               : 'primary.contrastText',
-            textAlign: 'center',
-            wordBreak: 'break-word',
-            transition: 'color 0.3s ease-in-out',
           }}
         >
           <Box component="span" sx={{ color: '#ff4444', fontWeight: 600 }}>

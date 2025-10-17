@@ -15,7 +15,8 @@ export const SEO_CONFIG = {
       'гостиница Богородск услуги',
       'отель Богородск отзывы',
       'бронирование гостиницы Богородск',
-      'отель Богородск адрес'
+      'отель Богородск адрес',
+      'гостиница'
     ],
     locale: 'ru_RU',
     type: 'website',
@@ -31,8 +32,8 @@ export const SEO_CONFIG = {
       country: 'RU'
     },
     coordinates: {
-      latitude: '56.106022',
-      longitude: '43.520823'
+      latitude: 56.106022,
+      longitude: 43.520823
     },
     contact: {
       phone: '+7 (987) 757-83-23',
@@ -63,10 +64,7 @@ export const SEO_CONFIG = {
 
   social: {
     vk: 'https://vk.com/id412614778',
-    telegram: 'https://t.me/otelluxbg',
-    facebook: '',
-    instagram: '',
-    twitter: ''
+    telegram: 'https://t.me/otelluxbg'
   },
 
   images: {
