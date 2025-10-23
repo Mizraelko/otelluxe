@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, CardMedia, CardContent, Typography, Button, Box, Chip, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Chip, Grid } from '@mui/material';
+import Image from 'next/image';
 import Link from 'next/link';
 import WifiIcon from '@mui/icons-material/Wifi';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
@@ -52,13 +53,16 @@ const getAmenityIcon = (amenity: string) => {
 export default function RoomCard({ room }: RoomCardProps) {
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <CardMedia
-        component="img"
-        height="240"
-        image={room.image}
-        alt={room.title}
-        sx={{ objectFit: 'cover' }}
-      />
+      <Box sx={{ position: 'relative', height: 240, overflow: 'hidden' }}>
+        <Image
+          src={room.image}
+          alt={room.title}
+          fill
+          style={{ objectFit: 'cover' }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={room.id <= 2} // Приоритет для первых двух изображений
+        />
+      </Box>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Typography variant="h5" gutterBottom>
           {room.title}

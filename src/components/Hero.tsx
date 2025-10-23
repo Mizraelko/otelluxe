@@ -9,7 +9,7 @@ export default function Hero() {
       sx={{
         position: 'relative',
         height: '600px',
-        backgroundImage: 'url(https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200)',
+        backgroundImage: 'url(/images/hero/главная.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
