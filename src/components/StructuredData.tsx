@@ -3,6 +3,11 @@ import { SEO_CONFIG } from '@/config/seo';
 import { StructuredDataProps, Room, BreadcrumbItem, FAQItem } from '@/types';
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
+  const hotelImages = [
+    `${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`,
+    ...SEO_CONFIG.images.gallery.map((image) => `${SEO_CONFIG.site.url}${image}`),
+  ];
+
   const getStructuredData = () => {
     switch (type) {
       case 'hotel':
@@ -44,11 +49,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "currenciesAccepted": SEO_CONFIG.hotel.currenciesAccepted,
           "paymentAccepted": SEO_CONFIG.hotel.paymentAccepted,
           "priceRange": SEO_CONFIG.hotel.priceRange,
-          "image": [
-            `${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`,
-            `${SEO_CONFIG.site.url}/images/hotel-lobby.jpg`,
-            `${SEO_CONFIG.site.url}/images/hotel-room.jpg`
-          ],
+          "image": hotelImages,
           "sameAs": [
             SEO_CONFIG.social.vk,
             SEO_CONFIG.social.telegram
@@ -57,13 +58,14 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
 
       case 'room':
         const roomData = data as Room;
+        const roomImages = roomData.images && roomData.images.length > 0 ? roomData.images : [roomData.image];
         return {
           "@context": "https://schema.org",
           "@type": "LodgingBusiness",
           "name": roomData.title,
           "description": roomData.description,
-          "url": `${SEO_CONFIG.site.url}/rooms#${roomData.id}`,
-          "image": roomData.image,
+          "url": `${SEO_CONFIG.site.url}/rooms#room-${roomData.id}`,
+          "image": roomImages.map((src) => `${SEO_CONFIG.site.url}${src}`),
           "offers": {
             "@type": "Offer",
             "price": roomData.price,
@@ -125,7 +127,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "@context": "https://schema.org",
           "@type": "LodgingBusiness",
           "name": SEO_CONFIG.hotel.name,
-          "image": `${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`,
+          "image": hotelImages,
           "telephone": SEO_CONFIG.hotel.contact.phone,
           "email": SEO_CONFIG.hotel.contact.email,
           "url": SEO_CONFIG.site.url,
@@ -152,10 +154,18 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
   };
 
   const structuredData = getStructuredData();
+  if (!structuredData || Object.keys(structuredData).length === 0) {
+    return null;
+  }
+
+  const scriptId =
+    type === 'room' && (data as Room | undefined)?.id
+      ? `structured-data-room-${(data as Room).id}`
+      : `structured-data-${type}`;
 
   return (
     <Script
-      id={`structured-data-${type}`}
+      id={scriptId}
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(structuredData, null, 2),

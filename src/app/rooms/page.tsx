@@ -4,20 +4,9 @@ import StructuredData from '@/components/StructuredData';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { ROOMS } from '@/config/rooms';
 import { Room } from '@/types';
-import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/config/seo';
 
-export const metadata: Metadata = {
-  title: 'Номера - Отель "Люкс" Богородск',
-  description: 'Выбор номеров в отеле "Люкс" Богородск: Стандарт, Полулюкс, Люкс. Современные номера с комфортом и удобствами. Бронирование онлайн.',
-  openGraph: {
-    title: 'Номера отеля "Люкс" в Богородске',
-    description: 'Комфортабельные номера различных категорий с современными удобствами',
-    url: 'https://hotelluxbg.ru/rooms',
-  },
-  alternates: {
-    canonical: '/rooms',
-  },
-};
+export const metadata = buildPageMetadata('rooms');
 
 export default function RoomsPage() {
   const breadcrumbs = [
@@ -35,7 +24,7 @@ export default function RoomsPage() {
       <Box sx={{ py: 6, bgcolor: 'background.default' }}>
         <Container maxWidth="lg">
           <Breadcrumbs items={breadcrumbItems} />
-        <Typography variant="h2" align="center" gutterBottom>
+        <Typography component="h1" variant="h2" align="center" gutterBottom>
           Наши номера
         </Typography>
         <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto' }}>
@@ -53,21 +42,17 @@ export default function RoomsPage() {
         </Grid>
 
         <Box sx={{ mt: 6, p: 4, bgcolor: 'background.paper', borderRadius: 2 }}>
-          <Typography variant="h5" gutterBottom>
-            Что входит во все номера:
+          <Typography variant="h5" align="center" gutterBottom>
+            Наши удобства
           </Typography>
           <Grid container spacing={2} sx={{ mt: 2 }}>
             <Grid item xs={12} sm={6}>
-              <Typography variant="body1">✓ Бесплатный Wi-Fi</Typography>
-              <Typography variant="body1">✓ Кондиционер</Typography>
-              <Typography variant="body1">✓ LED телевизор</Typography>
-              <Typography variant="body1">✓ Сейф</Typography>
+              <Typography variant="body1">✓ Круглосуточная (24/7) помощь администратора</Typography>
+              <Typography variant="body1">✓ Бесплатный Wi-fi</Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Typography variant="body1">✓ Мини-холодильник</Typography>
-              <Typography variant="body1">✓ Электрический чайник</Typography>
-              <Typography variant="body1">✓ Фен</Typography>
-              <Typography variant="body1">✓ Банные принадлежности</Typography>
+              <Typography variant="body1">✓ Бесплатная парковка</Typography>
+              <Typography variant="body1">✓ Удобная локация. Мы находимся в центре города, рядом с центральной площадью.</Typography>
             </Grid>
           </Grid>
         </Box>

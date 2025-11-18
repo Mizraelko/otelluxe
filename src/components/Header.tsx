@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   AppBar, 
   Toolbar, 
@@ -9,10 +9,9 @@ import {
   Container, 
   Box, 
   IconButton, 
-  Menu, 
+  Menu,
   MenuItem,
-  useMediaQuery,
-  useTheme as useMuiTheme
+  useMediaQuery
 } from '@mui/material';
 import Link from 'next/link';
 import HotelIcon from '@mui/icons-material/Hotel';
@@ -21,8 +20,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import VKIcon from './VKIcon';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
+import { CONTACTS, SITE_CONFIG, VK_COLORS } from '@/config/contacts';
+import { useTheme as useMuiTheme } from '@mui/material/styles';
 
-// Style constants for better maintainability
 const HEADER_STYLES = {
   logo: {
     fontWeight: 700,
@@ -35,7 +35,7 @@ const HEADER_STYLES = {
     boxShadow: 'none',
   },
   vkButton: {
-    color: '#0077FF',
+    color: VK_COLORS.primary,
     border: 'none',
     outline: 'none',
     boxShadow: 'none',
@@ -53,19 +53,8 @@ export default function Header() {
   const { isDarkMode, toggleTheme } = useTheme();
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
-  
-  const [scrolled, setScrolled] = useState(false);
+
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      setScrolled(isScrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMenuAnchor(event.currentTarget);
@@ -86,15 +75,10 @@ export default function Header() {
     <AppBar 
       position="fixed" 
       sx={{ 
-        bgcolor: scrolled 
-          ? (isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.9)')
-          : 'primary.main',
-        color: scrolled 
-          ? (isDarkMode ? 'white' : 'primary.main')
-          : 'primary.contrastText',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
-        transition: 'all 0.3s ease-in-out',
-        boxShadow: scrolled ? (isDarkMode ? '0 2px 20px rgba(0, 0, 0, 0.5)' : '0 2px 20px rgba(0, 0, 0, 0.1)') : 'none',
+        bgcolor: (theme) => theme.palette.header.background,
+        color: (theme) => theme.palette.header.text,
+        backdropFilter: 'blur(20px)',
+        boxShadow: (theme) => theme.palette.header.shadow,
       }}
     >
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
@@ -103,9 +87,7 @@ export default function Header() {
             <HotelIcon sx={{ 
               mr: 1, 
               fontSize: 36, 
-              color: scrolled 
-                ? (isDarkMode ? 'white' : 'primary.main')
-                : 'inherit'
+              color: 'primary.main'
             }} />
             <Typography
               variant="h6"
@@ -114,17 +96,10 @@ export default function Header() {
               sx={{
                 ...HEADER_STYLES.logo,
                 textDecoration: 'none',
-                color: scrolled 
-                  ? (isDarkMode ? 'white' : 'primary.main')
-                  : 'inherit',
-                '&:hover': {
-                  color: scrolled 
-                    ? (isDarkMode ? '#ffeb3b' : 'primary.dark')
-                    : 'inherit',
-                }
+                color: 'primary.main',
               }}
             >
-              Отель &quot;Люкс&quot;
+              {SITE_CONFIG.name}
             </Typography>
           </Box>
           
@@ -136,14 +111,10 @@ export default function Header() {
                 component={Link} 
                 href={item.href} 
                 sx={{ 
-                  color: scrolled 
-                    ? (isDarkMode ? 'white' : 'primary.main')
-                    : 'inherit',
+                  color: (theme) => theme.palette.header.text,
                   ...HEADER_STYLES.navigationButton,
                   '&:hover': {
-                    backgroundColor: scrolled 
-                      ? (isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(25, 118, 210, 0.1)')
-                      : 'rgba(255, 255, 255, 0.1)',
+                    backgroundColor: (theme) => theme.palette.header.hoverBackground,
                     boxShadow: 'none',
                   },
                   '&:focus': {
@@ -166,15 +137,15 @@ export default function Header() {
             {/* VK Link */}
             <IconButton
               component={Link}
-              href="https://vk.com/id412614778"
+              href={CONTACTS.social.vk.url}
               target="_blank"
               rel="noopener noreferrer"
               sx={{
                 ...HEADER_STYLES.vkButton,
                 size: { xs: 'small', sm: 'medium', md: 'small', lg: 'medium' },
                 '&:hover': {
-                  backgroundColor: 'rgba(0, 119, 255, 0.1)',
-                  color: '#0056CC',
+                  backgroundColor: VK_COLORS.hoverBackground,
+                  color: VK_COLORS.hover,
                   boxShadow: 'none',
                 },
                 '&:focus': {
@@ -182,15 +153,15 @@ export default function Header() {
                   outline: 'none',
                 },
                 '& svg': {
-                  fill: '#0077FF',
-                  color: '#0077FF',
+                  fill: VK_COLORS.primary,
+                  color: VK_COLORS.primary,
                 },
                 '&:hover svg': {
-                  fill: '#0056CC',
-                  color: '#0056CC',
+                  fill: VK_COLORS.hover,
+                  color: VK_COLORS.hover,
                 },
               }}
-              aria-label="Мы в ВКонтакте"
+              aria-label={`Мы в ${CONTACTS.social.vk.name}`}
             >
               <VKIcon />
             </IconButton>
@@ -220,13 +191,6 @@ export default function Header() {
                   transformOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                  }}
-                  PaperProps={{
-                    sx: {
-                      bgcolor: 'background.paper',
-                      minWidth: 200,
-                      mt: 1,
-                    }
                   }}
                 >
                   {navigationItems.map((item) => (
@@ -291,14 +255,14 @@ export default function Header() {
           
         </Toolbar>
       </Container>
-      
+
       {/* 24/7 Reception Phone - Responsive */}
       <Box 
         sx={{ 
           position: 'absolute',
           top: 4,
           right: { xs: 8, sm: 16 },
-          display: { xs: 'none', md: 'none', xl: 'flex' }, // Показываем только на очень больших экранах
+          display: { xs: 'none', md: 'none', xl: 'flex' },
           flexDirection: 'column',
           alignItems: 'center',
           zIndex: 10,
@@ -311,9 +275,7 @@ export default function Header() {
           variant="caption" 
           sx={{ 
             ...HEADER_STYLES.phoneInfo,
-            color: scrolled 
-              ? (isDarkMode ? 'white' : 'primary.main')
-              : 'primary.contrastText',
+            color: (theme) => theme.palette.header.text,
           }}
         >
           <Box component="span" sx={{ color: '#ff4444', fontWeight: 600 }}>
@@ -323,16 +285,14 @@ export default function Header() {
         </Typography>
         <Box
           component="a"
-          href="tel:+79877578323"
+          href={CONTACTS.phone.link}
           sx={{
             display: 'flex',
             alignItems: 'center',
             gap: 0.3,
             fontSize: { xs: '0.7rem', lg: '0.8rem' },
             fontWeight: 700,
-            color: scrolled 
-              ? (isDarkMode ? 'white' : 'primary.main')
-              : 'primary.contrastText',
+            color: (theme) => theme.palette.header.text,
             textDecoration: 'none',
             transition: 'color 0.3s ease-in-out',
             mt: 1,
@@ -342,7 +302,7 @@ export default function Header() {
           }}
         >
           <PhoneIcon sx={{ fontSize: { xs: '0.6rem', lg: '0.7rem' } }} />
-          +7 (987) 757-83-23
+          {CONTACTS.phone.display}
         </Box>
       </Box>
     </AppBar>

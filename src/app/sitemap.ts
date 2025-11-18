@@ -1,89 +1,40 @@
 import { MetadataRoute } from 'next';
+import { PAGE_METADATA, SEO_CONFIG } from '@/config/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://hotelluxbg.ru';
   const now = new Date();
 
-  return [
-    {
-      url: baseUrl,
+  return Object.values(PAGE_METADATA).map((page) => {
+    const url =
+      page.path === '/'
+        ? SEO_CONFIG.site.url
+        : `${SEO_CONFIG.site.url}${page.path}`;
+
+    // Определяем приоритет и частоту обновления в зависимости от страницы
+    let priority: number = 0.8;
+    let changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never' = 'monthly';
+
+    if (page.path === '/') {
+      priority = 1.0;
+      changeFrequency = 'weekly';
+    } else if (page.path === '/rooms') {
+      priority = 0.9;
+      changeFrequency = 'weekly';
+    } else if (page.path === '/booking') {
+      priority = 0.9;
+      changeFrequency = 'weekly';
+    } else {
+      priority = 0.8;
+      changeFrequency = 'monthly';
+    }
+
+    return {
+      url,
       lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/rooms`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/rooms/standard`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/rooms/semi-lux`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/rooms/lux`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contacts`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/booking`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/gallery`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/reviews`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/rooms/family`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/rooms/apartment`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ];
+      changeFrequency,
+      priority,
+    };
+  });
 }
 
 

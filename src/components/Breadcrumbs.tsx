@@ -35,6 +35,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
           sx={{ 
             display: 'flex', 
             alignItems: 'center',
+            gap: 0.75,
             textDecoration: 'none',
             '&:hover': {
               textDecoration: 'underline',

@@ -5,60 +5,49 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Analytics from '@/components/Analytics';
 import { CONTACTS } from '@/config/contacts';
+import { SEO_CONFIG } from '@/config/seo';
+import React from "react";
 
 export const metadata: Metadata = {
   title: {
-    default: 'Отель Люкс Богородск',
-    template: '%s | Отель Люкс Богородск'
+    default: 'Отель "Люкс" Богородск',
+    template: '%s | Отель "Люкс" Богородск',
   },
-  description: 'Современный отель "Люкс" в Богородске предлагает комфортабельные номера, высокий сервис и удобное расположение в центре города. Бронирование онлайн по выгодным ценам. Wi-Fi, ресторан, парковка.',
-  keywords: [
-    'отель Богородск',
-    'гостиница Люкс',
-    'бронирование отеля Богородск',
-    'гостиница в центре Богородска',
-    'номера в Богородске',
-    'отель Богородск цены',
-    'гостиница Богородск бронирование',
-    'отель Богородск номера',
-    'гостиница Богородск услуги',
-    'отель Богородск отзывы',
-    'бронирование гостиницы Богородск',
-    'отель Богородск адрес'
-  ],
-  authors: [{ name: 'Отель "Люкс"' }],
-  creator: 'Отель "Люкс"',
-  publisher: 'Отель "Люкс"',
+  description: SEO_CONFIG.site.description,
+  keywords: [...SEO_CONFIG.site.keywords],
+  authors: [{ name: SEO_CONFIG.site.name }],
+  creator: SEO_CONFIG.site.name,
+  publisher: SEO_CONFIG.site.name,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://hotelluxbg.ru'),
+  metadataBase: new URL(SEO_CONFIG.site.url),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Отель "Люкс" - Богородск | Комфортабельная гостиница',
-    description: 'Современный отель в центре Богородска. Уютные номера, высокий сервис, удобное расположение. Бронирование онлайн.',
-    url: 'https://hotelluxbg.ru',
-    siteName: 'Отель "Люкс"',
+    title: SEO_CONFIG.site.name,
+    description: SEO_CONFIG.site.description,
+    url: SEO_CONFIG.site.url,
+    siteName: SEO_CONFIG.site.name,
     images: [
       {
-        url: '/images/hotel-exterior.jpg',
+        url: `${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`,
         width: 1200,
         height: 630,
-        alt: 'Отель "Люкс" в Богородске - современная гостиница',
+        alt: SEO_CONFIG.site.name,
       },
     ],
-    locale: 'ru_RU',
-    type: 'website',
+    locale: SEO_CONFIG.site.locale,
+    type: SEO_CONFIG.site.type as 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Отель "Люкс" - Богородск',
-    description: 'Комфортабельная гостиница в центре Богородска',
-    images: ['/images/hotel-exterior.jpg'],
+    title: SEO_CONFIG.site.name,
+    description: SEO_CONFIG.site.description,
+    images: [`${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`],
   },
   robots: {
     index: true,
@@ -72,8 +61,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
-    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    google: SEO_CONFIG.verification.google,
+    yandex: SEO_CONFIG.verification.yandex,
   },
 };
 
@@ -98,19 +87,6 @@ export default function RootLayout({
         <meta name="geo.placename" content="Богородск" />
         <meta name="geo.position" content={`${CONTACTS.coordinates.latitude};${CONTACTS.coordinates.longitude}`} />
         <meta name="ICBM" content={`${CONTACTS.coordinates.latitude}, ${CONTACTS.coordinates.longitude}`} />
-        <link rel="canonical" href="https://hotelluxbg.ru" />
-        <link rel="alternate" hrefLang="ru" href="https://hotelluxbg.ru" />
-        <link rel="alternate" hrefLang="x-default" href="https://hotelluxbg.ru" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            /* Скрываем предупреждения от расширений браузера */
-            [data-cz-shortcut-listen] {
-              display: none !important;
-            }
-          `
-        }} />
       </head>
       <body suppressHydrationWarning={true}>
         <Analytics 

@@ -5,19 +5,16 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import VKIcon from '@/components/VKIcon';
 import YandexMap from '@/components/YandexMap';
-import { CONTACTS } from '@/config/contacts';
-import type { Metadata } from 'next';
+import { CONTACTS, VK_COLORS } from '@/config/contacts';
+import { buildPageMetadata } from '@/config/seo';
 
-export const metadata: Metadata = {
-  title: 'Контакты - Отель "Люкс" Богородск',
-  description: 'Контактная информация отеля "Люкс" в Богородске: адрес, телефон, email. Как нас найти на карте.',
-};
+export const metadata = buildPageMetadata('contacts');
 
 export default function ContactsPage() {
   return (
     <Box sx={{ py: 6 }}>
       <Container maxWidth="lg">
-        <Typography variant="h2" align="center" gutterBottom>
+        <Typography component="h1" variant="h2" align="center" gutterBottom>
           Контакты
         </Typography>
         <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto' }}>
@@ -121,26 +118,24 @@ export default function ContactsPage() {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                bgcolor: '#0077FF', // Синий цвет VK
+                bgcolor: VK_COLORS.primary,
                 color: 'white',
                 '&:hover': {
-                  bgcolor: '#0056CC', // Темнее синий при hover
+                  bgcolor: VK_COLORS.hover,
                 },
                 width: 64,
                 height: 64,
                 '& svg': {
-                  fill: 'white !important', // Белый цвет для VK иконки
-                  color: 'white !important',
                   width: '32px',
                   height: '32px',
                 },
               }}
-              aria-label="Мы в ВКонтакте"
+              aria-label={`Мы в ${CONTACTS.social.vk.name}`}
             >
               <VKIcon 
                 width={32} 
-                height={32} 
-                style={{ color: 'white', fill: 'white' }}
+                height={32}
+                style={{ fill: 'white', color: 'white' }}
               />
             </IconButton>
           </Box>

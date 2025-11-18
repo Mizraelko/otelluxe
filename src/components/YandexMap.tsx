@@ -6,6 +6,7 @@ import { CONTACTS, SITE_CONFIG } from '@/config/contacts';
 
 function MapComponent() {
   const [mounted, setMounted] = useState(false);
+  const hasApiKey = Boolean(SITE_CONFIG.yandexMapsApiKey);
   // Используем координаты из конфигурации
   const coordinates: [number, number] = useMemo(() => [
     CONTACTS.coordinates.latitude, 
@@ -15,23 +16,29 @@ function MapComponent() {
   useEffect(() => {
     setMounted(true);
     
+    if (!hasApiKey) {
+      return;
+    }
+
     // Динамически загружаем Яндекс.Карты для избежания SSR проблем
-    const script = document.createElement('script');
-    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${SITE_CONFIG.yandexMapsApiKey}&lang=ru_RU&load=package.full`;
-    script.async = true;
+    const existingScript = document.getElementById('yandex-map-script') as HTMLScriptElement | null;
+    const script = existingScript ?? document.createElement('script');
+
+    if (!existingScript) {
+      script.id = 'yandex-map-script';
+      script.src = `https://api-maps.yandex.ru/2.1/?apikey=${SITE_CONFIG.yandexMapsApiKey}&lang=ru_RU&load=package.full`;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
     script.onload = () => {
-      // @ts-ignore
       if (window.ymaps) {
-        // @ts-ignore
         window.ymaps.ready(() => {
-          // @ts-ignore
           const map = new window.ymaps.Map('yandex-map', {
             center: coordinates,
             zoom: 15
           });
-          
-          // Ставим метку точно на координаты дома 223Б
-          // @ts-ignore
+
           const placemark = new window.ymaps.Placemark(coordinates, {
             hintContent: SITE_CONFIG.name,
             balloonContent: `
@@ -66,7 +73,7 @@ function MapComponent() {
               </div>
             `
           }, {
-            preset: 'islands#redIcon', // Стандартная красная метка Яндекса
+            preset: 'islands#redIcon',
             iconColor: '#ff0000'
           });
           
@@ -74,15 +81,7 @@ function MapComponent() {
         });
       }
     };
-    document.head.appendChild(script);
-
-    return () => {
-      // Очистка при размонтировании
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, [coordinates]);
+  }, [coordinates, hasApiKey]);
 
   if (!mounted) {
     return (
@@ -93,16 +92,35 @@ function MapComponent() {
   }
 
   return (
-    <Box 
-      id="yandex-map" 
-      sx={{ 
-        width: '100%', 
-        height: '450px', 
-        borderRadius: 2, 
-        overflow: 'hidden',
-        bgcolor: 'grey.200'
-      }} 
-    />
+    hasApiKey ? (
+      <Box 
+        id="yandex-map" 
+        sx={{ 
+          width: '100%', 
+          height: '450px', 
+          borderRadius: 2, 
+          overflow: 'hidden',
+          bgcolor: 'grey.200'
+        }} 
+      />
+    ) : (
+      <Box
+        sx={{
+          width: '100%',
+          height: '450px',
+          borderRadius: 2,
+          bgcolor: 'grey.100',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          px: 4,
+          color: 'text.secondary',
+        }}
+      >
+        Карта временно недоступна. Добавьте ключ API Яндекс.Карт в переменную NEXT_PUBLIC_YANDEX_MAPS_API_KEY.
+      </Box>
+    )
   );
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, CardContent, Typography, Button, Box, Chip, Grid } from '@mui/material';
+import { useState, useEffect, type TouchEvent } from 'react';
+import { Card, CardContent, Typography, Button, Box, Chip, Grid, IconButton, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import WifiIcon from '@mui/icons-material/Wifi';
@@ -13,6 +14,27 @@ import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import LocalLaundryServiceIcon from '@mui/icons-material/LocalLaundryService';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AspectRatioIcon from '@mui/icons-material/AspectRatio';
+import PeopleIcon from '@mui/icons-material/People';
+import SingleBedIcon from '@mui/icons-material/SingleBed';
+import BedIcon from '@mui/icons-material/Bed';
+import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
+import WcIcon from '@mui/icons-material/Wc';
+import ShowerIcon from '@mui/icons-material/Shower';
+import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import BathtubIcon from '@mui/icons-material/Bathtub';
+import AirIcon from '@mui/icons-material/Air';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import SoupKitchenIcon from '@mui/icons-material/SoupKitchen';
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import IronIcon from '@mui/icons-material/Iron';
+import MicrowaveIcon from '@mui/icons-material/Microwave';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Room } from '@/types';
 
 interface RoomCardProps {
@@ -26,10 +48,13 @@ const getAmenityIcon = (amenity: string) => {
     case 'wi-fi':
     case 'wifi':
       return <WifiIcon {...iconProps} />;
-    case 'кондиционер':
-      return <AcUnitIcon {...iconProps} />;
+    case 'телевидение':
     case 'телевизор':
       return <TvIcon {...iconProps} />;
+    case 'телевизор по запросу':
+      return <LiveTvIcon {...iconProps} />;
+    case 'кондиционер':
+      return <AcUnitIcon {...iconProps} />;
     case 'сейф':
       return <SecurityIcon {...iconProps} />;
     case 'мини-бар':
@@ -41,54 +66,295 @@ const getAmenityIcon = (amenity: string) => {
       return <SmokeFreeIcon {...iconProps} />;
     case 'детская кроватка':
       return <ChildCareIcon {...iconProps} />;
+    case 'частная кухня':
+      return <RestaurantMenuIcon {...iconProps} />;
+    case 'кухонные принадлежности':
+      return <SoupKitchenIcon {...iconProps} />;
     case 'кухня':
       return <KitchenIcon {...iconProps} />;
+    case 'электроплита':
+      return <ElectricBoltIcon {...iconProps} />;
+    case 'утюг и гладильная доска':
+      return <IronIcon {...iconProps} />;
     case 'стиральная машина':
       return <LocalLaundryServiceIcon {...iconProps} />;
+    case 'микроволновая печь':
+      return <MicrowaveIcon {...iconProps} />;
+    case 'две односпальные кровати':
+    case 'три односпальные кровати':
+    case 'дополнительная односпальная кровать':
+      return <SingleBedIcon {...iconProps} />;
+    case 'одна двуспальная кровать':
+      return <BedIcon {...iconProps} />;
+    case 'постельные принадлежности':
+      return <BedIcon {...iconProps} />;
+    case 'чайный набор':
+      return <EmojiFoodBeverageIcon {...iconProps} />;
+    case 'раздельный санузел':
+      return <WcIcon {...iconProps} />;
+    case 'душевая кабина':
+    case 'душевая':
+      return <ShowerIcon {...iconProps} />;
+    case 'фен':
+      return <AirIcon {...iconProps} />;
+    case 'тапочки':
+      return <FavoriteIcon {...iconProps} />;
+    case 'банные принадлежности':
+      return <BathtubIcon {...iconProps} />;
+    case 'бутилированная вода':
+      return <LocalDrinkIcon {...iconProps} />;
+    case 'кулер с водой':
+      return <WaterDropIcon {...iconProps} />;
+    case 'холодильник':
+      return <KitchenIcon {...iconProps} />;
     default:
       return <WifiIcon {...iconProps} />;
   }
 };
 
+const getAmenityTooltip = (amenity: string): string | null => {
+  const lowerAmenity = amenity.toLowerCase();
+  
+  if (lowerAmenity === 'чайный набор') {
+    return 'Чайник, чай, кофе, сахар, чайные принадлежности';
+  }
+  
+  if (lowerAmenity === 'бутилированная вода') {
+    return 'На этаже имеются кулеры с водой, в номерах стаканы, вода газированная и не газированная 0.5л';
+  }
+  
+  return null;
+};
+
+const normalizeAmenityName = (amenity: string): string => {
+  if (amenity.toLowerCase() === 'душевая кабина') {
+    return 'Душевая';
+  }
+  return amenity;
+};
+
 export default function RoomCard({ room }: RoomCardProps) {
+  const imageList = room.images && room.images.length > 0 ? room.images : [room.image];
+  const totalImages = imageList.length;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [totalImages]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? totalImages - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === totalImages - 1 ? 0 : prev + 1));
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    setTouchStartX(event.changedTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (touchStartX === null) return;
+    const touchEndX = event.changedTouches[0].clientX;
+    const delta = touchEndX - touchStartX;
+    if (Math.abs(delta) > 40) {
+      if (delta > 0) {
+        handlePrev();
+      } else {
+        handleNext();
+      }
+    }
+    setTouchStartX(null);
+  };
+
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ position: 'relative', height: 240, overflow: 'hidden' }}>
-        <Image
-          src={room.image}
-          alt={room.title}
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={room.id <= 2} // Приоритет для первых двух изображений
-        />
+    <Card
+      id={`room-${room.id}`}
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        boxShadow: (theme) => theme.palette.card.shadow,
+        transition: 'box-shadow 0.2s ease',
+        '&:hover': {
+          boxShadow: (theme) => theme.palette.card.shadowHover,
+        },
+      }}
+    >
+      <Box
+        sx={{ 
+          position: 'relative', 
+          width: '100%',
+          aspectRatio: '4/3',
+          overflow: 'hidden', 
+          borderTopLeftRadius: 4, 
+          borderTopRightRadius: 4
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {imageList.map((src, index) => (
+          <Box
+            key={src}
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              opacity: index === currentIndex ? 1 : 0,
+              transition: 'opacity 0.5s ease',
+            }}
+          >
+            <Image
+              src={src}
+              alt={`${room.title} фото ${index + 1}`}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={room.id <= 2 && index === 0}
+            />
+          </Box>
+        ))}
+
+        {totalImages > 1 && (
+          <>
+            <IconButton
+              onClick={handlePrev}
+              aria-label="Предыдущее фото"
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: 8,
+                transform: 'translateY(-50%)',
+                color: 'white',
+                bgcolor: (theme) => theme.palette.card.overlay,
+                '&:hover': { bgcolor: (theme) => theme.palette.card.overlayHover },
+              }}
+            >
+              <ChevronLeftIcon />
+            </IconButton>
+            <IconButton
+              onClick={handleNext}
+              aria-label="Следующее фото"
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                right: 8,
+                transform: 'translateY(-50%)',
+                color: 'white',
+                bgcolor: (theme) => theme.palette.card.overlay,
+                '&:hover': { bgcolor: (theme) => theme.palette.card.overlayHover },
+              }}
+            >
+              <ChevronRightIcon />
+            </IconButton>
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: 8,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                display: 'flex',
+                gap: 1,
+              }}
+            >
+              {imageList.map((_, index) => (
+                <Box
+                  key={index}
+                  component="button"
+                  type="button"
+                  onClick={() => setCurrentIndex(index)}
+                  aria-label={`Показать фото ${index + 1}`}
+                  sx={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    border: 'none',
+                    cursor: 'pointer',
+                    backgroundColor: index === currentIndex ? 'primary.main' : 'rgba(255,255,255,0.7)',
+                    opacity: index === currentIndex ? 1 : 0.6,
+                    transition: 'all 0.2s ease-in-out',
+                  }}
+                />
+              ))}
+            </Box>
+          </>
+        )}
       </Box>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h5" gutterBottom>
-          {room.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" paragraph>
-          {room.description}
-        </Typography>
+        <Box sx={{ minHeight: { xs: 'auto', sm: '72px' }, mb: 1 }}>
+          <Typography variant="h5" gutterBottom align="center">
+            {room.title}
+          </Typography>
+        </Box>
+        
+        {/* Площадь и количество человек */}
+        <Box sx={{ minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+          {(room.area || room.capacity) && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 6 }}>
+              {room.area && (
+                <Tooltip title={`Квадратных метров (${room.area})`} arrow>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
+                    <AspectRatioIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <Typography variant="body2" color="text.secondary" fontWeight={700}>
+                      {room.area} м²
+                    </Typography>
+                  </Box>
+                </Tooltip>
+              )}
+              {room.capacity && (
+                <Tooltip title={`Количество человек (${room.capacity})`} arrow>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
+                    <PeopleIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <Typography variant="body2" color="text.secondary" fontWeight={700}>
+                      × {room.capacity}
+                    </Typography>
+                  </Box>
+                </Tooltip>
+              )}
+            </Box>
+          )}
+        </Box>
         
         {/* Amenities */}
         {room.amenities && room.amenities.length > 0 && (
           <Box sx={{ mb: 2 }}>
-            <Typography variant="body2" color="text.secondary" gutterBottom>
+            <Typography variant="body2" color="text.secondary" gutterBottom fontWeight={700}>
               Удобства:
             </Typography>
             <Grid container spacing={2}>
-              {room.amenities.map((amenity, index) => (
-                <Grid item key={index}>
+              {room.amenities.map((amenity, index) => {
+                const normalizedAmenity = normalizeAmenityName(amenity);
+                const tooltipText = getAmenityTooltip(amenity);
+                const hasTooltip = tooltipText !== null;
+                
+                const chip = (
                   <Chip
                     icon={getAmenityIcon(amenity)}
-                    label={amenity}
+                    label={
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        <span>{normalizedAmenity}</span>
+                        {hasTooltip && (
+                          <HelpOutlineIcon 
+                            className="help-icon"
+                            sx={{ 
+                              fontSize: '14px', 
+                              opacity: 0.7,
+                              ml: 0.5,
+                              transition: 'all 0.2s ease-in-out',
+                            }} 
+                          />
+                        )}
+                      </Box>
+                    }
                     size="small"
                     variant="outlined"
                     sx={{ 
                       fontSize: '0.75rem',
                       height: '32px',
                       padding: '6px 12px',
+                      position: 'relative',
+                      cursor: hasTooltip ? 'help' : 'default',
                       '& .MuiChip-icon': {
                         fontSize: '16px',
                         marginLeft: '8px'
@@ -96,18 +362,37 @@ export default function RoomCard({ room }: RoomCardProps) {
                       '& .MuiChip-label': {
                         paddingLeft: '8px',
                         paddingRight: '8px'
+                      },
+                      '&:hover .help-icon': {
+                        opacity: 1,
+                        color: 'primary.main',
+                        transform: 'scale(1.15)',
                       }
                     }}
                   />
-                </Grid>
-              ))}
+                );
+                
+                return (
+                  <Grid item key={index}>
+                    {hasTooltip ? (
+                      <Tooltip title={tooltipText} arrow placement="top">
+                        <Box component="span" sx={{ display: 'inline-block' }}>
+                          {chip}
+                        </Box>
+                      </Tooltip>
+                    ) : (
+                      chip
+                    )}
+                  </Grid>
+                );
+              })}
             </Grid>
           </Box>
         )}
         
         <Box sx={{ mt: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6" color="primary.main" fontWeight="bold">
-            от {room.price} ₽/ночь
+            от {room.price} ₽/сутки
           </Typography>
           <Button
             variant="contained"

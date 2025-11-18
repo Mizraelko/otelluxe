@@ -2,28 +2,101 @@
 
 import { createTheme } from '@mui/material/styles';
 
+// Расширение типов для кастомных цветов
+declare module '@mui/material/styles' {
+  interface Palette {
+    header: {
+      background: string;
+      text: string;
+      shadow: string;
+      hoverBackground: string;
+    };
+    footer: {
+      background: string;
+      text: string;
+      shadow: string;
+      border: string;
+    };
+    card: {
+      gradient: string;
+      border: string;
+      shadow: string;
+      shadowHover: string;
+      overlay: string;
+      overlayHover: string;
+    };
+    hero: {
+      textShadow: string;
+      textShadowSmall: string;
+      buttonBorder: string;
+      buttonBackground: string;
+      buttonBackgroundHover: string;
+    };
+    booking: {
+      gradient: string;
+      shadow: string;
+      shadowHover: string;
+    };
+  }
+
+  interface PaletteOptions {
+    header?: {
+      background?: string;
+      text?: string;
+      shadow?: string;
+      hoverBackground?: string;
+    };
+    footer?: {
+      background?: string;
+      text?: string;
+      shadow?: string;
+      border?: string;
+    };
+    card?: {
+      gradient?: string;
+      border?: string;
+      shadow?: string;
+      shadowHover?: string;
+      overlay?: string;
+      overlayHover?: string;
+    };
+    hero?: {
+      textShadow?: string;
+      textShadowSmall?: string;
+      buttonBorder?: string;
+      buttonBackground?: string;
+      buttonBackgroundHover?: string;
+    };
+    booking?: {
+      gradient?: string;
+      shadow?: string;
+      shadowHover?: string;
+    };
+  }
+}
+
 // Светлая тема - Черно-белая
 export const lightTheme = createTheme({
   palette: {
     primary: {
-      main: '#000000', // Черный
+      main: '#000000',
       light: '#333333',
       dark: '#000000',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#666666', // Серый
+      main: '#666666',
       light: '#999999',
       dark: '#333333',
       contrastText: '#ffffff',
     },
     background: {
-      default: '#FFFFFF', // Белый
+      default: '#FFFFFF',
       paper: '#FFFFFF',
     },
     text: {
-      primary: '#000000', // Черный
-      secondary: '#666666', // Серый
+      primary: '#000000',
+      secondary: '#666666',
     },
     grey: {
       50: '#F9FAFB',
@@ -37,16 +110,47 @@ export const lightTheme = createTheme({
       800: '#1F2937',
       900: '#111827',
     },
-    // Дополнительные цвета для отеля
     info: {
-      main: '#000000', // Черный
+      main: '#000000',
       light: '#333333',
       dark: '#000000',
     },
     success: {
-      main: '#666666', // Серый
+      main: '#666666',
       light: '#999999',
       dark: '#333333',
+    },
+    header: {
+      background: 'rgba(255, 255, 255, 0.9)',
+      text: 'primary.main',
+      shadow: '0 2px 20px rgba(0, 0, 0, 0.1)',
+      hoverBackground: 'rgba(25, 118, 210, 0.1)',
+    },
+    footer: {
+      background: 'rgba(255, 255, 255, 0.9)',
+      text: 'primary.main',
+      shadow: '0 -2px 20px rgba(0, 0, 0, 0.1)',
+      border: 'rgba(0,0,0,0.1)',
+    },
+    card: {
+      gradient: 'linear-gradient(135deg, rgba(197, 151, 100, 0.1) 0%, rgba(197, 151, 100, 0.05) 100%)',
+      border: 'secondary.main',
+      shadow: '0 2px 8px rgba(0,0,0,0.12)',
+      shadowHover: '0 4px 16px rgba(0,0,0,0.18)',
+      overlay: 'rgba(0,0,0,0.4)',
+      overlayHover: 'rgba(0,0,0,0.6)',
+    },
+    hero: {
+      textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+      textShadowSmall: '1px 1px 2px rgba(0,0,0,0.3)',
+      buttonBorder: 'rgba(255, 255, 255, 0.8)',
+      buttonBackground: 'rgba(255, 255, 255, 0.1)',
+      buttonBackgroundHover: 'rgba(255, 255, 255, 0.2)',
+    },
+    booking: {
+      gradient: 'linear-gradient(135deg, rgba(197, 151, 100, 0.1) 0%, rgba(197, 151, 100, 0.05) 100%)',
+      shadow: '0 4px 20px rgba(197, 151, 100, 0.3)',
+      shadowHover: '0 6px 30px rgba(197, 151, 100, 0.5)',
     },
   },
   typography: {
@@ -105,24 +209,25 @@ export const lightTheme = createTheme({
     },
     MuiCard: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           borderRadius: 4,
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          border: '1px solid #E0E0E0',
+          boxShadow: theme.palette.card.shadow,
+          border: `1px solid ${theme.palette.card.border}`,
+          transition: 'all 0.3s ease-in-out',
           '&:hover': {
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
-            transform: 'translateY(-2px)',
-            transition: 'all 0.3s ease-in-out',
+            boxShadow: theme.palette.card.shadowHover,
           },
-        },
+        }),
       },
     },
     MuiAppBar: {
       styleOverrides: {
-        root: {
-          backgroundColor: '#000000',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-        },
+        root: ({ theme }) => ({
+          bgcolor: theme.palette.header.background,
+          color: theme.palette.header.text,
+          backdropFilter: 'blur(20px)',
+          boxShadow: theme.palette.header.shadow,
+        }),
       },
     },
     MuiTextField: {
@@ -153,24 +258,24 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#FFFFFF', // Белый
+      main: '#FFFFFF',
       light: '#FFFFFF',
       dark: '#E0E0E0',
       contrastText: '#000000',
     },
     secondary: {
-      main: '#BDBDBD', // Светло-серый
+      main: '#BDBDBD',
       light: '#E0E0E0',
       dark: '#9E9E9E',
       contrastText: '#000000',
     },
     background: {
-      default: '#000000', // Черный
+      default: '#000000',
       paper: '#121212',
     },
     text: {
-      primary: '#FFFFFF', // Белый
-      secondary: '#BDBDBD', // Светло-серый
+      primary: '#FFFFFF',
+      secondary: '#BDBDBD',
     },
     grey: {
       50: '#F9FAFB',
@@ -184,16 +289,47 @@ export const darkTheme = createTheme({
       800: '#1F2937',
       900: '#111827',
     },
-    // Дополнительные цвета для отеля
     info: {
-      main: '#38BDF8', // Ярко-голубой
+      main: '#38BDF8',
       light: '#7DD3FC',
       dark: '#0EA5E9',
     },
     success: {
-      main: '#34D399', // Ярко-зеленый
+      main: '#34D399',
       light: '#6EE7B7',
       dark: '#10B981',
+    },
+    header: {
+      background: 'rgba(0, 0, 0, 0.8)',
+      text: 'white',
+      shadow: '0 2px 20px rgba(0, 0, 0, 0.5)',
+      hoverBackground: 'rgba(255, 255, 255, 0.1)',
+    },
+    footer: {
+      background: 'rgba(0, 0, 0, 0.8)',
+      text: 'white',
+      shadow: '0 -2px 20px rgba(0, 0, 0, 0.5)',
+      border: 'rgba(255,255,255,0.2)',
+    },
+    card: {
+      gradient: 'linear-gradient(135deg, rgba(197, 151, 100, 0.15) 0%, rgba(197, 151, 100, 0.08) 100%)',
+      border: 'rgba(255, 255, 255, 0.1)',
+      shadow: '0 2px 8px rgba(0,0,0,0.12)',
+      shadowHover: '0 4px 16px rgba(0,0,0,0.18)',
+      overlay: 'rgba(0,0,0,0.4)',
+      overlayHover: 'rgba(0,0,0,0.6)',
+    },
+    hero: {
+      textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+      textShadowSmall: '1px 1px 2px rgba(0,0,0,0.3)',
+      buttonBorder: 'rgba(255, 255, 255, 0.8)',
+      buttonBackground: 'rgba(255, 255, 255, 0.1)',
+      buttonBackgroundHover: 'rgba(255, 255, 255, 0.2)',
+    },
+    booking: {
+      gradient: 'linear-gradient(135deg, rgba(197, 151, 100, 0.15) 0%, rgba(197, 151, 100, 0.08) 100%)',
+      shadow: '0 4px 20px rgba(197, 151, 100, 0.3)',
+      shadowHover: '0 6px 30px rgba(197, 151, 100, 0.5)',
     },
   },
   typography: {
@@ -254,26 +390,25 @@ export const darkTheme = createTheme({
     },
     MuiCard: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           borderRadius: 4,
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: theme.palette.card.shadow,
+          border: `1px solid ${theme.palette.card.border}`,
           transition: 'all 0.2s ease-in-out',
           '&:hover': {
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2)',
-            transform: 'translateY(-2px)',
+            boxShadow: theme.palette.card.shadowHover,
           },
-        },
+        }),
       },
     },
     MuiAppBar: {
       styleOverrides: {
-        root: {
-          backgroundColor: '#3C2E26',
-          color: '#F9F5F0',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
-          borderBottom: '1px solid rgba(212, 196, 176, 0.2)',
-        },
+        root: ({ theme }) => ({
+          bgcolor: theme.palette.header.background,
+          color: theme.palette.header.text,
+          backdropFilter: 'blur(20px)',
+          boxShadow: theme.palette.header.shadow,
+        }),
       },
     },
     MuiTextField: {
@@ -299,6 +434,5 @@ export const darkTheme = createTheme({
   },
 });
 
-// Экспортируем светлую тему по умолчанию
 export const theme = lightTheme;
 
