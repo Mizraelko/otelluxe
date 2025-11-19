@@ -4,7 +4,7 @@ export interface Room {
   description: string;
   price: string;
   image: string;
-  images?: readonly string[];
+  images: readonly string[];
   amenities?: readonly string[];
   area?: number;
   capacity?: number;

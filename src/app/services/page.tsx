@@ -16,11 +16,6 @@ const services = [
     description: 'Бесплатная охраняемая парковка для гостей отеля. Видеонаблюдение 24/7. Вместимость до 50 автомобилей.',
   },
   {
-    icon: <RoomServiceIcon sx={{ fontSize: 48 }} />,
-    title: 'Room Service',
-    description: 'Обслуживание в номерах 24/7. Доставка еды и напитков из ресторана прямо в ваш номер.',
-  },
-  {
     icon: <BusinessCenterIcon sx={{ fontSize: 48 }} />,
     title: 'Бизнес-центр',
     description: 'Услуги печати, копирования, сканирования. Рабочие места с компьютерами и быстрым интернетом.',
@@ -58,7 +53,7 @@ export default function ServicesPage() {
         <Grid container spacing={4}>
           {services.map((service, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card sx={{ height: '100%', textAlign: 'center', p: 2, transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-8px)' } }}>
+              <Card sx={{ height: '100%', textAlign: 'center', p: 2, transition: 'transform 0.2s' }}>
                 <Box sx={{ color: 'primary.main', mb: 2 }}>
                   {service.icon}
                 </Box>

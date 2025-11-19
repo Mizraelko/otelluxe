@@ -35,7 +35,7 @@ export default function RoomsPage() {
         <Grid container spacing={4}>
           {ROOMS.map((room) => (
             <Grid item xs={12} md={6} key={room.id}>
-              <StructuredData type="room" data={room as Room} />
+              <StructuredData type="room" data={room} />
               <RoomCard room={room} />
             </Grid>
           ))}

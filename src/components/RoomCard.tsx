@@ -92,6 +92,8 @@ const getAmenityIcon = (amenity: string) => {
       return <EmojiFoodBeverageIcon {...iconProps} />;
     case 'раздельный санузел':
       return <WcIcon {...iconProps} />;
+      case 'cанузел':
+          return <WcIcon {...iconProps} />;
     case 'душевая кабина':
     case 'душевая':
       return <ShowerIcon {...iconProps} />;
@@ -126,15 +128,8 @@ const getAmenityTooltip = (amenity: string): string | null => {
   return null;
 };
 
-const normalizeAmenityName = (amenity: string): string => {
-  if (amenity.toLowerCase() === 'душевая кабина') {
-    return 'Душевая';
-  }
-  return amenity;
-};
-
 export default function RoomCard({ room }: RoomCardProps) {
-  const imageList = room.images && room.images.length > 0 ? room.images : [room.image];
+  const imageList = room.images;
   const totalImages = imageList.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -324,7 +319,6 @@ export default function RoomCard({ room }: RoomCardProps) {
             </Typography>
             <Grid container spacing={2}>
               {room.amenities.map((amenity, index) => {
-                const normalizedAmenity = normalizeAmenityName(amenity);
                 const tooltipText = getAmenityTooltip(amenity);
                 const hasTooltip = tooltipText !== null;
                 
@@ -333,7 +327,7 @@ export default function RoomCard({ room }: RoomCardProps) {
                     icon={getAmenityIcon(amenity)}
                     label={
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                        <span>{normalizedAmenity}</span>
+                        <span>{amenity}</span>
                         {hasTooltip && (
                           <HelpOutlineIcon 
                             className="help-icon"
