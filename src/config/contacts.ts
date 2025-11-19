@@ -41,10 +41,9 @@ export const SITE_CONFIG = {
   yandexMapsApiKey: process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY || ''
 };
 
-// Цвета для VK (используются в нескольких компонентах)
 export const VK_COLORS = {
   primary: '#0077FF',
   hover: '#0056CC',
   hoverBackground: 'rgba(0, 119, 255, 0.1)',
-} as const;
+};
 

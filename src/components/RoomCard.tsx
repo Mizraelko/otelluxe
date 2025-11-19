@@ -16,8 +16,9 @@ import KitchenIcon from '@mui/icons-material/Kitchen';
 import LocalLaundryServiceIcon from '@mui/icons-material/LocalLaundryService';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import AspectRatioIcon from '@mui/icons-material/AspectRatio';
+import SquareFootIcon from '@mui/icons-material/SquareFoot';
 import PeopleIcon from '@mui/icons-material/People';
+import HomeIcon from '@mui/icons-material/Home';
 import SingleBedIcon from '@mui/icons-material/SingleBed';
 import BedIcon from '@mui/icons-material/Bed';
 import EmojiFoodBeverageIcon from '@mui/icons-material/EmojiFoodBeverage';
@@ -91,9 +92,8 @@ const getAmenityIcon = (amenity: string) => {
     case 'чайный набор':
       return <EmojiFoodBeverageIcon {...iconProps} />;
     case 'раздельный санузел':
+    case 'санузел':
       return <WcIcon {...iconProps} />;
-      case 'cанузел':
-          return <WcIcon {...iconProps} />;
     case 'душевая кабина':
     case 'душевая':
       return <ShowerIcon {...iconProps} />;
@@ -283,14 +283,14 @@ export default function RoomCard({ room }: RoomCardProps) {
           </Typography>
         </Box>
         
-        {/* Площадь и количество человек */}
+        {/* Площадь, количество человек и комнаты */}
         <Box sx={{ minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-          {(room.area || room.capacity) && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 6 }}>
+          {(room.area || room.capacity || room.rooms) && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: { xs: 3, sm: 4, md: 6 }, flexWrap: 'wrap' }}>
               {room.area && (
                 <Tooltip title={`Квадратных метров (${room.area})`} arrow>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
-                    <AspectRatioIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <SquareFootIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
                     <Typography variant="body2" color="text.secondary" fontWeight={700}>
                       {room.area} м²
                     </Typography>
@@ -307,10 +307,38 @@ export default function RoomCard({ room }: RoomCardProps) {
                   </Box>
                 </Tooltip>
               )}
+              {room.rooms && (
+                <Tooltip title={`Количество комнат (${room.rooms})`} arrow>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
+                    <HomeIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <Typography variant="body2" color="text.secondary" fontWeight={700}>
+                      {room.rooms} комн.
+                    </Typography>
+                  </Box>
+                </Tooltip>
+              )}
             </Box>
           )}
         </Box>
-        
+
+        {/* Description */}
+        {room.description && (
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                fontWeight: 600,
+                lineHeight: 1.5,
+                textAlign: 'center',
+                px: 1
+              }}
+            >
+              {room.description}
+            </Typography>
+          </Box>
+        )}
+
         {/* Amenities */}
         {room.amenities && room.amenities.length > 0 && (
           <Box sx={{ mb: 2 }}>

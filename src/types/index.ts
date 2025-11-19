@@ -5,9 +5,10 @@ export interface Room {
   price: string;
   image: string;
   images: readonly string[];
-  amenities?: readonly string[];
-  area?: number;
-  capacity?: number;
+  amenities: readonly string[];
+  area: number;
+  capacity: number;
+  rooms: number;
 }
 
 export interface FAQItem {

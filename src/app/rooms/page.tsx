@@ -1,9 +1,8 @@
 import { Container, Box, Typography, Grid } from '@mui/material';
-import RoomCard from '@/components/RoomCard';
+import RoomsList from '@/components/RoomsList';
 import StructuredData from '@/components/StructuredData';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { ROOMS } from '@/config/rooms';
-import { Room } from '@/types';
 import { buildPageMetadata } from '@/config/seo';
 
 export const metadata = buildPageMetadata('rooms');
@@ -32,14 +31,7 @@ export default function RoomsPage() {
           мебелью, кондиционером, телевизором и бесплатным Wi-Fi.
         </Typography>
 
-        <Grid container spacing={4}>
-          {ROOMS.map((room) => (
-            <Grid item xs={12} md={6} key={room.id}>
-              <StructuredData type="room" data={room} />
-              <RoomCard room={room} />
-            </Grid>
-          ))}
-        </Grid>
+        <RoomsList rooms={ROOMS} />
 
         <Box sx={{ mt: 6, p: 4, bgcolor: 'background.paper', borderRadius: 2 }}>
           <Typography variant="h5" align="center" gutterBottom>

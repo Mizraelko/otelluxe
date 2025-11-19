@@ -1,12 +1,13 @@
 export const ROOMS = [
     {
         id: 1,
-        title: 'Стандарт двухместный с двумя раздельными кроватями.',
+        title: 'Стандарт "Комфорт" двухместный с двумя раздельными кроватями',
         description:
             'Светлый номер площадью 30 м² с двумя раздельными кроватями. Идеален для друзей или коллег — администратор по запросу подготовит чайный столик и наборы воды.',
         price: '3300',
         area: 30,
         capacity: 2,
+        rooms: 1,
         image: '/images/rooms/standard-comfort-double-twin/Стандарт_Комфорт_двухместный_с_двумя_раздельными_кроватями.jpg',
         images: [
             '/images/rooms/standard-comfort-double-twin/Стандарт_Комфорт_двухместный_с_двумя_раздельными_кроватями.jpg',
@@ -42,6 +43,7 @@ export const ROOMS = [
         price: '3500',
         area: 30,
         capacity: 3,
+        rooms: 1,
         image: '/images/rooms/standard-one-bed-double-bed/Стандарт_с_одной_односпальной_и_большой_двухспальной_кроватью.jpg',
         images: [
             '/images/rooms/standard-one-bed-double-bed/Стандарт_с_одной_односпальной_и_большой_двухспальной_кроватью.jpg',
@@ -74,6 +76,7 @@ export const ROOMS = [
         price: '3300',
         area: 30,
         capacity: 3,
+        rooms: 1,
         image: '/images/rooms/standard-triple-three-bed/Стандарт_трёхместный_с_тремя_раздельными_кроватями.jpg',
         images: [
             '/images/rooms/standard-triple-three-bed/Стандарт_трёхместный_с_тремя_раздельными_кроватями.jpg',
@@ -103,6 +106,7 @@ export const ROOMS = [
         price: '3500',
         area: 30,
         capacity: 2,
+        rooms: 1,
         image: '/images/rooms/standard-comfort-one-double-bed/Стандарт_Комфорт_с_одной_двуспальной_кроватью.webp',
         images: [
             '/images/rooms/standard-comfort-one-double-bed/Стандарт_Комфорт_с_одной_двуспальной_кроватью_1.webp',
@@ -135,6 +139,7 @@ export const ROOMS = [
         price: '2000',
         area: 60,
         capacity: 8,
+        rooms: 1,
         image: '/images/rooms/group-accommodation/Групповой_номер_на_8_гостей.jpg',
         images: [
             '/images/rooms/group-accommodation/Групповой_номер_на_8_гостей.jpg',
@@ -163,6 +168,7 @@ export const ROOMS = [
         price: '2000',
         area: 100,
         capacity: 12,
+        rooms: 1,
         image: '/images/rooms/group-accommodation/Групповой_номер_на_12_гостей.jpg',
         images: [
             '/images/rooms/group-accommodation/Групповой_номер_на_12_гостей.jpg',
@@ -191,11 +197,13 @@ export const ROOMS = [
         price: '3000',
         area: 25,
         capacity: 2,
+        rooms: 1,
         image: '/images/rooms/standard-double-twin/Стандарт_двухместный_с_двумя_раздельными_кроватями.jpg',
         images: [
-            '/images/rooms/photo-1598928506311-c55ded91a20c.jpg',
-            '/images/rooms/photo-1590490360182-c33d57733427.jpg',
-            '/images/rooms/photo-1582719478250-c89cae4dc85b.jpg',
+            '/images/rooms/standard-double-twin/Стандарт_двухместный_с_двумя_раздельными_кроватями.jpg',
+            '/images/rooms/standard-double-twin/Стандарт_двухместный_с_двумя_раздельными_кроватями_1.jpg',
+            '/images/rooms/standard-double-twin/Стандарт_двухместный_с_двумя_раздельными_кроватями_2.jpg',
+            '/images/rooms/standard-double-twin/Стандарт_двухместный_с_двумя_раздельными_кроватями_3.jpg',
         ],
         amenities: [
             'Две односпальные кровати',
@@ -219,6 +227,7 @@ export const ROOMS = [
         price: '3300',
         area: 25,
         capacity: 2,
+        rooms: 1,
         image: '/images/rooms/standard-double-double-bed/Стандарт_двухместный_с_одной_двуспальной_кроватью.webp',
         images: [
             '/images/rooms/standard-double-double-bed/Стандарт_двухместный_с_одной_двуспальной_кроватью_1.jpg',
@@ -246,6 +255,7 @@ export const ROOMS = [
         price: '3000',
         area: 15,
         capacity: 2,
+        rooms: 1,
         image: '/images/rooms/standard-double-one-bed/Стандарт_двухместный_с_одной_кроватью.jpg',
         images: [
             '/images/rooms/standard-double-one-bed/Стандарт_двухместный_с_одной_кроватью.jpg',
@@ -274,6 +284,7 @@ export const ROOMS = [
         price: '5000',
         area: 70,
         capacity: 6,
+        rooms: 3,
         image: '/images/rooms/apartments-comfort-triple-own-kitchen/Апартаменты_Комфорт_трёхкомнатный_номер_с_собственной_кухней.jpg',
         images: [
             '/images/rooms/apartments-comfort-triple-own-kitchen/Апартаменты_Комфорт_трёхкомнатный_номер_с_собственной_кухней.jpg',
@@ -313,6 +324,7 @@ export const ROOMS = [
         price: '5000',
         area: 70,
         capacity: 7,
+        rooms: 2,
         image: '/images/rooms/apartments-comfort-double-own-kitchen/Апартаменты_Комфорт_двухкомнатный_номер_с_собственной_кухней.jpg',
         images: [
             '/images/rooms/apartments-comfort-double-own-kitchen/Апартаменты_Комфорт_двухкомнатный_номер_с_собственной_кухней.jpg',
@@ -353,6 +365,7 @@ export const ROOMS = [
         price: '3500',
         area: 60,
         capacity: 6,
+        rooms: 1,
         image: '/images/rooms/luxe/Комфорт_Двухместный_Люкс_c_одной_двухспальной_кроватью.webp',
         images: [
             '/images/rooms/luxe/Комфорт_Двухместный_Люкс_c_одной_двухспальной_кроватью.webp',

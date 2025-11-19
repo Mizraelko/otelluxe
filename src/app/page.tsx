@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { Container, Box, Typography, Grid } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 import Hero from '@/components/Hero';
-import RoomCard from '@/components/RoomCard';
+import RoomsList from '@/components/RoomsList';
 import StructuredData from '@/components/StructuredData';
 import { ROOMS } from '@/config/rooms';
 import { buildPageMetadata } from '@/config/seo';
@@ -21,13 +21,7 @@ export default function Home() {
           <Typography variant="h2" align="center" gutterBottom>
             Наши номера
           </Typography>
-          <Grid container spacing={4} sx={{ mt: 4 }}>
-            {rooms.map((room) => (
-              <Grid item xs={12} md={6} key={room.id}>
-                <RoomCard room={room} />
-              </Grid>
-            ))}
-          </Grid>
+          <RoomsList rooms={rooms} />
         </Container>
       </Box>
 
