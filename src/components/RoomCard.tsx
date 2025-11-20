@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, type TouchEvent } from 'react';
-import { Card, CardContent, Typography, Button, Box, Chip, Grid, IconButton, Tooltip } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Chip, Grid, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import WifiIcon from '@mui/icons-material/Wifi';
@@ -14,8 +14,6 @@ import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import LocalLaundryServiceIcon from '@mui/icons-material/LocalLaundryService';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SquareFootIcon from '@mui/icons-material/SquareFoot';
 import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
@@ -189,6 +187,26 @@ export default function RoomCard({ room }: RoomCardProps) {
         }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onMouseMove={(event) => {
+          if (!window.matchMedia('(pointer: fine)').matches || totalImages <= 1) return;
+
+          const rect = event.currentTarget.getBoundingClientRect();
+          const relativeX = event.clientX - rect.left;
+          const sectorWidth = rect.width / totalImages;
+          const hoveredIndex = Math.min(
+            totalImages - 1,
+            Math.max(0, Math.floor(relativeX / sectorWidth))
+          );
+
+          if (hoveredIndex !== currentIndex) {
+            setCurrentIndex(hoveredIndex);
+          }
+        }}
+        onMouseLeave={() => {
+          if (totalImages > 1) {
+            setCurrentIndex(0);
+          }
+        }}
       >
         {imageList.map((src, index) => (
           <Box
@@ -212,68 +230,38 @@ export default function RoomCard({ room }: RoomCardProps) {
         ))}
 
         {totalImages > 1 && (
-          <>
-            <IconButton
-              onClick={handlePrev}
-              aria-label="Предыдущее фото"
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: 8,
-                transform: 'translateY(-50%)',
-                color: 'white',
-                bgcolor: (theme) => theme.palette.card.overlay,
-                '&:hover': { bgcolor: (theme) => theme.palette.card.overlayHover },
-              }}
-            >
-              <ChevronLeftIcon />
-            </IconButton>
-            <IconButton
-              onClick={handleNext}
-              aria-label="Следующее фото"
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                right: 8,
-                transform: 'translateY(-50%)',
-                color: 'white',
-                bgcolor: (theme) => theme.palette.card.overlay,
-                '&:hover': { bgcolor: (theme) => theme.palette.card.overlayHover },
-              }}
-            >
-              <ChevronRightIcon />
-            </IconButton>
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: 8,
-                left: '50%',
-                transform: 'translateX(-50%)',
-                display: 'flex',
-                gap: 1,
-              }}
-            >
-              {imageList.map((_, index) => (
-                <Box
-                  key={index}
-                  component="button"
-                  type="button"
-                  onClick={() => setCurrentIndex(index)}
-                  aria-label={`Показать фото ${index + 1}`}
-                  sx={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: '50%',
-                    border: 'none',
-                    cursor: 'pointer',
-                    backgroundColor: index === currentIndex ? 'primary.main' : 'rgba(255,255,255,0.7)',
-                    opacity: index === currentIndex ? 1 : 0.6,
-                    transition: 'all 0.2s ease-in-out',
-                  }}
-                />
-              ))}
-            </Box>
-          </>
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 8,
+              left: 16,
+              right: 16,
+              display: 'flex',
+              gap: 1,
+            }}
+          >
+            {imageList.map((_, index) => (
+              <Box
+                key={index}
+                onMouseEnter={() => {
+                  if (window.matchMedia('(pointer: fine)').matches) {
+                    setCurrentIndex(index);
+                  }
+                }}
+                onFocus={() => setCurrentIndex(index)}
+                tabIndex={-1}
+                sx={{
+                  flex: 1,
+                  height: 6,
+                  borderRadius: 999,
+                  backgroundColor: index === currentIndex ? 'primary.main' : 'rgba(255,255,255,0.5)',
+                  opacity: index === currentIndex ? 1 : 0.4,
+                  transition: 'opacity 0.2s ease',
+                  cursor: 'pointer',
+                }}
+              />
+            ))}
+          </Box>
         )}
       </Box>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
