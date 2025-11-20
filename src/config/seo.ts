@@ -56,8 +56,8 @@ export const SEO_CONFIG = {
       'Фен',
       'Банные принадлежности',
     ],
-    checkinTime: '14:00',
-    checkoutTime: '12:00',
+    checkinTime: '00:00',
+    checkoutTime: '00:00',
     currenciesAccepted: 'RUB',
     paymentAccepted: 'Cash, Credit Card',
     priceRange: '$$',
@@ -72,12 +72,12 @@ export const SEO_CONFIG = {
 
   images: {
     logo: '/favicon.svg',
-    hero: '/images/hero/hero-main.jpg',
+    hero: '/images/hero/hero-main.webp',
     favicon: '/favicon.ico',
     gallery: [
-      '/images/rooms/photo-1598928506311-c55ded91a20c.jpg',
-      '/images/rooms/photo-1611892440504-42a792e24d32.jpg',
-      '/images/rooms/photo-1590490360182-c33d57733427.jpg',
+      '/images/rooms/photo-1598928506311-c55ded91a20c.webp',
+      '/images/rooms/photo-1611892440504-42a792e24d32.webp',
+      '/images/rooms/photo-1590490360182-c33d57733427.webp',
     ],
   },
 
@@ -99,6 +99,8 @@ type PageMetadata = {
   title: string;
   description: string;
   keywords: string[];
+  image?: string;
+  imageAlt?: string;
 };
 
 export const PAGE_METADATA: Record<PageKey, PageMetadata> = {
@@ -114,6 +116,8 @@ export const PAGE_METADATA: Record<PageKey, PageMetadata> = {
       'отель в центре Богородска',
       'гостиница Богородск цены',
     ],
+    image: SEO_CONFIG.images.hero,
+    imageAlt: 'Отель Люкс в центре Богородска',
   },
   rooms: {
     path: '/rooms',
@@ -129,6 +133,8 @@ export const PAGE_METADATA: Record<PageKey, PageMetadata> = {
       'стандарт номер Богородск',
       'апартаменты Богородск',
     ],
+    image: '/images/rooms/standard-comfort-one-double-bed/Стандарт_Комфорт_с_одной_двуспальной_кроватью.webp',
+    imageAlt: 'Номер стандарта Комфорт с одной двуспальной кроватью',
   },
   services: {
     path: '/services',
@@ -143,6 +149,8 @@ export const PAGE_METADATA: Record<PageKey, PageMetadata> = {
       'трансфер отель Богородск',
       'услуги гостиницы Люкс',
     ],
+    image: '/images/rooms/standard-comfort-double-twin/Стандарт_Комфорт_двухместный_с_двумя_раздельными_кроватями_1.webp',
+    imageAlt: 'Парковка и сервисы отеля Люкс',
   },
   contacts: {
     path: '/contacts',
@@ -157,6 +165,8 @@ export const PAGE_METADATA: Record<PageKey, PageMetadata> = {
       'как добраться до отеля Богородск',
       'отель Богородск карта',
     ],
+    image: '/images/rooms/standard-double-double-bed/Стандарт_двухместный_с_одной_двуспальной_кроватью_1.webp',
+    imageAlt: 'Стойка администратора и контакты отеля Люкс',
   },
   booking: {
     path: '/booking',
@@ -171,12 +181,19 @@ export const PAGE_METADATA: Record<PageKey, PageMetadata> = {
       'отель Богородск бронирование онлайн',
       'забронировать отель Богородск',
     ],
+    image: '/images/rooms/standard-double-one-bed/Стандарт_двухместный_с_одной_кроватью.webp',
+    imageAlt: 'Процесс бронирования номера в отеле Люкс',
   },
 };
 
 export const buildPageMetadata = (page: PageKey): Metadata => {
   const pageConfig = PAGE_METADATA[page];
   const canonicalUrl = new URL(pageConfig.path, SEO_CONFIG.site.url).toString();
+  const ogImagePath = pageConfig.image ?? SEO_CONFIG.images.hero;
+  const ogImageUrl = ogImagePath.startsWith('http')
+    ? ogImagePath
+    : `${SEO_CONFIG.site.url}${ogImagePath}`;
+  const ogImageAlt = pageConfig.imageAlt ?? pageConfig.title;
 
   // Объединяем общие ключевые слова + специфичные для страницы
   // Убираем дубликаты и ограничиваем общее количество для оптимального SEO
@@ -209,10 +226,10 @@ export const buildPageMetadata = (page: PageKey): Metadata => {
       type: SEO_CONFIG.site.type as 'website',
       images: [
         {
-          url: `${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: pageConfig.title,
+          alt: ogImageAlt,
         },
       ],
     },
@@ -220,7 +237,7 @@ export const buildPageMetadata = (page: PageKey): Metadata => {
       card: 'summary_large_image',
       title: pageConfig.title,
       description: pageConfig.description,
-      images: [`${SEO_CONFIG.site.url}${SEO_CONFIG.images.hero}`],
+      images: [ogImageUrl],
       creator: SEO_CONFIG.site.name,
     },
     robots: {

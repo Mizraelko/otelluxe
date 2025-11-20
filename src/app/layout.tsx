@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(SEO_CONFIG.site.url),
   alternates: {
-    canonical: '/',
+    canonical: SEO_CONFIG.site.url,
   },
   openGraph: {
     title: SEO_CONFIG.site.name,
@@ -87,6 +87,12 @@ export default function RootLayout({
         <meta name="geo.placename" content="Богородск" />
         <meta name="geo.position" content={`${CONTACTS.coordinates.latitude};${CONTACTS.coordinates.longitude}`} />
         <meta name="ICBM" content={`${CONTACTS.coordinates.latitude}, ${CONTACTS.coordinates.longitude}`} />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://mc.yandex.ru" />
+        <link rel="preconnect" href="https://mc.yandex.ru" />
+        <link rel="dns-prefetch" href="https://api-maps.yandex.ru" />
+        <link rel="preconnect" href="https://api-maps.yandex.ru" />
       </head>
       <body suppressHydrationWarning={true}>
         <Analytics 

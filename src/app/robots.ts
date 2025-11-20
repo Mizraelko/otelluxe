@@ -1,6 +1,19 @@
 import { MetadataRoute } from 'next';
 
+const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEX !== 'false';
+
 export default function robots(): MetadataRoute.Robots {
+  if (!allowIndex) {
+    return {
+      rules: [
+        {
+          userAgent: '*',
+          disallow: '/',
+        },
+      ],
+    };
+  }
+
   return {
     rules: [
       {

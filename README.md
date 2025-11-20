@@ -223,8 +223,14 @@ sudo certbot --nginx -d hotelluxbg.ru -d www.hotelluxbg.ru
 ### Обновление сайта
 ```bash
 cd /opt/otelluxe
+ cd /opt/otelluxe
+   # достаточно один раз
+chmod +x advanced-update.sh 
+./advanced-update.sh
+или ручное обновление -
 git pull origin main
 docker compose up -d --build
+
 ```
 
 ### Мониторинг

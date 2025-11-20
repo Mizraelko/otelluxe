@@ -1,19 +1,74 @@
-import { Container, Box, Typography, Grid, Card, CardContent, Link, IconButton } from '@mui/material';
+import { Container, Box, Typography, Grid, Card, CardContent, Link, IconButton, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import VKIcon from '@/components/VKIcon';
 import YandexMap from '@/components/YandexMap';
+import StructuredData from '@/components/StructuredData';
 import { CONTACTS, VK_COLORS } from '@/config/contacts';
 import { buildPageMetadata } from '@/config/seo';
 
 export const metadata = buildPageMetadata('contacts');
 
 export default function ContactsPage() {
+  const faqItems = [
+    {
+      question: 'Во сколько время заезда и выезда?',
+      answer: 'Заселение доступно после 00:00, выезд — до 00:00. По предварительному согласованию возможен ранний заезд или поздний выезд.',
+    },
+    {
+      question: 'Есть ли парковка для гостей?',
+      answer: 'Да, у отеля есть бесплатная охраняемая парковка с видеонаблюдением. Места доступны гостям круглосуточно.',
+    },
+    {
+      question: 'Какие документы нужны при заселении?',
+      answer: 'Для проживания необходим паспорт каждого гостя. Для групповых размещений подготовьте список командируемых.',
+    },
+    {
+      question: 'Как связаться с администратором ночью?',
+      answer: 'Стойка регистрации работает 24/7. Позвоните по номеру +7 (987) 757-83-23 — администратор ответит в любое время.',
+    },
+  ];
+
+  const travelSteps = [
+    {
+      title: '🚗 На автомобиле',
+      description:
+        'От трассы М7 поверните на Богородск, следуйте по главной улице до центра города. Отель находится рядом с центральной площадью и виден с дороги.',
+    },
+    {
+      title: '🚌 Общественным транспортом',
+      description:
+        'От автовокзала Богородска автобусы №5 и №12 следуют до остановки «Центр». От остановки всего 2 минуты пешком по улице Ленина до входа в отель.',
+    },
+    {
+      title: '🚂 От ж/д вокзала',
+      description:
+        'Расстояние от вокзала — 3 км. Можно доехать на такси за 10 минут или воспользоваться городским автобусом. Также предоставляем трансфер по предварительной заявке.',
+    },
+    {
+      title: '✈️ От аэропорта Нижний Новгород',
+      description:
+        'Аэропорт Стригино находится в 45 км. Дорога на такси занимает 40 минут. При необходимости организуем платный трансфер прямо к отелю.',
+    },
+  ];
+
+  const howToStructuredData = {
+    name: 'Как добраться до отеля "Люкс" в Богородске',
+    description: 'Пошаговые инструкции по основным маршрутам: автомобиль, общественный транспорт, железная дорога и аэропорт.',
+    steps: travelSteps.map(({ title, description }) => ({
+      name: title,
+      text: description,
+    })),
+  };
+
   return (
     <Box sx={{ py: 6 }}>
       <Container maxWidth="lg">
+        <StructuredData type="faq" data={faqItems} />
+        <StructuredData type="howTo" data={howToStructuredData} />
         <Typography component="h1" variant="h2" align="center" gutterBottom>
           Контакты
         </Typography>
@@ -100,7 +155,7 @@ export default function ContactsPage() {
                   Круглосуточно
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  Регистрация с 14:00, выезд до 12:00
+                  Заезд после 00:00, Выезд до 00:00
                 </Typography>
               </CardContent>
             </Card>
@@ -153,43 +208,53 @@ export default function ContactsPage() {
             Как добраться
           </Typography>
           <Grid container spacing={3} sx={{ mt: 2 }}>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom color="primary.main">
-                🚗 На автомобиле
-              </Typography>
-              <Typography variant="body1">
-                От трассы М7 поверните на Богородск, следуйте по главной улице до центра города. 
-                Отель находится в самом центре, рядом с площадью.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom color="primary.main">
-                🚌 Общественным транспортом
-              </Typography>
-              <Typography variant="body1">
-                От автовокзала автобусы №5, №12 до остановки &quot;Центр&quot;. 
-                От остановки 2 минуты пешком до отеля.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom color="primary.main">
-                🚂 От ж/д вокзала
-              </Typography>
-              <Typography variant="body1">
-                Расстояние от вокзала 3 км. Доехать можно на такси за 10 минут. 
-                Также доступен наш трансфер (по предварительной договоренности).
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom color="primary.main">
-                ✈️ От аэропорта Нижний Новгород
-              </Typography>
-              <Typography variant="body1">
-                Расстояние 45 км. На такси - около 40 минут. 
-                Предоставляем трансфер от аэропорта по предварительному заказу.
-              </Typography>
-            </Grid>
+            {travelSteps.map((step) => (
+              <Grid item xs={12} md={6} key={step.title}>
+                <Box sx={{ p: 2, borderRadius: 2, bgcolor: 'background.paper', height: '100%' }}>
+                  <Typography variant="h6" gutterBottom color="primary.main">
+                    {step.title}
+                  </Typography>
+                  <Typography variant="body1" color="text.primary">
+                    {step.description}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
           </Grid>
+        </Box>
+
+        <Box sx={{ mt: 6 }}>
+          <Typography variant="h4" gutterBottom align="center">
+            Частые вопросы
+          </Typography>
+          <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 3, maxWidth: 700, mx: 'auto' }}>
+            Сохраняем ответы на самые популярные вопросы гостей. Если не нашли нужный — позвоните нам, мы всегда на связи.
+          </Typography>
+          {faqItems.map((faq, index) => (
+            <Accordion
+              key={faq.question}
+              disableGutters
+              elevation={0}
+              sx={{
+                border: '1px solid',
+                borderColor: 'divider',
+                borderRadius: 2,
+                mb: 2,
+                '&:before': { display: 'none' },
+              }}
+            >
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`faq-content-${index}`} id={`faq-header-${index}`}>
+                <Typography variant="subtitle1" fontWeight={600}>
+                  {faq.question}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1" color="text.secondary">
+                  {faq.answer}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </Box>
       </Container>
     </Box>

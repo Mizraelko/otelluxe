@@ -158,13 +158,7 @@ export default function BookingContent() {
             ℹ️ Информация о бронировании
           </Typography>
           <Typography variant="body1" paragraph sx={{ mb: 1.5 }}>
-            • Регистрация гостей с 14:00, выезд до 12:00
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 1.5 }}>
-            • Завтрак включен в стоимость всех номеров
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ mb: 1.5 }}>
-            • Отмена бронирования без штрафа возможна за 24 часа до заезда
+            • Заселение после 00:00, выезд до 00:00
           </Typography>
           <Typography variant="body1">• При раннем заезде или позднем выезде возможна доплата</Typography>
         </Box>

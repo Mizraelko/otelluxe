@@ -129,7 +129,7 @@ const getAmenityTooltip = (amenity: string): string | null => {
 };
 
 export default function RoomCard({ room }: RoomCardProps) {
-  const imageList = room.images;
+  const imageList = room.images && room.images.length > 0 ? room.images : [room.image];
   const totalImages = imageList.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);

@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import { SEO_CONFIG } from '@/config/seo';
-import { StructuredDataProps, Room, BreadcrumbItem, FAQItem } from '@/types';
+import { StructuredDataProps, Room, BreadcrumbItem, FAQItem, HowToData } from '@/types';
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
   const hotelImages = [
@@ -56,45 +56,83 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           ]
         };
 
-      case 'room':
+      case 'room': {
         const roomData = data as Room;
-        const roomImages = roomData.images && roomData.images.length > 0 ? roomData.images : [roomData.image];
+        const roomImages =
+          roomData.images && roomData.images.length > 0 ? roomData.images : [roomData.image];
+
+        const amenityFeature =
+          roomData.amenities && roomData.amenities.length > 0
+            ? roomData.amenities.map((amenity) => ({
+                '@type': 'LocationFeatureSpecification',
+                name: amenity,
+                value: true,
+              }))
+            : [
+                {
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Wi-Fi',
+                  value: true,
+                },
+                {
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Кондиционер',
+                  value: true,
+                },
+                {
+                  '@type': 'LocationFeatureSpecification',
+                  name: 'Собственная ванная',
+                  value: true,
+                },
+              ];
+
         return {
-          "@context": "https://schema.org",
-          "@type": "LodgingBusiness",
-          "name": roomData.title,
-          "description": roomData.description,
-          "url": `${SEO_CONFIG.site.url}/rooms#room-${roomData.id}`,
-          "image": roomImages.map((src) => `${SEO_CONFIG.site.url}${src}`),
-          "offers": {
-            "@type": "Offer",
-            "price": roomData.price,
-            "priceCurrency": "RUB",
-            "availability": "https://schema.org/InStock",
-            "validFrom": new Date().toISOString().split('T')[0]
+          '@context': 'https://schema.org',
+          '@type': 'HotelRoom',
+          name: roomData.title,
+          description: roomData.description,
+          url: `${SEO_CONFIG.site.url}/rooms#room-${roomData.id}`,
+          image: roomImages.map((src) => `${SEO_CONFIG.site.url}${src}`),
+          numberOfRooms: roomData.rooms || 1,
+          occupancy: roomData.capacity
+            ? {
+                '@type': 'QuantitativeValue',
+                value: roomData.capacity,
+                unitCode: 'C62',
+              }
+            : undefined,
+          floorSize: roomData.area
+            ? {
+                '@type': 'QuantitativeValue',
+                value: roomData.area,
+                unitCode: 'MTK',
+              }
+            : undefined,
+          containedInPlace: {
+            '@type': 'Hotel',
+            name: SEO_CONFIG.hotel.name,
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: SEO_CONFIG.hotel.address.street,
+              addressLocality: SEO_CONFIG.hotel.address.city,
+              addressRegion: SEO_CONFIG.hotel.address.region,
+              postalCode: SEO_CONFIG.hotel.address.postalCode,
+              addressCountry: SEO_CONFIG.hotel.address.country,
+            },
+            telephone: SEO_CONFIG.hotel.contact.phone,
+            url: SEO_CONFIG.site.url,
           },
-          "amenityFeature": roomData.amenities ? roomData.amenities.map((amenity) => ({
-            "@type": "LocationFeatureSpecification",
-            "name": amenity,
-            "value": true
-          })) : [
-            {
-              "@type": "LocationFeatureSpecification",
-              "name": "Wi-Fi",
-              "value": true
-            },
-            {
-              "@type": "LocationFeatureSpecification",
-              "name": "Кондиционер",
-              "value": true
-            },
-            {
-              "@type": "LocationFeatureSpecification",
-              "name": "Собственная ванная",
-              "value": true
-            }
-          ]
+          offers: {
+            '@type': 'Offer',
+            price: roomData.price,
+            priceCurrency: 'RUB',
+            availability: 'https://schema.org/InStock',
+            url: `${SEO_CONFIG.site.url}/booking?room=${roomData.id}`,
+            validFrom: new Date().toISOString().split('T')[0],
+          },
+          amenityFeature,
         };
+      }
 
       case 'breadcrumb':
         return {
@@ -121,6 +159,35 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             }
           }))
         };
+
+      case 'howTo': {
+        const howToData = data as HowToData;
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: howToData.name,
+          description: howToData.description,
+          totalTime: 'PT30M',
+          supply: [
+            {
+              '@type': 'HowToSupply',
+              name: 'Документы для заселения',
+            },
+          ],
+          tool: [
+            {
+              '@type': 'HowToTool',
+              name: 'Смартфон или навигатор',
+            },
+          ],
+          step: howToData.steps.map((step, index) => ({
+            '@type': 'HowToStep',
+            position: index + 1,
+            name: step.name,
+            text: step.text,
+          })),
+        };
+      }
 
       case 'localBusiness':
         return {

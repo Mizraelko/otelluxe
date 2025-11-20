@@ -30,8 +30,19 @@ export interface OptimizedImageProps {
   className?: string;
 }
 
+export interface HowToStep {
+  name: string;
+  text: string;
+}
+
+export interface HowToData {
+  name: string;
+  description: string;
+  steps: HowToStep[];
+}
+
 export interface StructuredDataProps {
-  type: 'hotel' | 'room' | 'breadcrumb' | 'faq' | 'localBusiness';
-  data?: Room | BreadcrumbItem[] | FAQItem[] | Record<string, unknown>;
+  type: 'hotel' | 'room' | 'breadcrumb' | 'faq' | 'localBusiness' | 'howTo';
+  data?: Room | BreadcrumbItem[] | FAQItem[] | HowToData | Record<string, unknown>;
 }
 

@@ -17,7 +17,7 @@ export default function Hero() {
       }}
     >
       <Image
-        src="/images/hero/hero-main.jpg"
+        src="/images/hero/hero-main.webp"
         alt={`Фасад ${SITE_CONFIG.name} в Богородске`}
         fill
         priority
