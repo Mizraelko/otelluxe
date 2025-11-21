@@ -166,6 +166,24 @@ export default function Header() {
               <VKIcon />
             </IconButton>
             
+            {/* Yandex Rating Badge */}
+            <Box
+              component="iframe"
+              src={
+                isDarkMode
+                  ? 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating&theme=dark'
+                  : 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating'
+              }
+              width={150}
+              height={50}
+              sx={{
+                border: 0,
+                display: { xs: 'none', sm: 'block' },
+              }}
+              loading="lazy"
+              title="Рейтинг отеля на Яндексе"
+            />
+            
             <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
             
             {/* Mobile Menu Button */}

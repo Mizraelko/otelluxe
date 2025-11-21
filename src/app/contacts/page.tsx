@@ -1,10 +1,12 @@
-import { Container, Box, Typography, Grid, Card, CardContent, Link, IconButton, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Container, Box, Typography, Grid, Card, CardContent, Link, IconButton, Accordion, AccordionSummary, AccordionDetails, Button } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AltRouteIcon from '@mui/icons-material/AltRoute';
 import VKIcon from '@/components/VKIcon';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import YandexMap from '@/components/YandexMap';
 import StructuredData from '@/components/StructuredData';
 import { CONTACTS, VK_COLORS } from '@/config/contacts';
@@ -13,6 +15,15 @@ import { buildPageMetadata } from '@/config/seo';
 export const metadata = buildPageMetadata('contacts');
 
 export default function ContactsPage() {
+  const breadcrumbs = [
+    { name: 'Главная', url: 'https://hotelluxbg.ru' },
+    { name: 'Контакты', url: 'https://hotelluxbg.ru/contacts' }
+  ];
+
+  const breadcrumbItems = [
+    { label: 'Контакты', current: true }
+  ];
+
   const faqItems = [
     {
       question: 'Во сколько время заезда и выезда?',
@@ -21,10 +32,6 @@ export default function ContactsPage() {
     {
       question: 'Есть ли парковка для гостей?',
       answer: 'Да, у отеля есть бесплатная охраняемая парковка с видеонаблюдением. Места доступны гостям круглосуточно.',
-    },
-    {
-      question: 'Какие документы нужны при заселении?',
-      answer: 'Для проживания необходим паспорт каждого гостя. Для групповых размещений подготовьте список командируемых.',
     },
     {
       question: 'Как связаться с администратором ночью?',
@@ -67,8 +74,10 @@ export default function ContactsPage() {
   return (
     <Box sx={{ py: 6 }}>
       <Container maxWidth="lg">
+        <StructuredData type="breadcrumb" data={breadcrumbs} />
         <StructuredData type="faq" data={faqItems} />
         <StructuredData type="howTo" data={howToStructuredData} />
+        <Breadcrumbs items={breadcrumbItems} />
         <Typography component="h1" variant="h2" align="center" gutterBottom>
           Контакты
         </Typography>
@@ -197,13 +206,45 @@ export default function ContactsPage() {
         </Box>
 
         <Box sx={{ mb: 6 }}>
-          <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4 }}>
+          <Typography variant="h4" gutterBottom align="center" sx={{ mb: 2 }}>
             Как нас найти
           </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              mb: 2,
+            }}
+          >
+            <Button
+              variant="contained"
+              color="inherit"
+              href="https://yandex.ru/maps/20036/bogorodsk/?ll=43.520823%2C56.106022&mode=routes&rtext=~56.106022%2C43.520823&rtt=auto&ruri=~&z=17"
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={<AltRouteIcon />}
+              sx={{
+                borderRadius: 999,
+                bgcolor: 'background.paper',
+                color: 'text.primary',
+                boxShadow: 1,
+                textTransform: 'none',
+                px: 3,
+                py: 1,
+                fontWeight: 500,
+                '&:hover': {
+                  bgcolor: 'action.hover',
+                  boxShadow: 2,
+                },
+              }}
+            >
+              Как доехать
+            </Button>
+          </Box>
           <YandexMap />
         </Box>
 
-        <Box sx={{ p: 4, bgcolor: 'background.default', borderRadius: 2 }}>
+        <Box sx={{ p: 4, bgcolor: 'background.default', borderRadius: 2, mb: 6 }}>
           <Typography variant="h5" gutterBottom>
             Как добраться
           </Typography>
@@ -221,6 +262,69 @@ export default function ContactsPage() {
               </Grid>
             ))}
           </Grid>
+        </Box>
+
+        <Box sx={{ mb: 6 }}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            align="center"
+            sx={{ mb: 4 }}
+          >
+            Отзывы гостей
+          </Typography>
+
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: 560,
+              mx: 'auto',
+              height: { xs: 400, md: 600 },
+              overflow: 'hidden',
+              borderRadius: 2,
+              border: '1px solid',
+              borderColor: 'divider',
+              bgcolor: 'background.paper',
+              boxShadow: 2,
+            }}
+          >
+            <Box
+              component="iframe"
+              src="https://yandex.ru/maps-reviews-widget/1742070480?comments"
+              sx={{
+                width: '100%',
+                height: '100%',
+                border: 0,
+                borderRadius: 2,
+              }}
+              loading="lazy"
+              title="Отзывы об отеле «Люкс» на Яндекс Картах"
+            />
+
+            <Box
+              component="a"
+              href="https://yandex.ru/maps/org/lyuks/1742070480/"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                position: 'absolute',
+                bottom: 8,
+                left: 0,
+                width: '100%',
+                textAlign: 'center',
+                px: 2,
+                typography: 'caption',
+                color: 'text.secondary',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              Люкс на карте Богородска — Яндекс Карты
+            </Box>
+          </Box>
         </Box>
 
         <Box sx={{ mt: 6 }}>

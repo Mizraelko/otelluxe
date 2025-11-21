@@ -7,8 +7,10 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import VKIcon from './VKIcon';
 import { CONTACTS, SITE_CONFIG, VK_COLORS } from '@/config/contacts';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Footer() {
+    const { isDarkMode } = useTheme();
     return (
         <Box
             component="footer"
@@ -89,29 +91,45 @@ export default function Footer() {
                             <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mt: 2}}>
                                 <Typography variant="body2" color="inherit">Мы в соцсетях:</Typography>
                                 <IconButton
-                                    component={Link}
-                                    href={CONTACTS.social.vk.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{
-                                        color: VK_COLORS.primary,
-                                        '&:hover': {
-                                            backgroundColor: VK_COLORS.hoverBackground,
-                                            color: VK_COLORS.hover,
-                                        },
-                                        '& svg': {
-                                            fill: VK_COLORS.primary,
+                                        component={Link}
+                                        href={CONTACTS.social.vk.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        sx={{
                                             color: VK_COLORS.primary,
-                                        },
-                                        '&:hover svg': {
-                                            fill: VK_COLORS.hover,
-                                            color: VK_COLORS.hover,
-                                        },
+                                            '&:hover': {
+                                                backgroundColor: VK_COLORS.hoverBackground,
+                                                color: VK_COLORS.hover,
+                                            },
+                                            '& svg': {
+                                                fill: VK_COLORS.primary,
+                                                color: VK_COLORS.primary,
+                                            },
+                                            '&:hover svg': {
+                                                fill: VK_COLORS.hover,
+                                                color: VK_COLORS.hover,
+                                            },
+                                        }}
+                                        aria-label={`Мы в ${CONTACTS.social.vk.name}`}
+                                    >
+                                        <VKIcon/>
+                                    </IconButton>
+                                <Box
+                                    component="iframe"
+                                    src={
+                                        isDarkMode
+                                            ? 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating&theme=dark'
+                                            : 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating'
+                                    }
+                                    width={150}
+                                    height={50}
+                                    sx={{
+                                        border: 0,
+                                        ml: 1,
                                     }}
-                                    aria-label={`Мы в ${CONTACTS.social.vk.name}`}
-                                >
-                                    <VKIcon/>
-                                </IconButton>
+                                    loading="lazy"
+                                    title="Рейтинг отеля на Яндексе"
+                                />
                             </Box>
                         </Box>
                     </Grid>

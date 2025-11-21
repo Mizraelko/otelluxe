@@ -87,6 +87,9 @@ export default function RootLayout({
         <meta name="geo.placename" content="Богородск" />
         <meta name="geo.position" content={`${CONTACTS.coordinates.latitude};${CONTACTS.coordinates.longitude}`} />
         <meta name="ICBM" content={`${CONTACTS.coordinates.latitude}, ${CONTACTS.coordinates.longitude}`} />
+        {/* Favicons for browsers and search engines (Yandex recommends SVG or 120x120 PNG) */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://mc.yandex.ru" />
