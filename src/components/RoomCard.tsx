@@ -222,10 +222,10 @@ export default function RoomCard({ room }: RoomCardProps) {
               src={src}
               alt={`${room.title} фото ${index + 1}`}
               fill
-              quality={75}
+              quality={65}
               loading={room.id <= 2 && index === 0 ? undefined : 'lazy'}
               style={{ objectFit: 'cover' }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 550px"
               priority={room.id <= 2 && index === 0}
             />
           </Box>
@@ -403,7 +403,13 @@ export default function RoomCard({ room }: RoomCardProps) {
         )}
         
         <Box sx={{ mt: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6" color="primary.main" fontWeight="bold">
+          <Typography 
+            component="div"
+            variant="body1" 
+            color="primary.main" 
+            fontWeight="bold"
+            sx={{ fontSize: '1.25rem' }}
+          >
             от {room.price} ₽/сутки
           </Typography>
           <Button
