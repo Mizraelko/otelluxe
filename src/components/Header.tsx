@@ -89,18 +89,24 @@ export default function Header() {
               fontSize: 36, 
               color: 'primary.main'
             }} />
-            <Typography
-              variant="h6"
-              component={Link}
+            <Link
               href="/"
-              sx={{
-                ...HEADER_STYLES.logo,
+              style={{
                 textDecoration: 'none',
-                color: 'primary.main',
+                color: 'inherit',
               }}
             >
-              {SITE_CONFIG.name}
-            </Typography>
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{
+                  ...HEADER_STYLES.logo,
+                  color: 'primary.main',
+                }}
+              >
+                {SITE_CONFIG.name}
+              </Typography>
+            </Link>
           </Box>
           
           {/* Desktop Navigation */}

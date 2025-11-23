@@ -225,7 +225,7 @@ export default function RoomCard({ room }: RoomCardProps) {
               quality={65}
               loading={room.id <= 2 && index === 0 ? undefined : 'lazy'}
               style={{ objectFit: 'cover' }}
-              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 550px"
+              sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 900px) calc(50vw - 24px), (max-width: 1200px) calc(50vw - 32px), 600px"
               priority={room.id <= 2 && index === 0}
             />
           </Box>

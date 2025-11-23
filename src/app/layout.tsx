@@ -92,10 +92,14 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {/* Yandex Metrika - оптимизация подключения */}
         <link rel="dns-prefetch" href="https://mc.yandex.ru" />
-        <link rel="preconnect" href="https://mc.yandex.ru" />
+        <link rel="preconnect" href="https://mc.yandex.ru" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://mc.yandex.com" />
+        <link rel="preconnect" href="https://mc.yandex.com" crossOrigin="anonymous" />
+        {/* Yandex Maps */}
         <link rel="dns-prefetch" href="https://api-maps.yandex.ru" />
-        <link rel="preconnect" href="https://api-maps.yandex.ru" />
+        <link rel="preconnect" href="https://api-maps.yandex.ru" crossOrigin="anonymous" />
       </head>
       <body suppressHydrationWarning={true}>
         <Analytics 

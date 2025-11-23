@@ -11,14 +11,14 @@ export default function Analytics({
 }: AnalyticsProps) {
   return (
     <>
-      {/* Google Analytics */}
+      {/* Google Analytics - отложенная загрузка для уменьшения неиспользуемого кода */}
       {googleAnalyticsId && (
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="google-analytics" strategy="afterInteractive">
+          <Script id="google-analytics" strategy="lazyOnload">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
@@ -32,10 +32,11 @@ export default function Analytics({
         </>
       )}
 
-      {/* Yandex Metrika */}
+      {/* Yandex Metrika - отложенная загрузка для уменьшения неиспользуемого кода */}
       {yandexMetrikaId && (
         <>
-          <Script id="yandex-metrika" strategy="afterInteractive">
+          {/* Загружаем скрипт только после полной загрузки страницы */}
+          <Script id="yandex-metrika-init" strategy="lazyOnload">
             {`
               (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
               m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
