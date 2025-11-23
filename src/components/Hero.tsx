@@ -21,11 +21,14 @@ export default function Hero() {
         alt={`Фасад ${SITE_CONFIG.name} в Богородске`}
         fill
         priority
+        quality={80}
         sizes="(max-width: 768px) 100vw, 100vw"
         style={{
           objectFit: 'cover',
           filter: 'brightness(0.55)',
         }}
+        placeholder="blur"
+        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
       />
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, px: { xs: 2, sm: 3 } }}>
         <Box sx={{ maxWidth: 700, color: 'white' }}>
@@ -42,6 +45,7 @@ export default function Hero() {
             Добро пожаловать в {SITE_CONFIG.name}
           </Typography>
           <Typography
+            component="h2"
             variant="h5"
             sx={{
               mb: 4,

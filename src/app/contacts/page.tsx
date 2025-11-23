@@ -206,7 +206,7 @@ export default function ContactsPage() {
         </Box>
 
         <Box sx={{ mb: 6 }}>
-          <Typography variant="h4" gutterBottom align="center" sx={{ mb: 2 }}>
+          <Typography component="h2" variant="h4" gutterBottom align="center" sx={{ mb: 2 }}>
             Как нас найти
           </Typography>
           <Box
@@ -245,14 +245,14 @@ export default function ContactsPage() {
         </Box>
 
         <Box sx={{ p: 4, bgcolor: 'background.default', borderRadius: 2, mb: 6 }}>
-          <Typography variant="h5" gutterBottom>
+          <Typography component="h3" variant="h5" gutterBottom>
             Как добраться
           </Typography>
           <Grid container spacing={3} sx={{ mt: 2 }}>
             {travelSteps.map((step) => (
               <Grid item xs={12} md={6} key={step.title}>
                 <Box sx={{ p: 2, borderRadius: 2, bgcolor: 'background.paper', height: '100%' }}>
-                  <Typography variant="h6" gutterBottom color="primary.main">
+                  <Typography component="h4" variant="h6" gutterBottom color="primary.main">
                     {step.title}
                   </Typography>
                   <Typography variant="body1" color="text.primary">
@@ -266,6 +266,7 @@ export default function ContactsPage() {
 
         <Box sx={{ mb: 6 }}>
           <Typography
+            component="h2"
             variant="h4"
             gutterBottom
             align="center"
@@ -328,7 +329,7 @@ export default function ContactsPage() {
         </Box>
 
         <Box sx={{ mt: 6 }}>
-          <Typography variant="h4" gutterBottom align="center">
+          <Typography component="h2" variant="h4" gutterBottom align="center">
             Частые вопросы
           </Typography>
           <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 3, maxWidth: 700, mx: 'auto' }}>

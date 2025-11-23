@@ -50,6 +50,7 @@ export default function BookingContent() {
             </Box>
 
             <Typography
+              component="h2"
               variant="h4"
               gutterBottom
               sx={{
@@ -62,6 +63,7 @@ export default function BookingContent() {
             </Typography>
 
             <Typography
+              component="p"
               variant="h5"
               sx={{
                 mb: 4,
@@ -85,6 +87,7 @@ export default function BookingContent() {
             >
               <AccessTimeIcon sx={{ fontSize: 32, color: 'secondary.main' }} />
               <Typography
+                component="h3"
                 variant="h6"
                 sx={{
                   color: 'error.main',
@@ -147,6 +150,7 @@ export default function BookingContent() {
           }}
         >
           <Typography
+            component="h2"
             variant="h6"
             gutterBottom
             sx={{

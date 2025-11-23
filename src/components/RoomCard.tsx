@@ -222,6 +222,8 @@ export default function RoomCard({ room }: RoomCardProps) {
               src={src}
               alt={`${room.title} фото ${index + 1}`}
               fill
+              quality={75}
+              loading={room.id <= 2 && index === 0 ? undefined : 'lazy'}
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={room.id <= 2 && index === 0}
@@ -266,7 +268,7 @@ export default function RoomCard({ room }: RoomCardProps) {
       </Box>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ minHeight: { xs: 'auto', sm: '72px' }, mb: 1 }}>
-          <Typography variant="h5" gutterBottom align="center">
+          <Typography component="h3" variant="h5" gutterBottom align="center">
             {room.title}
           </Typography>
         </Box>

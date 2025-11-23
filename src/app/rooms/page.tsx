@@ -34,7 +34,7 @@ export default function RoomsPage() {
         <RoomsList rooms={ROOMS} />
 
         <Box sx={{ mt: 6, p: 4, bgcolor: 'background.paper', borderRadius: 2 }}>
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography component="h2" variant="h5" align="center" gutterBottom>
             Наши удобства
           </Typography>
           <Grid container spacing={2} sx={{ mt: 2 }}>
