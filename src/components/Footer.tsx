@@ -26,7 +26,7 @@ export default function Footer() {
             <Container maxWidth="lg">
                 <Grid container spacing={4}>
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h6" gutterBottom color="inherit">
+                        <Typography variant="h6" component="p" gutterBottom color="inherit">
                             {SITE_CONFIG.name}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}} color="inherit">
@@ -35,7 +35,7 @@ export default function Footer() {
                     </Grid>
 
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h6" gutterBottom color="inherit">
+                        <Typography variant="h6" component="p" gutterBottom color="inherit">
                             Навигация
                         </Typography>
                         <Box sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
@@ -58,7 +58,7 @@ export default function Footer() {
                     </Grid>
 
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h6" gutterBottom color="inherit">
+                        <Typography variant="h6" component="p" gutterBottom color="inherit">
                             Контакты
                         </Typography>
                         <Box sx={{display: 'flex', flexDirection: 'column', gap: 1}}>

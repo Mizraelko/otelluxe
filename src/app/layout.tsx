@@ -3,10 +3,14 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { AppThemeProvider } from '@/contexts/ThemeContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Analytics from '@/components/Analytics';
+import dynamic from 'next/dynamic';
 import { CONTACTS } from '@/config/contacts';
 import { SEO_CONFIG } from '@/config/seo';
 import React from "react";
+
+const AnalyticsLoader = dynamic(() => import('@/components/AnalyticsLoader'), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: {
@@ -102,7 +106,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api-maps.yandex.ru" crossOrigin="anonymous" />
       </head>
       <body suppressHydrationWarning={true}>
-        <Analytics 
+        <AnalyticsLoader 
           googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}
           yandexMetrikaId={process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID}
         />
