@@ -52,7 +52,10 @@ const HEADER_STYLES = {
 export default function Header() {
   const { isDarkMode, toggleTheme } = useTheme();
   const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'), {
+    defaultMatches: false,
+    noSsr: true,
+  });
 
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null);
 

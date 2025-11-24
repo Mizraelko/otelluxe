@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, type TouchEvent } from 'react';
+import { useState, useEffect, useRef, type TouchEvent, type MouseEvent as ReactMouseEvent } from 'react';
 import { Card, CardContent, Typography, Button, Box, Chip, Grid, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -131,10 +131,52 @@ export default function RoomCard({ room }: RoomCardProps) {
   const totalImages = imageList.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const imageContainerRef = useRef<HTMLDivElement | null>(null);
+  const hoverMetricsRef = useRef({ width: 0 });
 
   useEffect(() => {
     setCurrentIndex(0);
   }, [totalImages]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const element = imageContainerRef.current;
+    if (!element) return;
+    const win: Window & typeof globalThis = window;
+
+    const updateMetrics = () => {
+      hoverMetricsRef.current.width = element.clientWidth;
+    };
+
+    updateMetrics();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const resizeObserver = new ResizeObserver(updateMetrics);
+      resizeObserver.observe(element);
+      return () => resizeObserver.disconnect();
+    }
+
+    win.addEventListener('resize', updateMetrics);
+    return () => win.removeEventListener('resize', updateMetrics);
+  }, [totalImages]);
+
+  const handleMouseMove = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!window.matchMedia('(pointer: fine)').matches || totalImages <= 1) return;
+
+    const storedWidth = hoverMetricsRef.current.width;
+    const width = storedWidth || event.currentTarget.clientWidth;
+    if (!width) {
+      return;
+    }
+
+    const relativeX = event.nativeEvent.offsetX;
+    const sectorWidth = width / totalImages;
+    const hoveredIndex = Math.min(totalImages - 1, Math.max(0, Math.floor(relativeX / sectorWidth)));
+
+    if (hoveredIndex !== currentIndex) {
+      setCurrentIndex(hoveredIndex);
+    }
+  };
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? totalImages - 1 : prev - 1));
@@ -177,6 +219,7 @@ export default function RoomCard({ room }: RoomCardProps) {
       }}
     >
       <Box
+        ref={imageContainerRef}
         sx={{ 
           position: 'relative', 
           width: '100%',
@@ -187,21 +230,7 @@ export default function RoomCard({ room }: RoomCardProps) {
         }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        onMouseMove={(event) => {
-          if (!window.matchMedia('(pointer: fine)').matches || totalImages <= 1) return;
-
-          const rect = event.currentTarget.getBoundingClientRect();
-          const relativeX = event.clientX - rect.left;
-          const sectorWidth = rect.width / totalImages;
-          const hoveredIndex = Math.min(
-            totalImages - 1,
-            Math.max(0, Math.floor(relativeX / sectorWidth))
-          );
-
-          if (hoveredIndex !== currentIndex) {
-            setCurrentIndex(hoveredIndex);
-          }
-        }}
+        onMouseMove={handleMouseMove}
         onMouseLeave={() => {
           if (totalImages > 1) {
             setCurrentIndex(0);
