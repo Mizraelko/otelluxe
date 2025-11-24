@@ -21,7 +21,7 @@ export default function Hero() {
         alt={`Фасад ${SITE_CONFIG.name} в Богородске`}
         fill
         priority
-        quality={75}
+        quality={70}
         sizes="100vw"
         style={{
           objectFit: 'cover',
