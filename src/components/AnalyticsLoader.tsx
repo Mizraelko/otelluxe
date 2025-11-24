@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Analytics from '@/components/Analytics';
 
 interface AnalyticsLoaderProps {
@@ -15,27 +15,35 @@ export default function AnalyticsLoader({
   googleAnalyticsId,
   yandexMetrikaId,
 }: AnalyticsLoaderProps) {
-  const router = useRouter();
+  const pathname = usePathname();
   const [enabled, setEnabled] = useState(false);
+  const initialPathRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (initialPathRef.current === null) {
+      initialPathRef.current = pathname;
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (enabled) {
       return;
     }
 
-    const enableAnalytics = () => {
-      setEnabled(true);
-      router.events?.off('routeChangeComplete', enableAnalytics);
-    };
+    const maybeEnable = () => setEnabled(true);
 
-    router.events?.on('routeChangeComplete', enableAnalytics);
-    const timeoutId = window.setTimeout(enableAnalytics, FALLBACK_DELAY_MS);
+    if (
+      initialPathRef.current !== null &&
+      pathname !== null &&
+      pathname !== initialPathRef.current
+    ) {
+      maybeEnable();
+      return;
+    }
 
-    return () => {
-      router.events?.off('routeChangeComplete', enableAnalytics);
-      window.clearTimeout(timeoutId);
-    };
-  }, [enabled, router.events]);
+    const timeoutId = window.setTimeout(maybeEnable, FALLBACK_DELAY_MS);
+    return () => window.clearTimeout(timeoutId);
+  }, [enabled, pathname]);
 
   if (!enabled) {
     return null;

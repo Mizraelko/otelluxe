@@ -22,7 +22,7 @@ export default function Hero() {
         fill
         priority
         quality={75}
-        sizes="(max-width: 768px) 100vw, (max-width: 1920px) 100vw, 1920px"
+        sizes="100vw"
         style={{
           objectFit: 'cover',
           filter: 'brightness(0.55)',
