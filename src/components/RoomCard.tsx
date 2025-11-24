@@ -164,13 +164,14 @@ export default function RoomCard({ room }: RoomCardProps) {
     if (!window.matchMedia('(pointer: fine)').matches || totalImages <= 1) return;
 
     const storedWidth = hoverMetricsRef.current.width;
-    const width = storedWidth || event.currentTarget.clientWidth;
-    if (!width) {
+    // Убираем fallback clientWidth - используем только кэшированное значение
+    // чтобы избежать принудительной компоновки
+    if (!storedWidth) {
       return;
     }
 
     const relativeX = event.nativeEvent.offsetX;
-    const sectorWidth = width / totalImages;
+    const sectorWidth = storedWidth / totalImages;
     const hoveredIndex = Math.min(totalImages - 1, Math.max(0, Math.floor(relativeX / sectorWidth)));
 
     if (hoveredIndex !== currentIndex) {
@@ -254,7 +255,7 @@ export default function RoomCard({ room }: RoomCardProps) {
               quality={55}
               loading={room.id <= 2 && index === 0 ? undefined : 'lazy'}
               style={{ objectFit: 'cover' }}
-              sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 900px) calc(50vw - 24px), (max-width: 1200px) calc(33vw - 32px), 500px"
+              sizes="(max-width: 600px) 380px, (max-width: 960px) 450px, 550px"
               priority={room.id <= 2 && index === 0}
             />
           </Box>

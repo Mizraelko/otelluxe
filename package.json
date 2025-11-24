@@ -37,6 +37,8 @@
     "Safari >= 15.4",
     "Edge >= 109",
     "iOS >= 15.4",
-    "Android >= 109"
+    "Android >= 109",
+    "not dead",
+    "not op_mini all"
   ]
 }
