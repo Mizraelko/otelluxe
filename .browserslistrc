@@ -9,12 +9,12 @@
 # - Object.hasOwn (Chrome 93, Firefox 92, Safari 15.4, Edge 93)
 # - String.prototype.trimStart/trimEnd (Chrome 66, Firefox 61, Safari 12, Edge 79)
 
-Chrome >= 92
-Firefox >= 90
-Safari >= 15
-Edge >= 92
-iOS >= 15
-Android >= 92
+Chrome >= 109
+Firefox >= 109
+Safari >= 15.4
+Edge >= 109
+iOS >= 15.4
+Android >= 109
 
 # Альтернативный вариант (более широкий охват, но все еще современные браузеры):
 # > 0.5%
