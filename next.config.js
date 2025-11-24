@@ -30,6 +30,43 @@ const nextConfig = {
     // Используем современный JavaScript без транспиляции для современных браузеров
     optimizePackageImports: ['@mui/material', '@mui/icons-material'],
   },
+  // Webpack конфигурация для оптимизации чанков
+  webpack: (config, { isServer, dev }) => {
+    if (!isServer && !dev) {
+      // Оптимизация для production клиентской сборки
+      config.optimization = {
+        ...config.optimization,
+        // Разбиваем большие чанки на более мелкие
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            // Отдельный чанк для MUI
+            mui: {
+              test: /[\\/]node_modules[\\/]@mui[\\/]/,
+              name: 'mui',
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+            // Отдельный чанк для иконок MUI
+            muiIcons: {
+              test: /[\\/]node_modules[\\/]@mui[\\/]icons-material[\\/]/,
+              name: 'mui-icons',
+              priority: 25,
+              reuseExistingChunk: true,
+            },
+            // Отдельный чанк для остальных vendor библиотек
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendor',
+              priority: 10,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      };
+    }
+    return config;
+  },
   async headers() {
     return [
       {

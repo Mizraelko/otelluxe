@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Grid } from '@mui/material';
 import RoomCard from './RoomCard';
 import RoomFilters from './RoomFilters';
-import StructuredData from './StructuredData';
 import { Room } from '@/types';
 
 interface RoomsListProps {
@@ -21,7 +20,6 @@ export default function RoomsList({ rooms }: RoomsListProps) {
       <Grid container spacing={4}>
         {filteredRooms.map((room) => (
           <Grid item xs={12} md={6} key={room.id}>
-            <StructuredData type="room" data={room} />
             <RoomCard room={room} />
           </Grid>
         ))}
