@@ -4,26 +4,26 @@ FROM node:20-alpine AS base
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json
+# Копируем package.json и package-lock.json для кэширования
 COPY package*.json ./
 
-# Устанавливаем зависимости
+# Устанавливаем зависимости (кэшируется если package.json не изменился)
 FROM base AS deps
-RUN npm ci --only=production
+RUN npm ci
 
 # Сборка приложения
 FROM base AS builder
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm ci
 RUN npm run build
 
 # Production образ
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Создаем непривилегированного пользователя
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Создаем непривилегированного пользователя (объединяем команды для уменьшения слоев)
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 
 # Копируем необходимые файлы
 COPY --from=builder /app/public ./public
