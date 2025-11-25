@@ -11,7 +11,6 @@ import {
   IconButton, 
   Menu,
   MenuItem,
-  useMediaQuery
 } from '@mui/material';
 import Link from 'next/link';
 import HotelIcon from '@mui/icons-material/Hotel';
@@ -21,7 +20,6 @@ import VKIcon from './VKIcon';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
 import { CONTACTS, SITE_CONFIG, VK_COLORS } from '@/config/contacts';
-import { useTheme as useMuiTheme } from '@mui/material/styles';
 
 const HEADER_STYLES = {
   logo: {
@@ -51,12 +49,6 @@ const HEADER_STYLES = {
 
 export default function Header() {
   const { isDarkMode, toggleTheme } = useTheme();
-  const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'), {
-    defaultMatches: false,
-    noSsr: true,
-  });
-
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null);
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -195,89 +187,94 @@ export default function Header() {
             
             <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
             
-            {/* Mobile Menu Button */}
-            {isMobile ? (
-              <>
-                <IconButton
-                  edge="end"
-                  color="inherit"
-                  aria-label="menu"
-                  onClick={handleMobileMenuOpen}
-                  sx={{ ml: 1 }}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  anchorEl={mobileMenuAnchor}
-                  open={Boolean(mobileMenuAnchor)}
-                  onClose={handleMobileMenuClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                >
-                  {navigationItems.map((item) => (
-                    <MenuItem 
-                      key={item.href}
-                      component={Link}
-                      href={item.href}
-                      onClick={handleMobileMenuClose}
-                      sx={{
-                        color: 'text.primary',
-                        '&:hover': {
-                          backgroundColor: 'primary.main',
-                          color: 'primary.contrastText',
-                        }
-                      }}
-                    >
-                      {item.label}
-                    </MenuItem>
-                  ))}
+            {/* Mobile Menu Button - показываем только на мобильных */}
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <IconButton
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleMobileMenuOpen}
+                sx={{ 
+                  ml: 1, 
+                  width: 48, 
+                  height: 48, 
+                  minWidth: 48,
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                anchorEl={mobileMenuAnchor}
+                open={Boolean(mobileMenuAnchor)}
+                onClose={handleMobileMenuClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                {navigationItems.map((item) => (
                   <MenuItem 
+                    key={item.href}
                     component={Link}
-                    href="/booking"
+                    href={item.href}
                     onClick={handleMobileMenuClose}
                     sx={{
-                      color: 'primary.main',
-                      fontWeight: 'bold',
+                      color: 'text.primary',
                       '&:hover': {
                         backgroundColor: 'primary.main',
                         color: 'primary.contrastText',
                       }
                     }}
                   >
-                    Забронировать
+                    {item.label}
                   </MenuItem>
-                </Menu>
-              </>
-            ) : (
-              <Button
-                variant="contained"
-                color="secondary"
-                component={Link}
-                href="/booking"
-                sx={{
-                  fontSize: { xs: '0.8rem', sm: '0.9rem', md: '0.8rem', lg: '0.9rem' },
-                  px: { xs: 2, sm: 3, md: 2, lg: 3 },
-                  py: 1,
-                  minWidth: { xs: 'auto', sm: 'auto', md: 'auto', lg: 'auto' },
-                  ...HEADER_STYLES.navigationButton,
-                  '&:hover': {
-                    boxShadow: 'none',
-                  },
-                  '&:focus': {
-                    boxShadow: 'none',
-                    outline: 'none',
-                  },
-                }}
-              >
-                Забронировать
-              </Button>
-            )}
+                ))}
+                <MenuItem 
+                  component={Link}
+                  href="/booking"
+                  onClick={handleMobileMenuClose}
+                  sx={{
+                    color: 'primary.main',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      backgroundColor: 'primary.main',
+                      color: 'primary.contrastText',
+                    }
+                  }}
+                >
+                  Забронировать
+                </MenuItem>
+              </Menu>
+            </Box>
+            
+            {/* Desktop Booking Button - показываем только на десктопе */}
+            <Button
+              variant="contained"
+              color="secondary"
+              component={Link}
+              href="/booking"
+              sx={{
+                display: { xs: 'none', md: 'block' },
+                fontSize: { xs: '0.8rem', sm: '0.9rem', md: '0.8rem', lg: '0.9rem' },
+                px: { xs: 2, sm: 3, md: 2, lg: 3 },
+                py: 1,
+                minWidth: { xs: 'auto', sm: 'auto', md: 'auto', lg: 'auto' },
+                ...HEADER_STYLES.navigationButton,
+                '&:hover': {
+                  boxShadow: 'none',
+                },
+                '&:focus': {
+                  boxShadow: 'none',
+                  outline: 'none',
+                },
+              }}
+            >
+              Забронировать
+            </Button>
           </Box>
           
         </Toolbar>
