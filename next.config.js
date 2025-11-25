@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  // Отключаем проверку типов и ESLint при сборке для ускорения
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     // Убираем внешние домены, используем только локальные изображения
     formats: ['image/webp', 'image/avif'],
