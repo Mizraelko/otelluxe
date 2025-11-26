@@ -5,6 +5,13 @@ services:
       dockerfile: Dockerfile
       args:
         BUILDKIT_INLINE_CACHE: 1
+    # Лимиты памяти для сборки и работы контейнера
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+        reservations:
+          memory: 4G
     container_name: otelluxe-web
     restart: unless-stopped
     ports:

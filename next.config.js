@@ -26,6 +26,8 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   trailingSlash: false,
+  // Отключаем source maps для production (экономит память при сборке)
+  productionBrowserSourceMaps: false,
   // Оптимизация транспиляции для современных браузеров
   // Убираем полифиллы для ES2021/ES2022 функций (Array.at, Object.hasOwn и т.д.)
   compiler: {
@@ -40,6 +42,9 @@ const nextConfig = {
   // Webpack конфигурация для оптимизации чанков
   webpack: (config, { isServer, dev }) => {
     if (!isServer && !dev) {
+      // Уменьшаем параллелизм для экономии памяти
+      config.parallelism = 1;
+      
       // Оптимизация для production клиентской сборки
       config.optimization = {
         ...config.optimization,

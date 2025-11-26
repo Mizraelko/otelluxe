@@ -15,8 +15,10 @@ RUN npm ci
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# Увеличиваем память для Node.js для ускорения сборки
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+# Оптимизированные настройки памяти и сборки
+ENV NODE_OPTIONS="--max-old-space-size=3072"
+ENV GENERATE_SOURCEMAP=false
+ENV NODE_ENV=production
 RUN npm run build
 
 # Production образ
