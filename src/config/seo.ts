@@ -202,9 +202,15 @@ export const buildPageMetadata = (page: PageKey): Metadata => {
     ...new Set([...baseKeywords, ...pageConfig.keywords]) // Убираем дубликаты
   ];
 
+  // Убеждаемся, что title и description всегда присутствуют и не пустые
+  const pageTitle = pageConfig.title?.trim() || SEO_CONFIG.site.name;
+  const pageDescription = pageConfig.description?.trim() || SEO_CONFIG.site.description;
+
   return {
-    title: pageConfig.title,
-    description: pageConfig.description,
+    // Используем полный title для каждой страницы (без template, так как он убран из layout)
+    title: pageTitle,
+    // Явно указываем description для каждой страницы
+    description: pageDescription,
     keywords: combinedKeywords,
     authors: [{ name: SEO_CONFIG.site.name }],
     creator: SEO_CONFIG.site.name,

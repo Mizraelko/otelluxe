@@ -11,6 +11,7 @@
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
     "check": "npm run type-check && npm run lint",
+    "check:metadata": "node scripts/check-metadata.js",
     "sitemap": "next-sitemap"
   },
   "dependencies": {

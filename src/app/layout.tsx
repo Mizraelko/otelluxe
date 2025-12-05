@@ -13,10 +13,8 @@ const AnalyticsLoader = dynamic(() => import('@/components/AnalyticsLoader'), {
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Отель "Люкс" Богородск',
-    template: '%s | Отель "Люкс" Богородск',
-  },
+  // Используем простой title без template, так как каждая страница имеет свой полный title
+  title: SEO_CONFIG.site.name,
   description: SEO_CONFIG.site.description,
   keywords: [...SEO_CONFIG.site.keywords],
   authors: [{ name: SEO_CONFIG.site.name }],
