@@ -36,6 +36,7 @@ const BED_TYPES = [
 
 // Опции сортировки
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: 'default', label: 'По умолчанию' },
   { value: 'price-asc', label: 'Цена: по возрастанию' },
   { value: 'price-desc', label: 'Цена: по убыванию' },
   { value: 'area-asc', label: 'Площадь: по возрастанию' },
@@ -56,7 +57,7 @@ const CATEGORIES: { value: RoomCategory; label: string }[] = [
 export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFiltersProps) {
   const theme = useTheme();
   const [category, setCategory] = useState<RoomCategory>('Все');
-  const [sortOption, setSortOption] = useState<SortOption>('price-asc');
+  const [sortOption, setSortOption] = useState<SortOption>('default');
   const [selectedBedTypes, setSelectedBedTypes] = useState<string[]>([]);
   const [includeGroupRooms, setIncludeGroupRooms] = useState<boolean>(false);
 

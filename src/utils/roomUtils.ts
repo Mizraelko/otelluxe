@@ -3,6 +3,7 @@ import { Room } from '@/types';
 export type RoomCategory = 'Все' | 'Стандарт' | 'Комфорт' | 'Люкс' | 'Апартаменты';
 
 export type SortOption = 
+  | 'default'
   | 'price-asc' 
   | 'price-desc' 
   | 'area-asc' 
@@ -90,6 +91,9 @@ export function sortRooms(rooms: Room[], sortOption: SortOption): Room[] {
   const sorted = [...rooms];
   
   switch (sortOption) {
+    case 'default':
+      // Возвращаем исходный порядок без сортировки
+      return sorted;
     case 'price-asc':
       return sorted.sort((a, b) => Number(a.price) - Number(b.price));
     case 'price-desc':
