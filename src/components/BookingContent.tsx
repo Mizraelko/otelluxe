@@ -5,6 +5,7 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { CONTACTS } from '@/config/contacts';
+import { ICON_COLORS } from '@/config/iconColors';
 
 export default function BookingContent() {
   return (
@@ -39,7 +40,7 @@ export default function BookingContent() {
               <PhoneInTalkIcon
                 sx={{
                   fontSize: 80,
-                  color: 'secondary.main',
+                  color: ICON_COLORS.phone,
                   animation: 'pulse 2s ease-in-out infinite',
                   '@keyframes pulse': {
                     '0%, 100%': { opacity: 1 },
@@ -85,7 +86,7 @@ export default function BookingContent() {
                 flexWrap: 'wrap',
               }}
             >
-              <AccessTimeIcon sx={{ fontSize: 32, color: 'secondary.main' }} />
+              <AccessTimeIcon sx={{ fontSize: 32, color: ICON_COLORS.time }} />
               <Typography
                 component="h3"
                 variant="h6"
@@ -162,7 +163,7 @@ export default function BookingContent() {
             ℹ️ Информация о бронировании
           </Typography>
           <Typography variant="body1" paragraph sx={{ mb: 1.5 }}>
-            • Заселение после 00:00, выезд до 00:00
+            • {CONTACTS.stayHours.bookingLine}
           </Typography>
           <Typography variant="body1">• При раннем заезде или позднем выезде возможна доплата</Typography>
         </Box>

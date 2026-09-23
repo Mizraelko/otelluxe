@@ -4,6 +4,7 @@ import { Box, Breadcrumbs as MuiBreadcrumbs, Link, Typography } from '@mui/mater
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import HomeIcon from '@mui/icons-material/Home';
 import NextLink from 'next/link';
+import { ICON_COLORS } from '@/config/iconColors';
 
 interface BreadcrumbItem {
   label: string;
@@ -42,7 +43,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
             }
           }}
         >
-          <HomeIcon sx={{ mr: 0.5, fontSize: 16 }} />
+          <HomeIcon sx={{ mr: 0.5, fontSize: 16, color: ICON_COLORS.home }} />
           Главная
         </Link>
         

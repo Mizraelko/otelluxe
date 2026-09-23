@@ -5,22 +5,23 @@ import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import StructuredData from '@/components/StructuredData';
 import { buildPageMetadata } from '@/config/seo';
+import { ICON_COLORS } from '@/config/iconColors';
 
 export const metadata = buildPageMetadata('services');
 
 const services = [
   {
-    icon: <LocalParkingIcon sx={{ fontSize: 48 }} />,
+    icon: <LocalParkingIcon sx={{ fontSize: 48, color: ICON_COLORS.parking }} />,
     title: 'Парковка',
     description: 'Бесплатная охраняемая парковка для гостей отеля. Видеонаблюдение 24/7. Вместимость до 50 автомобилей.',
   },
   {
-    icon: <BusinessCenterIcon sx={{ fontSize: 48 }} />,
+    icon: <BusinessCenterIcon sx={{ fontSize: 48, color: ICON_COLORS.business }} />,
     title: 'Бизнес-центр',
     description: 'Услуги печати, копирования, сканирования. Рабочие места с компьютерами и быстрым интернетом.',
   },
   {
-    icon: <AirportShuttleIcon sx={{ fontSize: 48 }} />,
+    icon: <AirportShuttleIcon sx={{ fontSize: 48, color: ICON_COLORS.transfer }} />,
     title: 'Трансфер',
     description: 'Трансфер до/от вокзала и аэропорта. Услуга предоставляется по предварительной договоренности.',
   },
@@ -49,11 +50,11 @@ export default function ServicesPage() {
           Мы предлагаем широкий спектр услуг для комфортного проживания наших гостей
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent="center">
           {services.map((service, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
               <Card sx={{ height: '100%', textAlign: 'center', p: 2, transition: 'transform 0.2s' }}>
-                <Box sx={{ color: 'primary.main', mb: 2 }}>
+                <Box sx={{ mb: 2 }}>
                   {service.icon}
                 </Box>
                 <CardContent>

@@ -7,10 +7,11 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import VKIcon from './VKIcon';
 import { CONTACTS, SITE_CONFIG, VK_COLORS } from '@/config/contacts';
+import { ICON_COLORS } from '@/config/iconColors';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Footer() {
-    const { isDarkMode } = useTheme();
+    const { isDarkMode, mounted } = useTheme();
     return (
         <Box
             component="footer"
@@ -38,7 +39,14 @@ export default function Footer() {
                         <Typography variant="h6" component="p" gutterBottom color="inherit">
                             Навигация
                         </Typography>
-                        <Box sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                                columnGap: 2,
+                                rowGap: 1,
+                            }}
+                        >
                             <MuiLink component={Link} href="/" color="inherit" underline="hover">
                                 Главная
                             </MuiLink>
@@ -61,34 +69,44 @@ export default function Footer() {
                         <Typography variant="h6" component="p" gutterBottom color="inherit">
                             Контакты
                         </Typography>
-                        <Box sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
-                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                                <PhoneIcon fontSize="small" sx={{ color: 'inherit' }}/>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                                columnGap: 2,
+                                rowGap: 1,
+                                alignItems: 'start',
+                            }}
+                        >
+                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, minWidth: 0}}>
+                                <PhoneIcon fontSize="small" sx={{ color: ICON_COLORS.phone, flexShrink: 0 }}/>
                                 <MuiLink
                                     href={CONTACTS.phone.link}
                                     color="inherit"
                                     underline="hover"
-                                    sx={{textDecoration: 'none'}}
+                                    sx={{textDecoration: 'none', minWidth: 0}}
                                 >
-                                    <Typography variant="body2" color="inherit">{CONTACTS.phone.display}</Typography>
+                                    <Typography variant="body2" color="inherit" noWrap>{CONTACTS.phone.display}</Typography>
                                 </MuiLink>
                             </Box>
-                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                                <EmailIcon fontSize="small" sx={{ color: 'inherit' }}/>
+                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, minWidth: 0}}>
+                                <EmailIcon fontSize="small" sx={{ color: ICON_COLORS.email, flexShrink: 0 }}/>
                                 <MuiLink
                                     href={CONTACTS.email.link}
                                     color="inherit"
                                     underline="hover"
                                     sx={{textDecoration: 'none'}}
                                 >
-                                    <Typography variant="body2" color="inherit">{CONTACTS.email.display}</Typography>
+                                    <Typography variant="body2" color="inherit" noWrap>
+                                        {CONTACTS.email.display}
+                                    </Typography>
                                 </MuiLink>
                             </Box>
-                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                                <LocationOnIcon fontSize="small" sx={{ color: 'inherit' }}/>
+                            <Box sx={{display: 'flex', alignItems: 'flex-start', gap: 1, gridColumn: '1 / -1'}}>
+                                <LocationOnIcon fontSize="small" sx={{ color: ICON_COLORS.location, flexShrink: 0, mt: 0.25 }}/>
                                 <Typography variant="body2" color="inherit">{CONTACTS.address.full}</Typography>
                             </Box>
-                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mt: 2}}>
+                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', gridColumn: '1 / -1', mt: 1}}>
                                 <Typography variant="body2" color="inherit">Мы в соцсетях:</Typography>
                                 <IconButton
                                         component={Link}
@@ -114,6 +132,7 @@ export default function Footer() {
                                     >
                                         <VKIcon/>
                                     </IconButton>
+                                {mounted ? (
                                 <Box
                                     component="iframe"
                                     src={
@@ -130,6 +149,9 @@ export default function Footer() {
                                     loading="lazy"
                                     title="Рейтинг отеля на Яндексе"
                                 />
+                                ) : (
+                                <Box sx={{ width: 150, height: 50, ml: 1 }} />
+                                )}
                             </Box>
                         </Box>
                     </Grid>

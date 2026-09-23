@@ -19,6 +19,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CloseIcon from '@mui/icons-material/Close';
 import { Room } from '@/types';
+import { ICON_COLORS } from '@/config/iconColors';
 import { RoomCategory, SortOption, filterRoomsByCategory, filterRoomsByBedTypes, filterRoomsByGroupAccommodation, sortRooms } from '@/utils/roomUtils';
 
 interface RoomFiltersProps {
@@ -158,6 +159,12 @@ export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFilter
     },
   };
 
+  const chipIconColor = (color: string) => ({
+    '& .MuiChip-icon': {
+      color,
+    },
+  });
+
   const selectedChipStyle = {
     ...chipStyle,
     bgcolor: `${theme.palette.primary.main}15`,
@@ -187,13 +194,13 @@ export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFilter
       >
         {/* Сортировка - слева */}
         <Chip
-          icon={<SortIcon sx={{ fontSize: 18 }} />}
+          icon={<SortIcon sx={{ fontSize: 18, color: ICON_COLORS.sort }} />}
           label={getSortLabel()}
           deleteIcon={<KeyboardArrowDownIcon sx={{ fontSize: 18 }} />}
           onDelete={handleSortClick}
           onClick={handleSortClick}
           variant="outlined"
-          sx={chipStyle}
+          sx={{ ...chipStyle, ...chipIconColor(ICON_COLORS.sort) }}
         />
 
         {/* Фильтры - справа */}
@@ -201,7 +208,7 @@ export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFilter
           {/* Категория */}
           {category !== 'Все' ? (
             <Chip
-              icon={<CategoryIcon sx={{ fontSize: 18 }} />}
+              icon={<CategoryIcon sx={{ fontSize: 18, color: ICON_COLORS.category }} />}
               label={`Категория: ${category}`}
               deleteIcon={<CloseIcon sx={{ fontSize: 16 }} />}
               onDelete={(e) => {
@@ -210,24 +217,24 @@ export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFilter
               }}
               onClick={handleCategoryClick}
               variant="outlined"
-              sx={selectedChipStyle}
+              sx={{ ...selectedChipStyle, ...chipIconColor(ICON_COLORS.category) }}
             />
           ) : (
             <Chip
-              icon={<CategoryIcon sx={{ fontSize: 18 }} />}
+              icon={<CategoryIcon sx={{ fontSize: 18, color: ICON_COLORS.category }} />}
               label="Категория"
               deleteIcon={<KeyboardArrowDownIcon sx={{ fontSize: 18 }} />}
               onDelete={handleCategoryClick}
               onClick={handleCategoryClick}
               variant="outlined"
-              sx={chipStyle}
+              sx={{ ...chipStyle, ...chipIconColor(ICON_COLORS.category) }}
             />
           )}
 
           {/* Тип кровати - одна плашка с выпадающим списком */}
           <Box ref={bedTypeButtonRef} sx={{ display: 'inline-flex' }}>
             <Chip
-              icon={<BedIcon sx={{ fontSize: 18 }} />}
+              icon={<BedIcon sx={{ fontSize: 18, color: ICON_COLORS.bed }} />}
               label={
                 (() => {
                   if (selectedBedTypes.length === 0) {
@@ -257,28 +264,31 @@ export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFilter
               }
               onClick={handleBedTypeClick}
               variant="outlined"
-              sx={selectedBedTypes.length > 0 ? selectedChipStyle : chipStyle}
+              sx={{
+                ...(selectedBedTypes.length > 0 ? selectedChipStyle : chipStyle),
+                ...chipIconColor(ICON_COLORS.bed),
+              }}
             />
           </Box>
 
           {/* Групповые размещения */}
           {includeGroupRooms ? (
             <Chip
-              icon={<GroupIcon sx={{ fontSize: 18 }} />}
+              icon={<GroupIcon sx={{ fontSize: 18, color: ICON_COLORS.people }} />}
               label="Комнаты групповых размещений"
               deleteIcon={<CloseIcon sx={{ fontSize: 16 }} />}
               onDelete={handleGroupRoomsRemove}
               onClick={handleGroupRoomsToggle}
               variant="outlined"
-              sx={selectedChipStyle}
+              sx={{ ...selectedChipStyle, ...chipIconColor(ICON_COLORS.people) }}
             />
           ) : (
             <Chip
-              icon={<GroupIcon sx={{ fontSize: 18 }} />}
+              icon={<GroupIcon sx={{ fontSize: 18, color: ICON_COLORS.people }} />}
               label="Комнаты групповых размещений"
               onClick={handleGroupRoomsToggle}
               variant="outlined"
-              sx={chipStyle}
+              sx={{ ...chipStyle, ...chipIconColor(ICON_COLORS.people) }}
             />
           )}
         </Box>
@@ -409,7 +419,7 @@ export default function RoomFilters({ rooms, onFilteredRoomsChange }: RoomFilter
                   handleBedTypeSelect(bedType.key);
                 }}
               />
-              <IconComponent sx={{ fontSize: 18, mr: 1.5, color: isSelected ? 'primary.main' : 'text.secondary' }} />
+              <IconComponent sx={{ fontSize: 18, mr: 1.5, color: ICON_COLORS.bed }} />
               <Typography 
                 flex={1}
                 sx={{ 

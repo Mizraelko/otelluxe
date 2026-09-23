@@ -37,7 +37,7 @@ const nextConfig = {
   // Экспериментальные функции для оптимизации
   experimental: {
     // Используем современный JavaScript без транспиляции для современных браузеров
-    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+    optimizePackageImports: ['@mui/material'],
   },
   // Webpack конфигурация для оптимизации чанков
   webpack: (config, { isServer, dev }) => {

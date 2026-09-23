@@ -1,20 +1,10 @@
 import type { Metadata } from 'next';
 import { Container, Box, Typography } from '@mui/material';
-import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
+import RoomsList from '@/components/RoomsList';
 import StructuredData from '@/components/StructuredData';
 import { ROOMS } from '@/config/rooms';
 import { buildPageMetadata } from '@/config/seo';
-
-// Отложенная загрузка RoomsList для уменьшения начального бандла
-const RoomsList = dynamic(() => import('@/components/RoomsList'), {
-  loading: () => (
-    <Box sx={{ py: 4, textAlign: 'center' }}>
-      <Typography variant="body1">Загрузка номеров...</Typography>
-    </Box>
-  ),
-  ssr: true, // Оставляем SSR для SEO
-});
 
 export const metadata: Metadata = buildPageMetadata('home');
 

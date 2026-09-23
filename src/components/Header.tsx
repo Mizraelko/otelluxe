@@ -20,13 +20,9 @@ import VKIcon from './VKIcon';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
 import { CONTACTS, SITE_CONFIG, VK_COLORS } from '@/config/contacts';
+import { ICON_COLORS } from '@/config/iconColors';
 
 const HEADER_STYLES = {
-  logo: {
-    fontWeight: 700,
-    fontSize: '1.6rem',
-    flexGrow: { xs: 1, md: 0 },
-  },
   navigationButton: {
     border: 'none',
     outline: 'none',
@@ -38,17 +34,10 @@ const HEADER_STYLES = {
     outline: 'none',
     boxShadow: 'none',
   },
-  phoneInfo: {
-    fontSize: { xs: '0.6rem', lg: '0.65rem' },
-    lineHeight: 1.1,
-    textAlign: 'center' as const,
-    wordBreak: 'break-word' as const,
-    transition: 'color 0.3s ease-in-out',
-  },
 } as const;
 
 export default function Header() {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode, themeMode, mounted, toggleTheme } = useTheme();
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState<null | HTMLElement>(null);
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -76,13 +65,22 @@ export default function Header() {
         boxShadow: (theme) => theme.palette.header.shadow,
       }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
-        <Toolbar disableGutters>
-          <Box sx={{ display: 'flex', alignItems: 'center', mr: 4 }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 1.5, sm: 2, lg: 3 } }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            minHeight: 64,
+            height: 64,
+            gap: { xs: 0.75, sm: 1, lg: 2 },
+            flexWrap: 'nowrap',
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
             <HotelIcon sx={{ 
-              mr: 1, 
-              fontSize: 36, 
-              color: 'primary.main'
+              mr: { xs: 0.5, sm: 1 }, 
+              fontSize: { xs: 22, sm: 28, lg: 36 }, 
+              color: ICON_COLORS.hotel,
+              flexShrink: 0,
             }} />
             <Link
               href="/"
@@ -95,8 +93,10 @@ export default function Header() {
                 component="div"
                 variant="h6"
                 sx={{
-                  ...HEADER_STYLES.logo,
+                  fontWeight: 700,
+                  fontSize: { xs: '0.82rem', sm: '1.15rem', md: '1.25rem', lg: '1.5rem' },
                   color: 'primary.main',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {SITE_CONFIG.name}
@@ -104,8 +104,7 @@ export default function Header() {
             </Link>
           </Box>
           
-          {/* Desktop Navigation */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', lg: 'flex' }, gap: { lg: 1, xl: 2 }, minWidth: 0 }}>
             {navigationItems.map((item) => (
               <Button 
                 key={item.href}
@@ -114,6 +113,8 @@ export default function Header() {
                 sx={{ 
                   color: (theme) => theme.palette.header.text,
                   ...HEADER_STYLES.navigationButton,
+                  px: { lg: 1, xl: 2 },
+                  minWidth: 0,
                   '&:hover': {
                     backgroundColor: (theme) => theme.palette.header.hoverBackground,
                     boxShadow: 'none',
@@ -129,13 +130,72 @@ export default function Header() {
             ))}
           </Box>
 
+          <Box sx={{ flexGrow: { xs: 1, lg: 0 } }} />
+
           <Box sx={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: { xs: 0.5, sm: 1, md: 0.5, lg: 1 },
-            flexWrap: 'nowrap'
+            gap: { xs: 0.25, sm: 0.75, lg: 1 },
+            flexWrap: 'nowrap',
+            flexShrink: 0,
+            minWidth: 0,
           }}>
-            {/* VK Link */}
+            <Box
+              component="a"
+              href={CONTACTS.phone.link}
+              aria-label={`Круглосуточная стойка администрации ${CONTACTS.phone.display}`}
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'row', xl: 'column' },
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: { xs: 0.5, xl: 0.25 },
+                textDecoration: 'none',
+                color: 'inherit',
+                flexShrink: 0,
+                px: { xs: 0.5, sm: 1 },
+                py: 0.25,
+                borderRadius: 1,
+                '&:hover': {
+                  backgroundColor: (theme) => theme.palette.header.hoverBackground,
+                },
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{
+                  display: { xs: 'none', sm: 'inline' },
+                  color: '#ff4444',
+                  fontWeight: 600,
+                  lineHeight: 1.2,
+                  whiteSpace: 'nowrap',
+                  fontSize: { sm: '0.65rem', lg: '0.7rem' },
+                }}
+              >
+                <Box component="span" sx={{ display: { xs: 'none', sm: 'inline', xl: 'none' } }}>
+                  24/7
+                </Box>
+                <Box component="span" sx={{ display: { xs: 'none', xl: 'inline' } }}>
+                  Круглосуточно
+                </Box>
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 0.4,
+                  fontWeight: 700,
+                  fontSize: { xs: '0.72rem', sm: '0.78rem', lg: '0.85rem' },
+                  color: (theme) => theme.palette.header.text,
+                  whiteSpace: 'nowrap',
+                  lineHeight: 1.2,
+                }}
+              >
+                <PhoneIcon sx={{ fontSize: { xs: 16, sm: 18 }, color: ICON_COLORS.phone }} />
+                {CONTACTS.phone.display}
+              </Box>
+            </Box>
+
             <IconButton
               component={Link}
               href={CONTACTS.social.vk.url}
@@ -143,7 +203,7 @@ export default function Header() {
               rel="noopener noreferrer"
               sx={{
                 ...HEADER_STYLES.vkButton,
-                size: { xs: 'small', sm: 'medium', md: 'small', lg: 'medium' },
+                display: { xs: 'none', sm: 'inline-flex' },
                 '&:hover': {
                   backgroundColor: VK_COLORS.hoverBackground,
                   color: VK_COLORS.hover,
@@ -167,38 +227,47 @@ export default function Header() {
               <VKIcon />
             </IconButton>
             
-            {/* Yandex Rating Badge */}
-            <Box
-              component="iframe"
-              src={
-                isDarkMode
-                  ? 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating&theme=dark'
-                  : 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating'
-              }
-              width={150}
-              height={50}
-              sx={{
-                border: 0,
-                display: { xs: 'none', sm: 'block' },
-              }}
-              loading="lazy"
-              title="Рейтинг отеля на Яндексе"
-            />
+            {mounted ? (
+              <Box
+                component="iframe"
+                src={
+                  isDarkMode
+                    ? 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating&theme=dark'
+                    : 'https://yandex.ru/sprav/widget/rating-badge/1742070480?type=rating'
+                }
+                width={150}
+                height={50}
+                sx={{
+                  border: 0,
+                  display: { xs: 'none', lg: 'block' },
+                  flexShrink: 0,
+                }}
+                loading="lazy"
+                title="Рейтинг отеля на Яндексе"
+              />
+            ) : (
+              <Box
+                sx={{
+                  width: 150,
+                  height: 50,
+                  display: { xs: 'none', lg: 'block' },
+                  flexShrink: 0,
+                }}
+              />
+            )}
             
-            <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
+            <ThemeToggle isDarkMode={isDarkMode} themeMode={themeMode} onToggle={toggleTheme} />
             
-            {/* Mobile Menu Button - показываем только на мобильных */}
-            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <Box sx={{ display: { xs: 'flex', lg: 'none' } }}>
               <IconButton
                 edge="end"
                 color="inherit"
                 aria-label="menu"
                 onClick={handleMobileMenuOpen}
                 sx={{ 
-                  ml: 1, 
-                  width: 48, 
-                  height: 48, 
-                  minWidth: 48,
+                  width: { xs: 40, sm: 48 }, 
+                  height: { xs: 40, sm: 48 }, 
+                  minWidth: { xs: 40, sm: 48 },
                 }}
               >
                 <MenuIcon />
@@ -235,6 +304,16 @@ export default function Header() {
                 ))}
                 <MenuItem 
                   component={Link}
+                  href={CONTACTS.social.vk.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleMobileMenuClose}
+                  sx={{ display: { xs: 'flex', sm: 'none' } }}
+                >
+                  {CONTACTS.social.vk.name}
+                </MenuItem>
+                <MenuItem 
+                  component={Link}
                   href="/booking"
                   onClick={handleMobileMenuClose}
                   sx={{
@@ -251,18 +330,18 @@ export default function Header() {
               </Menu>
             </Box>
             
-            {/* Desktop Booking Button - показываем только на десктопе */}
             <Button
               variant="contained"
               color="secondary"
               component={Link}
               href="/booking"
               sx={{
-                display: { xs: 'none', md: 'block' },
-                fontSize: { xs: '0.8rem', sm: '0.9rem', md: '0.8rem', lg: '0.9rem' },
-                px: { xs: 2, sm: 3, md: 2, lg: 3 },
+                display: { xs: 'none', lg: 'inline-flex' },
+                fontSize: { lg: '0.85rem', xl: '0.9rem' },
+                px: { lg: 2, xl: 3 },
                 py: 1,
-                minWidth: { xs: 'auto', sm: 'auto', md: 'auto', lg: 'auto' },
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
                 ...HEADER_STYLES.navigationButton,
                 '&:hover': {
                   boxShadow: 'none',
@@ -276,61 +355,8 @@ export default function Header() {
               Забронировать
             </Button>
           </Box>
-          
         </Toolbar>
       </Container>
-
-      {/* 24/7 Reception Phone - Responsive */}
-      <Box 
-        sx={{ 
-          position: 'absolute',
-          top: 4,
-          right: { xs: 8, sm: 16 },
-          display: { xs: 'none', md: 'none', xl: 'flex' },
-          flexDirection: 'column',
-          alignItems: 'center',
-          zIndex: 10,
-          px: 1,
-          py: 0.5,
-          maxWidth: { xs: '120px', lg: '150px' },
-        }}
-      >
-        <Typography 
-          variant="caption" 
-          sx={{ 
-            ...HEADER_STYLES.phoneInfo,
-            color: (theme) => theme.palette.header.text,
-          }}
-        >
-          <Box component="span" sx={{ color: '#ff4444', fontWeight: 600 }}>
-            Круглосуточно
-          </Box>
-          {' '}стойка администрации
-        </Typography>
-        <Box
-          component="a"
-          href={CONTACTS.phone.link}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 0.3,
-            fontSize: { xs: '0.7rem', lg: '0.8rem' },
-            fontWeight: 700,
-            color: (theme) => theme.palette.header.text,
-            textDecoration: 'none',
-            transition: 'color 0.3s ease-in-out',
-            mt: 1,
-            '&:hover': {
-              color: 'secondary.light',
-            }
-          }}
-        >
-          <PhoneIcon sx={{ fontSize: { xs: '0.6rem', lg: '0.7rem' } }} />
-          {CONTACTS.phone.display}
-        </Box>
-      </Box>
     </AppBar>
   );
 }
-
-

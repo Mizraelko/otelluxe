@@ -10,6 +10,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import YandexMap from '@/components/YandexMap';
 import StructuredData from '@/components/StructuredData';
 import { CONTACTS, VK_COLORS } from '@/config/contacts';
+import { ICON_COLORS } from '@/config/iconColors';
 import { buildPageMetadata } from '@/config/seo';
 
 export const metadata = buildPageMetadata('contacts');
@@ -27,7 +28,7 @@ export default function ContactsPage() {
   const faqItems = [
     {
       question: 'Во сколько время заезда и выезда?',
-      answer: 'Заселение доступно после 00:00, выезд — до 00:00. По предварительному согласованию возможен ранний заезд или поздний выезд.',
+      answer: CONTACTS.stayHours.faqAnswer,
     },
     {
       question: 'Есть ли парковка для гостей?',
@@ -85,10 +86,10 @@ export default function ContactsPage() {
           Мы всегда рады ответить на ваши вопросы и помочь с бронированием
         </Typography>
 
-        <Grid container spacing={4} sx={{ mb: 6 }}>
+        <Grid container spacing={4} justifyContent="center" sx={{ mb: 6 }}>
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', textAlign: 'center', p: 3 }}>
-              <PhoneIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
+              <PhoneIcon sx={{ fontSize: 48, color: ICON_COLORS.phone, mb: 2 }} />
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Телефон
@@ -113,7 +114,7 @@ export default function ContactsPage() {
 
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', textAlign: 'center', p: 3 }}>
-              <EmailIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
+              <EmailIcon sx={{ fontSize: 48, color: ICON_COLORS.email, mb: 2 }} />
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Email
@@ -138,7 +139,7 @@ export default function ContactsPage() {
 
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', textAlign: 'center', p: 3 }}>
-              <LocationOnIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
+              <LocationOnIcon sx={{ fontSize: 48, color: ICON_COLORS.location, mb: 2 }} />
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Адрес
@@ -155,7 +156,7 @@ export default function ContactsPage() {
 
           <Grid item xs={12} md={6} lg={3}>
             <Card sx={{ height: '100%', textAlign: 'center', p: 3 }}>
-              <AccessTimeIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
+              <AccessTimeIcon sx={{ fontSize: 48, color: ICON_COLORS.time, mb: 2 }} />
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Режим работы
@@ -164,7 +165,7 @@ export default function ContactsPage() {
                   Круглосуточно
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  Заезд после 00:00, Выезд до 00:00
+                  {CONTACTS.stayHours.cardLine}
                 </Typography>
               </CardContent>
             </Card>
@@ -222,7 +223,7 @@ export default function ContactsPage() {
               href="https://yandex.ru/maps/20036/bogorodsk/?ll=43.520823%2C56.106022&mode=routes&rtext=~56.106022%2C43.520823&rtt=auto&ruri=~&z=17"
               target="_blank"
               rel="noopener noreferrer"
-              startIcon={<AltRouteIcon />}
+              startIcon={<AltRouteIcon sx={{ color: ICON_COLORS.route }} />}
               sx={{
                 borderRadius: 999,
                 bgcolor: 'background.paper',

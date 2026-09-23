@@ -35,80 +35,137 @@ import IronIcon from '@mui/icons-material/Iron';
 import MicrowaveIcon from '@mui/icons-material/Microwave';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Room } from '@/types';
+import { ICON_COLORS } from '@/config/iconColors';
 
 interface RoomCardProps {
   room: Room;
 }
 
-const getAmenityIcon = (amenity: string) => {
-  const iconProps = { sx: { fontSize: 16 } };
-  
+const getAmenityColor = (amenity: string): string => {
   switch (amenity.toLowerCase()) {
     case 'wi-fi':
     case 'wifi':
-      return <WifiIcon {...iconProps} />;
+      return ICON_COLORS.wifi;
     case 'телевидение':
     case 'телевизор':
-      return <TvIcon {...iconProps} />;
     case 'телевизор по запросу':
-      return <LiveTvIcon {...iconProps} />;
+      return ICON_COLORS.tv;
     case 'кондиционер':
-      return <AcUnitIcon {...iconProps} />;
+    case 'фен':
+      return ICON_COLORS.ac;
     case 'сейф':
-      return <SecurityIcon {...iconProps} />;
+      return ICON_COLORS.safe;
     case 'мини-бар':
     case 'мини-холодильник':
-      return <LocalBarIcon {...iconProps} />;
+      return ICON_COLORS.bar;
     case 'джакузи':
-      return <HotTubIcon {...iconProps} />;
+    case 'раздельный санузел':
+    case 'санузел':
+    case 'душевая кабина':
+    case 'душевая':
+    case 'банные принадлежности':
+    case 'бутилированная вода':
+    case 'кулер с водой':
+      return ICON_COLORS.bath;
     case 'курить можно':
-      return <SmokeFreeIcon {...iconProps} />;
+      return ICON_COLORS.smoke;
     case 'детская кроватка':
-      return <ChildCareIcon {...iconProps} />;
+      return ICON_COLORS.child;
     case 'частная кухня':
-      return <RestaurantMenuIcon {...iconProps} />;
     case 'кухонные принадлежности':
-      return <SoupKitchenIcon {...iconProps} />;
     case 'кухня':
-      return <KitchenIcon {...iconProps} />;
-    case 'электроплита':
-      return <ElectricBoltIcon {...iconProps} />;
-    case 'утюг и гладильная доска':
-      return <IronIcon {...iconProps} />;
-    case 'стиральная машина':
-      return <LocalLaundryServiceIcon {...iconProps} />;
     case 'микроволновая печь':
-      return <MicrowaveIcon {...iconProps} />;
+    case 'чайный набор':
+    case 'холодильник':
+      return ICON_COLORS.kitchen;
+    case 'электроплита':
+      return ICON_COLORS.power;
+    case 'утюг и гладильная доска':
+      return ICON_COLORS.iron;
+    case 'стиральная машина':
+      return ICON_COLORS.laundry;
     case 'две односпальные кровати':
     case 'три односпальные кровати':
     case 'дополнительная односпальная кровать':
-      return <SingleBedIcon {...iconProps} />;
     case 'одна двуспальная кровать':
-      return <BedIcon {...iconProps} />;
     case 'постельные принадлежности':
-      return <BedIcon {...iconProps} />;
+      return ICON_COLORS.bed;
+    case 'тапочки':
+      return ICON_COLORS.favorite;
+    default:
+      return ICON_COLORS.wifi;
+  }
+};
+
+const iconSx = (amenity: string) => ({ sx: { fontSize: 16, color: getAmenityColor(amenity) } });
+
+const getAmenityIcon = (amenity: string) => {
+  switch (amenity.toLowerCase()) {
+    case 'wi-fi':
+    case 'wifi':
+      return <WifiIcon {...iconSx(amenity)} />;
+    case 'телевидение':
+    case 'телевизор':
+      return <TvIcon {...iconSx(amenity)} />;
+    case 'телевизор по запросу':
+      return <LiveTvIcon {...iconSx(amenity)} />;
+    case 'кондиционер':
+      return <AcUnitIcon {...iconSx(amenity)} />;
+    case 'сейф':
+      return <SecurityIcon {...iconSx(amenity)} />;
+    case 'мини-бар':
+    case 'мини-холодильник':
+      return <LocalBarIcon {...iconSx(amenity)} />;
+    case 'джакузи':
+      return <HotTubIcon {...iconSx(amenity)} />;
+    case 'курить можно':
+      return <SmokeFreeIcon {...iconSx(amenity)} />;
+    case 'детская кроватка':
+      return <ChildCareIcon {...iconSx(amenity)} />;
+    case 'частная кухня':
+      return <RestaurantMenuIcon {...iconSx(amenity)} />;
+    case 'кухонные принадлежности':
+      return <SoupKitchenIcon {...iconSx(amenity)} />;
+    case 'кухня':
+      return <KitchenIcon {...iconSx(amenity)} />;
+    case 'электроплита':
+      return <ElectricBoltIcon {...iconSx(amenity)} />;
+    case 'утюг и гладильная доска':
+      return <IronIcon {...iconSx(amenity)} />;
+    case 'стиральная машина':
+      return <LocalLaundryServiceIcon {...iconSx(amenity)} />;
+    case 'микроволновая печь':
+      return <MicrowaveIcon {...iconSx(amenity)} />;
+    case 'две односпальные кровати':
+    case 'три односпальные кровати':
+    case 'дополнительная односпальная кровать':
+      return <SingleBedIcon {...iconSx(amenity)} />;
+    case 'одна двуспальная кровать':
+      return <BedIcon {...iconSx(amenity)} />;
+    case 'постельные принадлежности':
+      return <BedIcon {...iconSx(amenity)} />;
     case 'чайный набор':
-      return <EmojiFoodBeverageIcon {...iconProps} />;
+      return <EmojiFoodBeverageIcon {...iconSx(amenity)} />;
     case 'раздельный санузел':
     case 'санузел':
-      return <WcIcon {...iconProps} />;
+      return <WcIcon {...iconSx(amenity)} />;
     case 'душевая кабина':
     case 'душевая':
-      return <ShowerIcon {...iconProps} />;
+      return <ShowerIcon {...iconSx(amenity)} />;
     case 'фен':
-      return <AirIcon {...iconProps} />;
+      return <AirIcon {...iconSx(amenity)} />;
     case 'тапочки':
-      return <FavoriteIcon {...iconProps} />;
+      return <FavoriteIcon {...iconSx(amenity)} />;
     case 'банные принадлежности':
-      return <BathtubIcon {...iconProps} />;
+      return <BathtubIcon {...iconSx(amenity)} />;
     case 'бутилированная вода':
-      return <LocalDrinkIcon {...iconProps} />;
+      return <LocalDrinkIcon {...iconSx(amenity)} />;
     case 'кулер с водой':
-      return <WaterDropIcon {...iconProps} />;
+      return <WaterDropIcon {...iconSx(amenity)} />;
     case 'холодильник':
-      return <KitchenIcon {...iconProps} />;
+      return <KitchenIcon {...iconSx(amenity)} />;
     default:
-      return <WifiIcon {...iconProps} />;
+      return <WifiIcon {...iconSx(amenity)} />;
   }
 };
 
@@ -310,7 +367,7 @@ export default function RoomCard({ room }: RoomCardProps) {
               {room.area && (
                 <Tooltip title={`Квадратных метров (${room.area})`} arrow>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
-                    <SquareFootIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <SquareFootIcon sx={{ fontSize: 20, color: ICON_COLORS.area }} />
                     <Typography variant="body2" color="text.secondary" fontWeight={700}>
                       {room.area} м²
                     </Typography>
@@ -320,7 +377,7 @@ export default function RoomCard({ room }: RoomCardProps) {
               {room.capacity && (
                 <Tooltip title={`Количество человек (${room.capacity})`} arrow>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
-                    <PeopleIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <PeopleIcon sx={{ fontSize: 20, color: ICON_COLORS.people }} />
                     <Typography variant="body2" color="text.secondary" fontWeight={700}>
                       × {room.capacity}
                     </Typography>
@@ -330,7 +387,7 @@ export default function RoomCard({ room }: RoomCardProps) {
               {room.rooms && (
                 <Tooltip title={`Количество комнат (${room.rooms})`} arrow>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, cursor: 'help' }}>
-                    <HomeIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
+                    <HomeIcon sx={{ fontSize: 20, color: ICON_COLORS.home }} />
                     <Typography variant="body2" color="text.secondary" fontWeight={700}>
                       {room.rooms} комн.
                     </Typography>
@@ -399,7 +456,8 @@ export default function RoomCard({ room }: RoomCardProps) {
                       cursor: hasTooltip ? 'help' : 'default',
                       '& .MuiChip-icon': {
                         fontSize: '16px',
-                        marginLeft: '8px'
+                        marginLeft: '8px',
+                        color: getAmenityColor(amenity),
                       },
                       '& .MuiChip-label': {
                         paddingLeft: '8px',
